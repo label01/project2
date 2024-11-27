@@ -11,23 +11,26 @@
 #include "delay.h"
 #include "lm75a.h"
 #include "oled0561.h"
+#include "encoder.h"
+#include "rtc.h"
+
+
+
 int main(void) {//主程序
 	
-	u8 buffer[3];
-	delay_ms(100);
-	RCC_Configuration();
-	I2C_Configuration();
-	LM75A_GetTemp(buffer);
-	
-	OLED0561_Init();
-	OLED_DISPLAY_LIT(200);
+	u8 buffer[3];//保存温度传感器数据
 	
 	
-	OLED_DISPLAY_PIC1();
-	delay_s(5);
-	OLED_DISPLAY_CLEAR();
-	OLED_DISPLAY_8x16_BUFFER(0, "  championTalk  ");
-	OLED_DISPLAY_8x16_BUFFER(6, "  Temp:");
+	delay_ms(100);//上电时等待其他器件就绪
+	RCC_Configuration();//系统时钟初始化
+	I2C_Configuration();//I2C初始化
+	LM75A_GetTemp(buffer);//读取lm75a的温度数据
+	ENCODER_Init();//旋转编码器初始化
+	RTC_Config();//初始化时钟
+	
+	OLED0561_Init();//OLED屏幕初始化
+	OLED_DISPLAY_LIT(200);//调整屏幕亮度
+	OLED_DISPLAY_CLEAR();//清屏
 	
 	OLED_DISPLAY_16x16(2,2*16,4);//汉字显示	 洋桃电子
 	OLED_DISPLAY_16x16(2,3*16,5);
@@ -37,17 +40,6 @@ int main(void) {//主程序
 	
 	while (1) {
 		//无限循环程序
-		
-		LM75A_GetTemp(buffer);//读取lm75a的温度数据
-		
-		if(buffer[0]) OLED_DISPLAY_8x16(6, 7*8, '-');
-		OLED_DISPLAY_8x16(6, 8*8, buffer[1]/10+0x30);
-		OLED_DISPLAY_8x16(6,9*8,buffer[1]%10+0x30);//
-		OLED_DISPLAY_8x16(6,10*8,'.');//
-		OLED_DISPLAY_8x16(6,11*8,buffer[2]/10+0x30);//
-		OLED_DISPLAY_8x16(6,12*8,buffer[2]%10+0x30);//
-		OLED_DISPLAY_8x16(6,13*8,'C');//
-
 		
 		delay_ms(500);//延时
 		
