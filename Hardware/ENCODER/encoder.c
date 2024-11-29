@@ -8,7 +8,7 @@ u16 cou; //用于锁死计数
 
 
 
-/*接口初始化*/
+/*编码器初始化*/
 void ENCODER_Init(void){
 	GPIO_InitTypeDef GPIO_InitStructure;
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA|RCC_APB2Periph_GPIOB, ENABLE);
@@ -22,7 +22,7 @@ void ENCODER_Init(void){
 
 }
 
-
+// 1 : 右转 2：左转 3：按下
 u8 ENCODER_READ(void){
 	u8 a;
 	u8 kt;
