@@ -33,3 +33,6 @@
 .\objects\main.o: .\Hardware\LM75A\lm75a.h
 .\objects\main.o: .\Basic\i2c\i2c.h
 .\objects\main.o: .\Hardware\OLED0561\oled0561.h
+.\objects\main.o: .\Hardware\ENCODER\encoder.h
+.\objects\main.o: .\Basic\rtc\rtc.h
+.\objects\main.o: .\Basic\bkp\bkp.h

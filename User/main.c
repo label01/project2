@@ -13,6 +13,7 @@
 #include "oled0561.h"
 #include "encoder.h"
 #include "rtc.h"
+#include "bkp.h"
 
 
 
@@ -29,10 +30,13 @@ int main(void) {//主程序
 	LM75A_GetTemp(buffer);//读取lm75a的温度数据
 	ENCODER_Init();//旋转编码器初始化
 	RTC_Config();//初始化时钟
+	BKP_Configuration();//初始化bkp
 	
 	OLED0561_Init();//OLED屏幕初始化
 	OLED_DISPLAY_LIT(155);//调整屏幕亮度
 	
+	MENU=BKP_ReadBackupRegister(BKP_DR1);
+	if(MENU<1||MENU>3)MENU=1; //如果menu的备份值不在1~3的菜单列表里，默认重新赋值menu为1
 	
 	while (1) {
 		//无限循环程序
@@ -70,6 +74,9 @@ int main(void) {//主程序
 			OLED_DISPLAY_16x16(6,2*16,19);	
 			OLED_DISPLAY_16x16(6,3*16,20);
 			
+			//备份菜单值,掉电保存在备份寄存器
+			BKP_WriteBackupRegister(BKP_DR1, MENU);
+			
 			MENU=11;//自动跳转到菜单11
 			
 		}
@@ -92,6 +99,9 @@ int main(void) {//主程序
 			OLED_DISPLAY_8x16_BUFFER(2,"ADC1:"); //显示字符串
 			OLED_DISPLAY_8x16_BUFFER(4,"ADC2:"); //显示字符串
 			OLED_DISPLAY_8x16_BUFFER(6,"ADC3: "); //显示字符串
+			
+			//备份菜单值,掉电保存在备份寄存器
+			BKP_WriteBackupRegister(BKP_DR1, MENU);
 			
 			MENU=21;//自动跳转到菜单21，用来设置菜单显示的数值
 		}
@@ -118,6 +128,9 @@ int main(void) {//主程序
 			INVERSE_OLED_DISPLAY_16x16(6,0*16,8);//汉字显示	 光照
 			INVERSE_OLED_DISPLAY_16x16(6,1*16,9);
 			OLED_DISPLAY_8x16(6,4*8,10+0x30);//冒号
+			
+			//备份菜单值,掉电保存在备份寄存器
+			BKP_WriteBackupRegister(BKP_DR1, MENU);
 			
 			MENU=31;//自动跳转到 菜单31 显示高低温 光照
 		}
