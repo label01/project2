@@ -135,6 +135,7 @@ void OLED_DISPLAY_16x16(u8 x, //显示汉字的页坐标（从0xB0到0xB7）
 			u8 y, //显示汉字的列坐标（从0到128）
 			u16 w){ //要显示汉字的编号
 	u8 j,t,c=0;
+	y=y+2;
 	for(t=0;t<2;t++){
 		I2C_Send_Byte(OLED0561_ADD,COM,0xb0+x); //页地址（从0xB0到0xB7）
 		I2C_Send_Byte(OLED0561_ADD,COM,y/16+0x10); //起始列地址的高4位 ，高四位第一列固定为0x10， 低四位固定为0x00 
@@ -151,6 +152,7 @@ void INVERSE_OLED_DISPLAY_16x16(u8 x, //显示汉字的页坐标（从0xB0到0xB7）
 			u8 y, //显示汉字的列坐标（从0到128）
 			u16 w){ //要显示汉字的编号
 	u8 j,t,c=0;//变量定义
+				y=y+2;
 	for(t=0;t<2;t++){
 		I2C_Send_Byte(OLED0561_ADD,COM,0xb0+x); //页地址（从0xB0到0xB7）
 		I2C_Send_Byte(OLED0561_ADD,COM,y/16+0x10); //起始列地址的高4位 ，高四位第一列固定为0x10， 低四位固定为0x00 

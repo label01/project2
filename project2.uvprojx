@@ -338,7 +338,7 @@
               <MiscControls></MiscControls>
               <Define>USE_STDPERIPH_DRIVER,STM32F10X_MD</Define>
               <Undefine></Undefine>
-              <IncludePath>.\Basic\delay;.\Basic\flash;.\Basic\i2c;.\Basic\rtc;.\Basic\sys;.\Basic\usart;.\CMSIS;.\Hardware\BUZZER;.\Hardware\ENCODER;.\Hardware\KEY;.\Hardware\LED;.\Hardware\LM75A;.\Hardware\TM1640;.\Hardware\TOUCH_KEY;.\Lib\inc;.\Lib\src;.\Startup;.\User;.\Hardware\OLED0561;.\Basic\bkp</IncludePath>
+              <IncludePath>.\Basic\delay;.\Basic\flash;.\Basic\i2c;.\Basic\rtc;.\Basic\sys;.\Basic\usart;.\CMSIS;.\Hardware\BUZZER;.\Hardware\ENCODER;.\Hardware\KEY;.\Hardware\LED;.\Hardware\LM75A;.\Hardware\TM1640;.\Hardware\TOUCH_KEY;.\Lib\inc;.\Lib\src;.\Startup;.\User;.\Hardware\OLED0561;.\Basic\bkp;.\Basic\adc;.\Basic\nvic</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -416,6 +416,16 @@
               <FileName>bkp.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Basic\bkp\bkp.c</FilePath>
+            </File>
+            <File>
+              <FileName>adc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Basic\adc\adc.c</FilePath>
+            </File>
+            <File>
+              <FileName>nvic.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Basic\nvic\nvic.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -536,6 +546,11 @@
               <FileName>stm32f10x_adc.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Lib\src\stm32f10x_adc.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f10x_dma.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Lib\src\stm32f10x_dma.c</FilePath>
             </File>
           </Files>
         </Group>

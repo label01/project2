@@ -1,6 +1,6 @@
 Dependencies for Project 'project2', Target 'Target 1': (DO NOT MODIFY !)
 CompilerVersion: 5060750::V5.06 update 6 (build 750)::ARMCC
-F (.\Basic\delay\delay.c)(0x66BE1CE4)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Basic\delay -I .\Basic\flash -I .\Basic\i2c -I .\Basic\rtc -I .\Basic\sys -I .\Basic\usart -I .\CMSIS -I .\Hardware\BUZZER -I .\Hardware\ENCODER -I .\Hardware\KEY -I .\Hardware\LED -I .\Hardware\LM75A -I .\Hardware\TM1640 -I .\Hardware\TOUCH_KEY -I .\Lib\inc -I .\Lib\src -I .\Startup -I .\User -I .\Hardware\OLED0561 -I .\Basic\bkp-I.\RTE\_Target_1-I"D:\project software\keil5\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include"-I"D:\project software\keil5\ARM\CMSIS\Include"-D__UVISION_VERSION="529" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\objects\delay.o --omf_browse .\objects\delay.crf --depend .\objects\delay.d)
+F (.\Basic\delay\delay.c)(0x66BE1CE4)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Basic\delay -I .\Basic\flash -I .\Basic\i2c -I .\Basic\rtc -I .\Basic\sys -I .\Basic\usart -I .\CMSIS -I .\Hardware\BUZZER -I .\Hardware\ENCODER -I .\Hardware\KEY -I .\Hardware\LED -I .\Hardware\LM75A -I .\Hardware\TM1640 -I .\Hardware\TOUCH_KEY -I .\Lib\inc -I .\Lib\src -I .\Startup -I .\User -I .\Hardware\OLED0561 -I .\Basic\bkp -I .\Basic\adc -I .\Basic\nvic-I.\RTE\_Target_1-I"D:\project software\keil5\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include"-I"D:\project software\keil5\ARM\CMSIS\Include"-D__UVISION_VERSION="529" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\objects\delay.o --omf_browse .\objects\delay.crf --depend .\objects\delay.d)
 I (Basic\delay\delay.h)(0x66BE1CDA)
 I (.\Basic\sys\sys.h)(0x66BE1C43)
 I (.\CMSIS\stm32f10x.h)(0x4D783CB4)
@@ -31,7 +31,7 @@ I (.\Lib\inc\stm32f10x_tim.h)(0x4D783BB4)
 I (.\Lib\inc\stm32f10x_usart.h)(0x4D783BB4)
 I (.\Lib\inc\stm32f10x_wwdg.h)(0x4D783BB4)
 I (.\Lib\inc\misc.h)(0x4D783BB4)
-F (.\Basic\flash\flash.c)(0x66C4BEC1)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Basic\delay -I .\Basic\flash -I .\Basic\i2c -I .\Basic\rtc -I .\Basic\sys -I .\Basic\usart -I .\CMSIS -I .\Hardware\BUZZER -I .\Hardware\ENCODER -I .\Hardware\KEY -I .\Hardware\LED -I .\Hardware\LM75A -I .\Hardware\TM1640 -I .\Hardware\TOUCH_KEY -I .\Lib\inc -I .\Lib\src -I .\Startup -I .\User -I .\Hardware\OLED0561 -I .\Basic\bkp-I.\RTE\_Target_1-I"D:\project software\keil5\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include"-I"D:\project software\keil5\ARM\CMSIS\Include"-D__UVISION_VERSION="529" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\objects\flash.o --omf_browse .\objects\flash.crf --depend .\objects\flash.d)
+F (.\Basic\flash\flash.c)(0x66C4BEC1)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Basic\delay -I .\Basic\flash -I .\Basic\i2c -I .\Basic\rtc -I .\Basic\sys -I .\Basic\usart -I .\CMSIS -I .\Hardware\BUZZER -I .\Hardware\ENCODER -I .\Hardware\KEY -I .\Hardware\LED -I .\Hardware\LM75A -I .\Hardware\TM1640 -I .\Hardware\TOUCH_KEY -I .\Lib\inc -I .\Lib\src -I .\Startup -I .\User -I .\Hardware\OLED0561 -I .\Basic\bkp -I .\Basic\adc -I .\Basic\nvic-I.\RTE\_Target_1-I"D:\project software\keil5\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include"-I"D:\project software\keil5\ARM\CMSIS\Include"-D__UVISION_VERSION="529" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\objects\flash.o --omf_browse .\objects\flash.crf --depend .\objects\flash.d)
 I (Basic\flash\flash.h)(0x66C4BA7B)
 I (.\Basic\sys\sys.h)(0x66BE1C43)
 I (.\CMSIS\stm32f10x.h)(0x4D783CB4)
@@ -62,7 +62,7 @@ I (.\Lib\inc\stm32f10x_tim.h)(0x4D783BB4)
 I (.\Lib\inc\stm32f10x_usart.h)(0x4D783BB4)
 I (.\Lib\inc\stm32f10x_wwdg.h)(0x4D783BB4)
 I (.\Lib\inc\misc.h)(0x4D783BB4)
-F (.\Basic\i2c\i2c.c)(0x66D6DEEC)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Basic\delay -I .\Basic\flash -I .\Basic\i2c -I .\Basic\rtc -I .\Basic\sys -I .\Basic\usart -I .\CMSIS -I .\Hardware\BUZZER -I .\Hardware\ENCODER -I .\Hardware\KEY -I .\Hardware\LED -I .\Hardware\LM75A -I .\Hardware\TM1640 -I .\Hardware\TOUCH_KEY -I .\Lib\inc -I .\Lib\src -I .\Startup -I .\User -I .\Hardware\OLED0561 -I .\Basic\bkp-I.\RTE\_Target_1-I"D:\project software\keil5\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include"-I"D:\project software\keil5\ARM\CMSIS\Include"-D__UVISION_VERSION="529" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\objects\i2c.o --omf_browse .\objects\i2c.crf --depend .\objects\i2c.d)
+F (.\Basic\i2c\i2c.c)(0x66D6DEEC)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Basic\delay -I .\Basic\flash -I .\Basic\i2c -I .\Basic\rtc -I .\Basic\sys -I .\Basic\usart -I .\CMSIS -I .\Hardware\BUZZER -I .\Hardware\ENCODER -I .\Hardware\KEY -I .\Hardware\LED -I .\Hardware\LM75A -I .\Hardware\TM1640 -I .\Hardware\TOUCH_KEY -I .\Lib\inc -I .\Lib\src -I .\Startup -I .\User -I .\Hardware\OLED0561 -I .\Basic\bkp -I .\Basic\adc -I .\Basic\nvic-I.\RTE\_Target_1-I"D:\project software\keil5\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include"-I"D:\project software\keil5\ARM\CMSIS\Include"-D__UVISION_VERSION="529" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\objects\i2c.o --omf_browse .\objects\i2c.crf --depend .\objects\i2c.d)
 I (Basic\i2c\i2c.h)(0x66D72B66)
 I (.\Basic\sys\sys.h)(0x66BE1C43)
 I (.\CMSIS\stm32f10x.h)(0x4D783CB4)
@@ -93,7 +93,7 @@ I (.\Lib\inc\stm32f10x_tim.h)(0x4D783BB4)
 I (.\Lib\inc\stm32f10x_usart.h)(0x4D783BB4)
 I (.\Lib\inc\stm32f10x_wwdg.h)(0x4D783BB4)
 I (.\Lib\inc\misc.h)(0x4D783BB4)
-F (.\Basic\rtc\rtc.c)(0x66CF2F81)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Basic\delay -I .\Basic\flash -I .\Basic\i2c -I .\Basic\rtc -I .\Basic\sys -I .\Basic\usart -I .\CMSIS -I .\Hardware\BUZZER -I .\Hardware\ENCODER -I .\Hardware\KEY -I .\Hardware\LED -I .\Hardware\LM75A -I .\Hardware\TM1640 -I .\Hardware\TOUCH_KEY -I .\Lib\inc -I .\Lib\src -I .\Startup -I .\User -I .\Hardware\OLED0561 -I .\Basic\bkp-I.\RTE\_Target_1-I"D:\project software\keil5\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include"-I"D:\project software\keil5\ARM\CMSIS\Include"-D__UVISION_VERSION="529" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\objects\rtc.o --omf_browse .\objects\rtc.crf --depend .\objects\rtc.d)
+F (.\Basic\rtc\rtc.c)(0x66CF2F81)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Basic\delay -I .\Basic\flash -I .\Basic\i2c -I .\Basic\rtc -I .\Basic\sys -I .\Basic\usart -I .\CMSIS -I .\Hardware\BUZZER -I .\Hardware\ENCODER -I .\Hardware\KEY -I .\Hardware\LED -I .\Hardware\LM75A -I .\Hardware\TM1640 -I .\Hardware\TOUCH_KEY -I .\Lib\inc -I .\Lib\src -I .\Startup -I .\User -I .\Hardware\OLED0561 -I .\Basic\bkp -I .\Basic\adc -I .\Basic\nvic-I.\RTE\_Target_1-I"D:\project software\keil5\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include"-I"D:\project software\keil5\ARM\CMSIS\Include"-D__UVISION_VERSION="529" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\objects\rtc.o --omf_browse .\objects\rtc.crf --depend .\objects\rtc.d)
 I (Basic\rtc\rtc.h)(0x66CE02F3)
 I (.\Basic\sys\sys.h)(0x66BE1C43)
 I (.\CMSIS\stm32f10x.h)(0x4D783CB4)
@@ -130,7 +130,7 @@ I (D:\project software\keil5\ARM\ARMCC\include\stdio.h)(0x5D9AD21A)
 I (D:\project software\keil5\ARM\ARMCC\include\stdarg.h)(0x5D9AD21A)
 I (D:\project software\keil5\ARM\ARMCC\include\stdlib.h)(0x5D9AD21A)
 I (D:\project software\keil5\ARM\ARMCC\include\string.h)(0x5D9AD218)
-F (.\Basic\sys\sys.c)(0x66CFD926)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Basic\delay -I .\Basic\flash -I .\Basic\i2c -I .\Basic\rtc -I .\Basic\sys -I .\Basic\usart -I .\CMSIS -I .\Hardware\BUZZER -I .\Hardware\ENCODER -I .\Hardware\KEY -I .\Hardware\LED -I .\Hardware\LM75A -I .\Hardware\TM1640 -I .\Hardware\TOUCH_KEY -I .\Lib\inc -I .\Lib\src -I .\Startup -I .\User -I .\Hardware\OLED0561 -I .\Basic\bkp-I.\RTE\_Target_1-I"D:\project software\keil5\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include"-I"D:\project software\keil5\ARM\CMSIS\Include"-D__UVISION_VERSION="529" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\objects\sys.o --omf_browse .\objects\sys.crf --depend .\objects\sys.d)
+F (.\Basic\sys\sys.c)(0x66CFD926)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Basic\delay -I .\Basic\flash -I .\Basic\i2c -I .\Basic\rtc -I .\Basic\sys -I .\Basic\usart -I .\CMSIS -I .\Hardware\BUZZER -I .\Hardware\ENCODER -I .\Hardware\KEY -I .\Hardware\LED -I .\Hardware\LM75A -I .\Hardware\TM1640 -I .\Hardware\TOUCH_KEY -I .\Lib\inc -I .\Lib\src -I .\Startup -I .\User -I .\Hardware\OLED0561 -I .\Basic\bkp -I .\Basic\adc -I .\Basic\nvic-I.\RTE\_Target_1-I"D:\project software\keil5\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include"-I"D:\project software\keil5\ARM\CMSIS\Include"-D__UVISION_VERSION="529" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\objects\sys.o --omf_browse .\objects\sys.crf --depend .\objects\sys.d)
 I (Basic\sys\sys.h)(0x66BE1C43)
 I (.\CMSIS\stm32f10x.h)(0x4D783CB4)
 I (.\CMSIS\core_cm3.h)(0x4D523B58)
@@ -160,7 +160,7 @@ I (.\Lib\inc\stm32f10x_tim.h)(0x4D783BB4)
 I (.\Lib\inc\stm32f10x_usart.h)(0x4D783BB4)
 I (.\Lib\inc\stm32f10x_wwdg.h)(0x4D783BB4)
 I (.\Lib\inc\misc.h)(0x4D783BB4)
-F (.\Basic\usart\usart.c)(0x66C9AE41)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Basic\delay -I .\Basic\flash -I .\Basic\i2c -I .\Basic\rtc -I .\Basic\sys -I .\Basic\usart -I .\CMSIS -I .\Hardware\BUZZER -I .\Hardware\ENCODER -I .\Hardware\KEY -I .\Hardware\LED -I .\Hardware\LM75A -I .\Hardware\TM1640 -I .\Hardware\TOUCH_KEY -I .\Lib\inc -I .\Lib\src -I .\Startup -I .\User -I .\Hardware\OLED0561 -I .\Basic\bkp-I.\RTE\_Target_1-I"D:\project software\keil5\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include"-I"D:\project software\keil5\ARM\CMSIS\Include"-D__UVISION_VERSION="529" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\objects\usart.o --omf_browse .\objects\usart.crf --depend .\objects\usart.d)
+F (.\Basic\usart\usart.c)(0x66C9AE41)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Basic\delay -I .\Basic\flash -I .\Basic\i2c -I .\Basic\rtc -I .\Basic\sys -I .\Basic\usart -I .\CMSIS -I .\Hardware\BUZZER -I .\Hardware\ENCODER -I .\Hardware\KEY -I .\Hardware\LED -I .\Hardware\LM75A -I .\Hardware\TM1640 -I .\Hardware\TOUCH_KEY -I .\Lib\inc -I .\Lib\src -I .\Startup -I .\User -I .\Hardware\OLED0561 -I .\Basic\bkp -I .\Basic\adc -I .\Basic\nvic-I.\RTE\_Target_1-I"D:\project software\keil5\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include"-I"D:\project software\keil5\ARM\CMSIS\Include"-D__UVISION_VERSION="529" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\objects\usart.o --omf_browse .\objects\usart.crf --depend .\objects\usart.d)
 I (Basic\usart\usart.h)(0x66C6A9D9)
 I (.\Basic\sys\sys.h)(0x66BE1C43)
 I (.\CMSIS\stm32f10x.h)(0x4D783CB4)
@@ -196,7 +196,7 @@ I (D:\project software\keil5\ARM\ARMCC\include\stdio.h)(0x5D9AD21A)
 I (D:\project software\keil5\ARM\ARMCC\include\stdarg.h)(0x5D9AD21A)
 I (D:\project software\keil5\ARM\ARMCC\include\stdlib.h)(0x5D9AD21A)
 I (D:\project software\keil5\ARM\ARMCC\include\string.h)(0x5D9AD218)
-F (.\Basic\bkp\bkp.c)(0x674ADA89)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Basic\delay -I .\Basic\flash -I .\Basic\i2c -I .\Basic\rtc -I .\Basic\sys -I .\Basic\usart -I .\CMSIS -I .\Hardware\BUZZER -I .\Hardware\ENCODER -I .\Hardware\KEY -I .\Hardware\LED -I .\Hardware\LM75A -I .\Hardware\TM1640 -I .\Hardware\TOUCH_KEY -I .\Lib\inc -I .\Lib\src -I .\Startup -I .\User -I .\Hardware\OLED0561 -I .\Basic\bkp-I.\RTE\_Target_1-I"D:\project software\keil5\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include"-I"D:\project software\keil5\ARM\CMSIS\Include"-D__UVISION_VERSION="529" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\objects\bkp.o --omf_browse .\objects\bkp.crf --depend .\objects\bkp.d)
+F (.\Basic\bkp\bkp.c)(0x674ADA89)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Basic\delay -I .\Basic\flash -I .\Basic\i2c -I .\Basic\rtc -I .\Basic\sys -I .\Basic\usart -I .\CMSIS -I .\Hardware\BUZZER -I .\Hardware\ENCODER -I .\Hardware\KEY -I .\Hardware\LED -I .\Hardware\LM75A -I .\Hardware\TM1640 -I .\Hardware\TOUCH_KEY -I .\Lib\inc -I .\Lib\src -I .\Startup -I .\User -I .\Hardware\OLED0561 -I .\Basic\bkp -I .\Basic\adc -I .\Basic\nvic-I.\RTE\_Target_1-I"D:\project software\keil5\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include"-I"D:\project software\keil5\ARM\CMSIS\Include"-D__UVISION_VERSION="529" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\objects\bkp.o --omf_browse .\objects\bkp.crf --depend .\objects\bkp.d)
 I (Basic\bkp\bkp.h)(0x674AD973)
 I (.\Basic\sys\sys.h)(0x66BE1C43)
 I (.\CMSIS\stm32f10x.h)(0x4D783CB4)
@@ -227,9 +227,73 @@ I (.\Lib\inc\stm32f10x_tim.h)(0x4D783BB4)
 I (.\Lib\inc\stm32f10x_usart.h)(0x4D783BB4)
 I (.\Lib\inc\stm32f10x_wwdg.h)(0x4D783BB4)
 I (.\Lib\inc\misc.h)(0x4D783BB4)
-F (.\CMSIS\core_cm3.c)(0x4C0C587E)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Basic\delay -I .\Basic\flash -I .\Basic\i2c -I .\Basic\rtc -I .\Basic\sys -I .\Basic\usart -I .\CMSIS -I .\Hardware\BUZZER -I .\Hardware\ENCODER -I .\Hardware\KEY -I .\Hardware\LED -I .\Hardware\LM75A -I .\Hardware\TM1640 -I .\Hardware\TOUCH_KEY -I .\Lib\inc -I .\Lib\src -I .\Startup -I .\User -I .\Hardware\OLED0561 -I .\Basic\bkp-I.\RTE\_Target_1-I"D:\project software\keil5\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include"-I"D:\project software\keil5\ARM\CMSIS\Include"-D__UVISION_VERSION="529" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\objects\core_cm3.o --omf_browse .\objects\core_cm3.crf --depend .\objects\core_cm3.d)
+F (.\Basic\adc\adc.c)(0x6755684B)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Basic\delay -I .\Basic\flash -I .\Basic\i2c -I .\Basic\rtc -I .\Basic\sys -I .\Basic\usart -I .\CMSIS -I .\Hardware\BUZZER -I .\Hardware\ENCODER -I .\Hardware\KEY -I .\Hardware\LED -I .\Hardware\LM75A -I .\Hardware\TM1640 -I .\Hardware\TOUCH_KEY -I .\Lib\inc -I .\Lib\src -I .\Startup -I .\User -I .\Hardware\OLED0561 -I .\Basic\bkp -I .\Basic\adc -I .\Basic\nvic-I.\RTE\_Target_1-I"D:\project software\keil5\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include"-I"D:\project software\keil5\ARM\CMSIS\Include"-D__UVISION_VERSION="529" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\objects\adc.o --omf_browse .\objects\adc.crf --depend .\objects\adc.d)
+I (Basic\adc\adc.h)(0x674FC6E4)
+I (.\Basic\sys\sys.h)(0x66BE1C43)
+I (.\CMSIS\stm32f10x.h)(0x4D783CB4)
+I (.\CMSIS\core_cm3.h)(0x4D523B58)
 I (D:\project software\keil5\ARM\ARMCC\include\stdint.h)(0x5D9AD218)
-F (.\CMSIS\system_stm32f10x.c)(0x4D783CB0)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Basic\delay -I .\Basic\flash -I .\Basic\i2c -I .\Basic\rtc -I .\Basic\sys -I .\Basic\usart -I .\CMSIS -I .\Hardware\BUZZER -I .\Hardware\ENCODER -I .\Hardware\KEY -I .\Hardware\LED -I .\Hardware\LM75A -I .\Hardware\TM1640 -I .\Hardware\TOUCH_KEY -I .\Lib\inc -I .\Lib\src -I .\Startup -I .\User -I .\Hardware\OLED0561 -I .\Basic\bkp-I.\RTE\_Target_1-I"D:\project software\keil5\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include"-I"D:\project software\keil5\ARM\CMSIS\Include"-D__UVISION_VERSION="529" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\objects\system_stm32f10x.o --omf_browse .\objects\system_stm32f10x.crf --depend .\objects\system_stm32f10x.d)
+I (.\CMSIS\system_stm32f10x.h)(0x4D783CAA)
+I (.\User\stm32f10x_conf.h)(0x4D99A59E)
+I (.\Lib\inc\stm32f10x_adc.h)(0x4D783BB4)
+I (.\Lib\inc\stm32f10x_bkp.h)(0x4D783BB4)
+I (.\Lib\inc\stm32f10x_can.h)(0x4D783BB4)
+I (.\Lib\inc\stm32f10x_cec.h)(0x4D783BB4)
+I (.\Lib\inc\stm32f10x_crc.h)(0x4D783BB4)
+I (.\Lib\inc\stm32f10x_dac.h)(0x4D783BB4)
+I (.\Lib\inc\stm32f10x_dbgmcu.h)(0x4D783BB4)
+I (.\Lib\inc\stm32f10x_dma.h)(0x4D783BB4)
+I (.\Lib\inc\stm32f10x_exti.h)(0x4D783BB4)
+I (.\Lib\inc\stm32f10x_flash.h)(0x4D783BB4)
+I (.\Lib\inc\stm32f10x_fsmc.h)(0x4D783BB4)
+I (.\Lib\inc\stm32f10x_gpio.h)(0x4D783BB4)
+I (.\Lib\inc\stm32f10x_i2c.h)(0x4D783BB4)
+I (.\Lib\inc\stm32f10x_iwdg.h)(0x4D783BB4)
+I (.\Lib\inc\stm32f10x_pwr.h)(0x4D783BB4)
+I (.\Lib\inc\stm32f10x_rcc.h)(0x4D783BB4)
+I (.\Lib\inc\stm32f10x_rtc.h)(0x4D783BB4)
+I (.\Lib\inc\stm32f10x_sdio.h)(0x4D783BB4)
+I (.\Lib\inc\stm32f10x_spi.h)(0x4D783BB4)
+I (.\Lib\inc\stm32f10x_tim.h)(0x4D783BB4)
+I (.\Lib\inc\stm32f10x_usart.h)(0x4D783BB4)
+I (.\Lib\inc\stm32f10x_wwdg.h)(0x4D783BB4)
+I (.\Lib\inc\misc.h)(0x4D783BB4)
+F (.\Basic\nvic\nvic.c)(0x67543955)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Basic\delay -I .\Basic\flash -I .\Basic\i2c -I .\Basic\rtc -I .\Basic\sys -I .\Basic\usart -I .\CMSIS -I .\Hardware\BUZZER -I .\Hardware\ENCODER -I .\Hardware\KEY -I .\Hardware\LED -I .\Hardware\LM75A -I .\Hardware\TM1640 -I .\Hardware\TOUCH_KEY -I .\Lib\inc -I .\Lib\src -I .\Startup -I .\User -I .\Hardware\OLED0561 -I .\Basic\bkp -I .\Basic\adc -I .\Basic\nvic-I.\RTE\_Target_1-I"D:\project software\keil5\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include"-I"D:\project software\keil5\ARM\CMSIS\Include"-D__UVISION_VERSION="529" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\objects\nvic.o --omf_browse .\objects\nvic.crf --depend .\objects\nvic.d)
+I (Basic\nvic\nvic.h)(0x675411AF)
+I (.\Basic\sys\sys.h)(0x66BE1C43)
+I (.\CMSIS\stm32f10x.h)(0x4D783CB4)
+I (.\CMSIS\core_cm3.h)(0x4D523B58)
+I (D:\project software\keil5\ARM\ARMCC\include\stdint.h)(0x5D9AD218)
+I (.\CMSIS\system_stm32f10x.h)(0x4D783CAA)
+I (.\User\stm32f10x_conf.h)(0x4D99A59E)
+I (.\Lib\inc\stm32f10x_adc.h)(0x4D783BB4)
+I (.\Lib\inc\stm32f10x_bkp.h)(0x4D783BB4)
+I (.\Lib\inc\stm32f10x_can.h)(0x4D783BB4)
+I (.\Lib\inc\stm32f10x_cec.h)(0x4D783BB4)
+I (.\Lib\inc\stm32f10x_crc.h)(0x4D783BB4)
+I (.\Lib\inc\stm32f10x_dac.h)(0x4D783BB4)
+I (.\Lib\inc\stm32f10x_dbgmcu.h)(0x4D783BB4)
+I (.\Lib\inc\stm32f10x_dma.h)(0x4D783BB4)
+I (.\Lib\inc\stm32f10x_exti.h)(0x4D783BB4)
+I (.\Lib\inc\stm32f10x_flash.h)(0x4D783BB4)
+I (.\Lib\inc\stm32f10x_fsmc.h)(0x4D783BB4)
+I (.\Lib\inc\stm32f10x_gpio.h)(0x4D783BB4)
+I (.\Lib\inc\stm32f10x_i2c.h)(0x4D783BB4)
+I (.\Lib\inc\stm32f10x_iwdg.h)(0x4D783BB4)
+I (.\Lib\inc\stm32f10x_pwr.h)(0x4D783BB4)
+I (.\Lib\inc\stm32f10x_rcc.h)(0x4D783BB4)
+I (.\Lib\inc\stm32f10x_rtc.h)(0x4D783BB4)
+I (.\Lib\inc\stm32f10x_sdio.h)(0x4D783BB4)
+I (.\Lib\inc\stm32f10x_spi.h)(0x4D783BB4)
+I (.\Lib\inc\stm32f10x_tim.h)(0x4D783BB4)
+I (.\Lib\inc\stm32f10x_usart.h)(0x4D783BB4)
+I (.\Lib\inc\stm32f10x_wwdg.h)(0x4D783BB4)
+I (.\Lib\inc\misc.h)(0x4D783BB4)
+I (.\Hardware\ENCODER\encoder.h)(0x66D424EA)
+I (.\Basic\delay\delay.h)(0x66BE1CDA)
+F (.\CMSIS\core_cm3.c)(0x4C0C587E)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Basic\delay -I .\Basic\flash -I .\Basic\i2c -I .\Basic\rtc -I .\Basic\sys -I .\Basic\usart -I .\CMSIS -I .\Hardware\BUZZER -I .\Hardware\ENCODER -I .\Hardware\KEY -I .\Hardware\LED -I .\Hardware\LM75A -I .\Hardware\TM1640 -I .\Hardware\TOUCH_KEY -I .\Lib\inc -I .\Lib\src -I .\Startup -I .\User -I .\Hardware\OLED0561 -I .\Basic\bkp -I .\Basic\adc -I .\Basic\nvic-I.\RTE\_Target_1-I"D:\project software\keil5\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include"-I"D:\project software\keil5\ARM\CMSIS\Include"-D__UVISION_VERSION="529" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\objects\core_cm3.o --omf_browse .\objects\core_cm3.crf --depend .\objects\core_cm3.d)
+I (D:\project software\keil5\ARM\ARMCC\include\stdint.h)(0x5D9AD218)
+F (.\CMSIS\system_stm32f10x.c)(0x4D783CB0)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Basic\delay -I .\Basic\flash -I .\Basic\i2c -I .\Basic\rtc -I .\Basic\sys -I .\Basic\usart -I .\CMSIS -I .\Hardware\BUZZER -I .\Hardware\ENCODER -I .\Hardware\KEY -I .\Hardware\LED -I .\Hardware\LM75A -I .\Hardware\TM1640 -I .\Hardware\TOUCH_KEY -I .\Lib\inc -I .\Lib\src -I .\Startup -I .\User -I .\Hardware\OLED0561 -I .\Basic\bkp -I .\Basic\adc -I .\Basic\nvic-I.\RTE\_Target_1-I"D:\project software\keil5\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include"-I"D:\project software\keil5\ARM\CMSIS\Include"-D__UVISION_VERSION="529" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\objects\system_stm32f10x.o --omf_browse .\objects\system_stm32f10x.crf --depend .\objects\system_stm32f10x.d)
 I (CMSIS\stm32f10x.h)(0x4D783CB4)
 I (CMSIS\core_cm3.h)(0x4D523B58)
 I (D:\project software\keil5\ARM\ARMCC\include\stdint.h)(0x5D9AD218)
@@ -259,7 +323,7 @@ I (.\Lib\inc\stm32f10x_tim.h)(0x4D783BB4)
 I (.\Lib\inc\stm32f10x_usart.h)(0x4D783BB4)
 I (.\Lib\inc\stm32f10x_wwdg.h)(0x4D783BB4)
 I (.\Lib\inc\misc.h)(0x4D783BB4)
-F (.\Hardware\BUZZER\buzzer.c)(0x66C606EE)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Basic\delay -I .\Basic\flash -I .\Basic\i2c -I .\Basic\rtc -I .\Basic\sys -I .\Basic\usart -I .\CMSIS -I .\Hardware\BUZZER -I .\Hardware\ENCODER -I .\Hardware\KEY -I .\Hardware\LED -I .\Hardware\LM75A -I .\Hardware\TM1640 -I .\Hardware\TOUCH_KEY -I .\Lib\inc -I .\Lib\src -I .\Startup -I .\User -I .\Hardware\OLED0561 -I .\Basic\bkp-I.\RTE\_Target_1-I"D:\project software\keil5\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include"-I"D:\project software\keil5\ARM\CMSIS\Include"-D__UVISION_VERSION="529" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\objects\buzzer.o --omf_browse .\objects\buzzer.crf --depend .\objects\buzzer.d)
+F (.\Hardware\BUZZER\buzzer.c)(0x66C606EE)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Basic\delay -I .\Basic\flash -I .\Basic\i2c -I .\Basic\rtc -I .\Basic\sys -I .\Basic\usart -I .\CMSIS -I .\Hardware\BUZZER -I .\Hardware\ENCODER -I .\Hardware\KEY -I .\Hardware\LED -I .\Hardware\LM75A -I .\Hardware\TM1640 -I .\Hardware\TOUCH_KEY -I .\Lib\inc -I .\Lib\src -I .\Startup -I .\User -I .\Hardware\OLED0561 -I .\Basic\bkp -I .\Basic\adc -I .\Basic\nvic-I.\RTE\_Target_1-I"D:\project software\keil5\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include"-I"D:\project software\keil5\ARM\CMSIS\Include"-D__UVISION_VERSION="529" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\objects\buzzer.o --omf_browse .\objects\buzzer.crf --depend .\objects\buzzer.d)
 I (Hardware\BUZZER\buzzer.h)(0x66C606EA)
 I (.\Basic\sys\sys.h)(0x66BE1C43)
 I (.\CMSIS\stm32f10x.h)(0x4D783CB4)
@@ -291,7 +355,7 @@ I (.\Lib\inc\stm32f10x_usart.h)(0x4D783BB4)
 I (.\Lib\inc\stm32f10x_wwdg.h)(0x4D783BB4)
 I (.\Lib\inc\misc.h)(0x4D783BB4)
 I (.\Basic\delay\delay.h)(0x66BE1CDA)
-F (.\Hardware\ENCODER\encoder.c)(0x6749CC63)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Basic\delay -I .\Basic\flash -I .\Basic\i2c -I .\Basic\rtc -I .\Basic\sys -I .\Basic\usart -I .\CMSIS -I .\Hardware\BUZZER -I .\Hardware\ENCODER -I .\Hardware\KEY -I .\Hardware\LED -I .\Hardware\LM75A -I .\Hardware\TM1640 -I .\Hardware\TOUCH_KEY -I .\Lib\inc -I .\Lib\src -I .\Startup -I .\User -I .\Hardware\OLED0561 -I .\Basic\bkp-I.\RTE\_Target_1-I"D:\project software\keil5\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include"-I"D:\project software\keil5\ARM\CMSIS\Include"-D__UVISION_VERSION="529" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\objects\encoder.o --omf_browse .\objects\encoder.crf --depend .\objects\encoder.d)
+F (.\Hardware\ENCODER\encoder.c)(0x6749CC63)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Basic\delay -I .\Basic\flash -I .\Basic\i2c -I .\Basic\rtc -I .\Basic\sys -I .\Basic\usart -I .\CMSIS -I .\Hardware\BUZZER -I .\Hardware\ENCODER -I .\Hardware\KEY -I .\Hardware\LED -I .\Hardware\LM75A -I .\Hardware\TM1640 -I .\Hardware\TOUCH_KEY -I .\Lib\inc -I .\Lib\src -I .\Startup -I .\User -I .\Hardware\OLED0561 -I .\Basic\bkp -I .\Basic\adc -I .\Basic\nvic-I.\RTE\_Target_1-I"D:\project software\keil5\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include"-I"D:\project software\keil5\ARM\CMSIS\Include"-D__UVISION_VERSION="529" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\objects\encoder.o --omf_browse .\objects\encoder.crf --depend .\objects\encoder.d)
 I (Hardware\ENCODER\encoder.h)(0x66D424EA)
 I (.\Basic\sys\sys.h)(0x66BE1C43)
 I (.\CMSIS\stm32f10x.h)(0x4D783CB4)
@@ -323,7 +387,7 @@ I (.\Lib\inc\stm32f10x_usart.h)(0x4D783BB4)
 I (.\Lib\inc\stm32f10x_wwdg.h)(0x4D783BB4)
 I (.\Lib\inc\misc.h)(0x4D783BB4)
 I (.\Basic\delay\delay.h)(0x66BE1CDA)
-F (.\Hardware\KEY\key.c)(0x66C0D8B5)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Basic\delay -I .\Basic\flash -I .\Basic\i2c -I .\Basic\rtc -I .\Basic\sys -I .\Basic\usart -I .\CMSIS -I .\Hardware\BUZZER -I .\Hardware\ENCODER -I .\Hardware\KEY -I .\Hardware\LED -I .\Hardware\LM75A -I .\Hardware\TM1640 -I .\Hardware\TOUCH_KEY -I .\Lib\inc -I .\Lib\src -I .\Startup -I .\User -I .\Hardware\OLED0561 -I .\Basic\bkp-I.\RTE\_Target_1-I"D:\project software\keil5\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include"-I"D:\project software\keil5\ARM\CMSIS\Include"-D__UVISION_VERSION="529" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\objects\key.o --omf_browse .\objects\key.crf --depend .\objects\key.d)
+F (.\Hardware\KEY\key.c)(0x66C0D8B5)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Basic\delay -I .\Basic\flash -I .\Basic\i2c -I .\Basic\rtc -I .\Basic\sys -I .\Basic\usart -I .\CMSIS -I .\Hardware\BUZZER -I .\Hardware\ENCODER -I .\Hardware\KEY -I .\Hardware\LED -I .\Hardware\LM75A -I .\Hardware\TM1640 -I .\Hardware\TOUCH_KEY -I .\Lib\inc -I .\Lib\src -I .\Startup -I .\User -I .\Hardware\OLED0561 -I .\Basic\bkp -I .\Basic\adc -I .\Basic\nvic-I.\RTE\_Target_1-I"D:\project software\keil5\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include"-I"D:\project software\keil5\ARM\CMSIS\Include"-D__UVISION_VERSION="529" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\objects\key.o --omf_browse .\objects\key.crf --depend .\objects\key.d)
 I (Hardware\KEY\key.h)(0x66C0C4E0)
 I (.\Basic\sys\sys.h)(0x66BE1C43)
 I (.\CMSIS\stm32f10x.h)(0x4D783CB4)
@@ -354,7 +418,7 @@ I (.\Lib\inc\stm32f10x_tim.h)(0x4D783BB4)
 I (.\Lib\inc\stm32f10x_usart.h)(0x4D783BB4)
 I (.\Lib\inc\stm32f10x_wwdg.h)(0x4D783BB4)
 I (.\Lib\inc\misc.h)(0x4D783BB4)
-F (.\Hardware\LED\led.c)(0x66C20F64)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Basic\delay -I .\Basic\flash -I .\Basic\i2c -I .\Basic\rtc -I .\Basic\sys -I .\Basic\usart -I .\CMSIS -I .\Hardware\BUZZER -I .\Hardware\ENCODER -I .\Hardware\KEY -I .\Hardware\LED -I .\Hardware\LM75A -I .\Hardware\TM1640 -I .\Hardware\TOUCH_KEY -I .\Lib\inc -I .\Lib\src -I .\Startup -I .\User -I .\Hardware\OLED0561 -I .\Basic\bkp-I.\RTE\_Target_1-I"D:\project software\keil5\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include"-I"D:\project software\keil5\ARM\CMSIS\Include"-D__UVISION_VERSION="529" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\objects\led.o --omf_browse .\objects\led.crf --depend .\objects\led.d)
+F (.\Hardware\LED\led.c)(0x66C20F64)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Basic\delay -I .\Basic\flash -I .\Basic\i2c -I .\Basic\rtc -I .\Basic\sys -I .\Basic\usart -I .\CMSIS -I .\Hardware\BUZZER -I .\Hardware\ENCODER -I .\Hardware\KEY -I .\Hardware\LED -I .\Hardware\LM75A -I .\Hardware\TM1640 -I .\Hardware\TOUCH_KEY -I .\Lib\inc -I .\Lib\src -I .\Startup -I .\User -I .\Hardware\OLED0561 -I .\Basic\bkp -I .\Basic\adc -I .\Basic\nvic-I.\RTE\_Target_1-I"D:\project software\keil5\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include"-I"D:\project software\keil5\ARM\CMSIS\Include"-D__UVISION_VERSION="529" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\objects\led.o --omf_browse .\objects\led.crf --depend .\objects\led.d)
 I (Hardware\LED\led.h)(0x66C207AB)
 I (.\Basic\sys\sys.h)(0x66BE1C43)
 I (.\CMSIS\stm32f10x.h)(0x4D783CB4)
@@ -386,7 +450,7 @@ I (.\Lib\inc\stm32f10x_usart.h)(0x4D783BB4)
 I (.\Lib\inc\stm32f10x_wwdg.h)(0x4D783BB4)
 I (.\Lib\inc\misc.h)(0x4D783BB4)
 I (.\Basic\delay\delay.h)(0x66BE1CDA)
-F (.\Hardware\LM75A\lm75a.c)(0x66D72B8D)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Basic\delay -I .\Basic\flash -I .\Basic\i2c -I .\Basic\rtc -I .\Basic\sys -I .\Basic\usart -I .\CMSIS -I .\Hardware\BUZZER -I .\Hardware\ENCODER -I .\Hardware\KEY -I .\Hardware\LED -I .\Hardware\LM75A -I .\Hardware\TM1640 -I .\Hardware\TOUCH_KEY -I .\Lib\inc -I .\Lib\src -I .\Startup -I .\User -I .\Hardware\OLED0561 -I .\Basic\bkp-I.\RTE\_Target_1-I"D:\project software\keil5\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include"-I"D:\project software\keil5\ARM\CMSIS\Include"-D__UVISION_VERSION="529" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\objects\lm75a.o --omf_browse .\objects\lm75a.crf --depend .\objects\lm75a.d)
+F (.\Hardware\LM75A\lm75a.c)(0x66D72B8D)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Basic\delay -I .\Basic\flash -I .\Basic\i2c -I .\Basic\rtc -I .\Basic\sys -I .\Basic\usart -I .\CMSIS -I .\Hardware\BUZZER -I .\Hardware\ENCODER -I .\Hardware\KEY -I .\Hardware\LED -I .\Hardware\LM75A -I .\Hardware\TM1640 -I .\Hardware\TOUCH_KEY -I .\Lib\inc -I .\Lib\src -I .\Startup -I .\User -I .\Hardware\OLED0561 -I .\Basic\bkp -I .\Basic\adc -I .\Basic\nvic-I.\RTE\_Target_1-I"D:\project software\keil5\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include"-I"D:\project software\keil5\ARM\CMSIS\Include"-D__UVISION_VERSION="529" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\objects\lm75a.o --omf_browse .\objects\lm75a.crf --depend .\objects\lm75a.d)
 I (Hardware\LM75A\lm75a.h)(0x66D70281)
 I (.\Basic\sys\sys.h)(0x66BE1C43)
 I (.\CMSIS\stm32f10x.h)(0x4D783CB4)
@@ -418,7 +482,7 @@ I (.\Lib\inc\stm32f10x_usart.h)(0x4D783BB4)
 I (.\Lib\inc\stm32f10x_wwdg.h)(0x4D783BB4)
 I (.\Lib\inc\misc.h)(0x4D783BB4)
 I (.\Basic\i2c\i2c.h)(0x66D72B66)
-F (.\Hardware\TM1640\tm1640.c)(0x66D43078)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Basic\delay -I .\Basic\flash -I .\Basic\i2c -I .\Basic\rtc -I .\Basic\sys -I .\Basic\usart -I .\CMSIS -I .\Hardware\BUZZER -I .\Hardware\ENCODER -I .\Hardware\KEY -I .\Hardware\LED -I .\Hardware\LM75A -I .\Hardware\TM1640 -I .\Hardware\TOUCH_KEY -I .\Lib\inc -I .\Lib\src -I .\Startup -I .\User -I .\Hardware\OLED0561 -I .\Basic\bkp-I.\RTE\_Target_1-I"D:\project software\keil5\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include"-I"D:\project software\keil5\ARM\CMSIS\Include"-D__UVISION_VERSION="529" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\objects\tm1640.o --omf_browse .\objects\tm1640.crf --depend .\objects\tm1640.d)
+F (.\Hardware\TM1640\tm1640.c)(0x66D43078)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Basic\delay -I .\Basic\flash -I .\Basic\i2c -I .\Basic\rtc -I .\Basic\sys -I .\Basic\usart -I .\CMSIS -I .\Hardware\BUZZER -I .\Hardware\ENCODER -I .\Hardware\KEY -I .\Hardware\LED -I .\Hardware\LM75A -I .\Hardware\TM1640 -I .\Hardware\TOUCH_KEY -I .\Lib\inc -I .\Lib\src -I .\Startup -I .\User -I .\Hardware\OLED0561 -I .\Basic\bkp -I .\Basic\adc -I .\Basic\nvic-I.\RTE\_Target_1-I"D:\project software\keil5\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include"-I"D:\project software\keil5\ARM\CMSIS\Include"-D__UVISION_VERSION="529" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\objects\tm1640.o --omf_browse .\objects\tm1640.crf --depend .\objects\tm1640.d)
 I (Hardware\TM1640\tm1640.h)(0x66D30EAD)
 I (.\Basic\sys\sys.h)(0x66BE1C43)
 I (.\CMSIS\stm32f10x.h)(0x4D783CB4)
@@ -450,7 +514,7 @@ I (.\Lib\inc\stm32f10x_usart.h)(0x4D783BB4)
 I (.\Lib\inc\stm32f10x_wwdg.h)(0x4D783BB4)
 I (.\Lib\inc\misc.h)(0x4D783BB4)
 I (.\Basic\delay\delay.h)(0x66BE1CDA)
-F (.\Hardware\TOUCH_KEY\touch_key.c)(0x66CFDA37)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Basic\delay -I .\Basic\flash -I .\Basic\i2c -I .\Basic\rtc -I .\Basic\sys -I .\Basic\usart -I .\CMSIS -I .\Hardware\BUZZER -I .\Hardware\ENCODER -I .\Hardware\KEY -I .\Hardware\LED -I .\Hardware\LM75A -I .\Hardware\TM1640 -I .\Hardware\TOUCH_KEY -I .\Lib\inc -I .\Lib\src -I .\Startup -I .\User -I .\Hardware\OLED0561 -I .\Basic\bkp-I.\RTE\_Target_1-I"D:\project software\keil5\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include"-I"D:\project software\keil5\ARM\CMSIS\Include"-D__UVISION_VERSION="529" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\objects\touch_key.o --omf_browse .\objects\touch_key.crf --depend .\objects\touch_key.d)
+F (.\Hardware\TOUCH_KEY\touch_key.c)(0x66CFDA37)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Basic\delay -I .\Basic\flash -I .\Basic\i2c -I .\Basic\rtc -I .\Basic\sys -I .\Basic\usart -I .\CMSIS -I .\Hardware\BUZZER -I .\Hardware\ENCODER -I .\Hardware\KEY -I .\Hardware\LED -I .\Hardware\LM75A -I .\Hardware\TM1640 -I .\Hardware\TOUCH_KEY -I .\Lib\inc -I .\Lib\src -I .\Startup -I .\User -I .\Hardware\OLED0561 -I .\Basic\bkp -I .\Basic\adc -I .\Basic\nvic-I.\RTE\_Target_1-I"D:\project software\keil5\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include"-I"D:\project software\keil5\ARM\CMSIS\Include"-D__UVISION_VERSION="529" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\objects\touch_key.o --omf_browse .\objects\touch_key.crf --depend .\objects\touch_key.d)
 I (Hardware\TOUCH_KEY\touch_key.h)(0x66CFD37E)
 I (.\Basic\sys\sys.h)(0x66BE1C43)
 I (.\CMSIS\stm32f10x.h)(0x4D783CB4)
@@ -481,7 +545,7 @@ I (.\Lib\inc\stm32f10x_tim.h)(0x4D783BB4)
 I (.\Lib\inc\stm32f10x_usart.h)(0x4D783BB4)
 I (.\Lib\inc\stm32f10x_wwdg.h)(0x4D783BB4)
 I (.\Lib\inc\misc.h)(0x4D783BB4)
-F (.\Hardware\OLED0561\oled0561.c)(0x6749C739)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Basic\delay -I .\Basic\flash -I .\Basic\i2c -I .\Basic\rtc -I .\Basic\sys -I .\Basic\usart -I .\CMSIS -I .\Hardware\BUZZER -I .\Hardware\ENCODER -I .\Hardware\KEY -I .\Hardware\LED -I .\Hardware\LM75A -I .\Hardware\TM1640 -I .\Hardware\TOUCH_KEY -I .\Lib\inc -I .\Lib\src -I .\Startup -I .\User -I .\Hardware\OLED0561 -I .\Basic\bkp-I.\RTE\_Target_1-I"D:\project software\keil5\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include"-I"D:\project software\keil5\ARM\CMSIS\Include"-D__UVISION_VERSION="529" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\objects\oled0561.o --omf_browse .\objects\oled0561.crf --depend .\objects\oled0561.d)
+F (.\Hardware\OLED0561\oled0561.c)(0x674B191C)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Basic\delay -I .\Basic\flash -I .\Basic\i2c -I .\Basic\rtc -I .\Basic\sys -I .\Basic\usart -I .\CMSIS -I .\Hardware\BUZZER -I .\Hardware\ENCODER -I .\Hardware\KEY -I .\Hardware\LED -I .\Hardware\LM75A -I .\Hardware\TM1640 -I .\Hardware\TOUCH_KEY -I .\Lib\inc -I .\Lib\src -I .\Startup -I .\User -I .\Hardware\OLED0561 -I .\Basic\bkp -I .\Basic\adc -I .\Basic\nvic-I.\RTE\_Target_1-I"D:\project software\keil5\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include"-I"D:\project software\keil5\ARM\CMSIS\Include"-D__UVISION_VERSION="529" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\objects\oled0561.o --omf_browse .\objects\oled0561.crf --depend .\objects\oled0561.d)
 I (Hardware\OLED0561\oled0561.h)(0x6748152C)
 I (.\Basic\sys\sys.h)(0x66BE1C43)
 I (.\CMSIS\stm32f10x.h)(0x4D783CB4)
@@ -516,7 +580,7 @@ I (.\Basic\i2c\i2c.h)(0x66D72B66)
 I (Hardware\OLED0561\ASCII_8x16.h)(0x6749C6E1)
 I (Hardware\OLED0561\CHS_16x16.h)(0x6747C7B3)
 I (Hardware\OLED0561\PIC1.h)(0x5A9FA528)
-F (.\Lib\src\misc.c)(0x4D783BB4)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Basic\delay -I .\Basic\flash -I .\Basic\i2c -I .\Basic\rtc -I .\Basic\sys -I .\Basic\usart -I .\CMSIS -I .\Hardware\BUZZER -I .\Hardware\ENCODER -I .\Hardware\KEY -I .\Hardware\LED -I .\Hardware\LM75A -I .\Hardware\TM1640 -I .\Hardware\TOUCH_KEY -I .\Lib\inc -I .\Lib\src -I .\Startup -I .\User -I .\Hardware\OLED0561 -I .\Basic\bkp-I.\RTE\_Target_1-I"D:\project software\keil5\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include"-I"D:\project software\keil5\ARM\CMSIS\Include"-D__UVISION_VERSION="529" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\objects\misc.o --omf_browse .\objects\misc.crf --depend .\objects\misc.d)
+F (.\Lib\src\misc.c)(0x4D783BB4)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Basic\delay -I .\Basic\flash -I .\Basic\i2c -I .\Basic\rtc -I .\Basic\sys -I .\Basic\usart -I .\CMSIS -I .\Hardware\BUZZER -I .\Hardware\ENCODER -I .\Hardware\KEY -I .\Hardware\LED -I .\Hardware\LM75A -I .\Hardware\TM1640 -I .\Hardware\TOUCH_KEY -I .\Lib\inc -I .\Lib\src -I .\Startup -I .\User -I .\Hardware\OLED0561 -I .\Basic\bkp -I .\Basic\adc -I .\Basic\nvic-I.\RTE\_Target_1-I"D:\project software\keil5\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include"-I"D:\project software\keil5\ARM\CMSIS\Include"-D__UVISION_VERSION="529" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\objects\misc.o --omf_browse .\objects\misc.crf --depend .\objects\misc.d)
 I (.\Lib\inc\misc.h)(0x4D783BB4)
 I (.\CMSIS\stm32f10x.h)(0x4D783CB4)
 I (.\CMSIS\core_cm3.h)(0x4D523B58)
@@ -545,7 +609,7 @@ I (.\Lib\inc\stm32f10x_spi.h)(0x4D783BB4)
 I (.\Lib\inc\stm32f10x_tim.h)(0x4D783BB4)
 I (.\Lib\inc\stm32f10x_usart.h)(0x4D783BB4)
 I (.\Lib\inc\stm32f10x_wwdg.h)(0x4D783BB4)
-F (.\Lib\src\stm32f10x_bkp.c)(0x4D783BB4)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Basic\delay -I .\Basic\flash -I .\Basic\i2c -I .\Basic\rtc -I .\Basic\sys -I .\Basic\usart -I .\CMSIS -I .\Hardware\BUZZER -I .\Hardware\ENCODER -I .\Hardware\KEY -I .\Hardware\LED -I .\Hardware\LM75A -I .\Hardware\TM1640 -I .\Hardware\TOUCH_KEY -I .\Lib\inc -I .\Lib\src -I .\Startup -I .\User -I .\Hardware\OLED0561 -I .\Basic\bkp-I.\RTE\_Target_1-I"D:\project software\keil5\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include"-I"D:\project software\keil5\ARM\CMSIS\Include"-D__UVISION_VERSION="529" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\objects\stm32f10x_bkp.o --omf_browse .\objects\stm32f10x_bkp.crf --depend .\objects\stm32f10x_bkp.d)
+F (.\Lib\src\stm32f10x_bkp.c)(0x4D783BB4)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Basic\delay -I .\Basic\flash -I .\Basic\i2c -I .\Basic\rtc -I .\Basic\sys -I .\Basic\usart -I .\CMSIS -I .\Hardware\BUZZER -I .\Hardware\ENCODER -I .\Hardware\KEY -I .\Hardware\LED -I .\Hardware\LM75A -I .\Hardware\TM1640 -I .\Hardware\TOUCH_KEY -I .\Lib\inc -I .\Lib\src -I .\Startup -I .\User -I .\Hardware\OLED0561 -I .\Basic\bkp -I .\Basic\adc -I .\Basic\nvic-I.\RTE\_Target_1-I"D:\project software\keil5\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include"-I"D:\project software\keil5\ARM\CMSIS\Include"-D__UVISION_VERSION="529" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\objects\stm32f10x_bkp.o --omf_browse .\objects\stm32f10x_bkp.crf --depend .\objects\stm32f10x_bkp.d)
 I (.\Lib\inc\stm32f10x_bkp.h)(0x4D783BB4)
 I (.\CMSIS\stm32f10x.h)(0x4D783CB4)
 I (.\CMSIS\core_cm3.h)(0x4D523B58)
@@ -574,7 +638,7 @@ I (.\Lib\inc\stm32f10x_tim.h)(0x4D783BB4)
 I (.\Lib\inc\stm32f10x_usart.h)(0x4D783BB4)
 I (.\Lib\inc\stm32f10x_wwdg.h)(0x4D783BB4)
 I (.\Lib\inc\misc.h)(0x4D783BB4)
-F (.\Lib\src\stm32f10x_exti.c)(0x4D783BB4)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Basic\delay -I .\Basic\flash -I .\Basic\i2c -I .\Basic\rtc -I .\Basic\sys -I .\Basic\usart -I .\CMSIS -I .\Hardware\BUZZER -I .\Hardware\ENCODER -I .\Hardware\KEY -I .\Hardware\LED -I .\Hardware\LM75A -I .\Hardware\TM1640 -I .\Hardware\TOUCH_KEY -I .\Lib\inc -I .\Lib\src -I .\Startup -I .\User -I .\Hardware\OLED0561 -I .\Basic\bkp-I.\RTE\_Target_1-I"D:\project software\keil5\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include"-I"D:\project software\keil5\ARM\CMSIS\Include"-D__UVISION_VERSION="529" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\objects\stm32f10x_exti.o --omf_browse .\objects\stm32f10x_exti.crf --depend .\objects\stm32f10x_exti.d)
+F (.\Lib\src\stm32f10x_exti.c)(0x4D783BB4)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Basic\delay -I .\Basic\flash -I .\Basic\i2c -I .\Basic\rtc -I .\Basic\sys -I .\Basic\usart -I .\CMSIS -I .\Hardware\BUZZER -I .\Hardware\ENCODER -I .\Hardware\KEY -I .\Hardware\LED -I .\Hardware\LM75A -I .\Hardware\TM1640 -I .\Hardware\TOUCH_KEY -I .\Lib\inc -I .\Lib\src -I .\Startup -I .\User -I .\Hardware\OLED0561 -I .\Basic\bkp -I .\Basic\adc -I .\Basic\nvic-I.\RTE\_Target_1-I"D:\project software\keil5\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include"-I"D:\project software\keil5\ARM\CMSIS\Include"-D__UVISION_VERSION="529" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\objects\stm32f10x_exti.o --omf_browse .\objects\stm32f10x_exti.crf --depend .\objects\stm32f10x_exti.d)
 I (.\Lib\inc\stm32f10x_exti.h)(0x4D783BB4)
 I (.\CMSIS\stm32f10x.h)(0x4D783CB4)
 I (.\CMSIS\core_cm3.h)(0x4D523B58)
@@ -603,7 +667,7 @@ I (.\Lib\inc\stm32f10x_tim.h)(0x4D783BB4)
 I (.\Lib\inc\stm32f10x_usart.h)(0x4D783BB4)
 I (.\Lib\inc\stm32f10x_wwdg.h)(0x4D783BB4)
 I (.\Lib\inc\misc.h)(0x4D783BB4)
-F (.\Lib\src\stm32f10x_flash.c)(0x4D783BB4)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Basic\delay -I .\Basic\flash -I .\Basic\i2c -I .\Basic\rtc -I .\Basic\sys -I .\Basic\usart -I .\CMSIS -I .\Hardware\BUZZER -I .\Hardware\ENCODER -I .\Hardware\KEY -I .\Hardware\LED -I .\Hardware\LM75A -I .\Hardware\TM1640 -I .\Hardware\TOUCH_KEY -I .\Lib\inc -I .\Lib\src -I .\Startup -I .\User -I .\Hardware\OLED0561 -I .\Basic\bkp-I.\RTE\_Target_1-I"D:\project software\keil5\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include"-I"D:\project software\keil5\ARM\CMSIS\Include"-D__UVISION_VERSION="529" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\objects\stm32f10x_flash.o --omf_browse .\objects\stm32f10x_flash.crf --depend .\objects\stm32f10x_flash.d)
+F (.\Lib\src\stm32f10x_flash.c)(0x4D783BB4)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Basic\delay -I .\Basic\flash -I .\Basic\i2c -I .\Basic\rtc -I .\Basic\sys -I .\Basic\usart -I .\CMSIS -I .\Hardware\BUZZER -I .\Hardware\ENCODER -I .\Hardware\KEY -I .\Hardware\LED -I .\Hardware\LM75A -I .\Hardware\TM1640 -I .\Hardware\TOUCH_KEY -I .\Lib\inc -I .\Lib\src -I .\Startup -I .\User -I .\Hardware\OLED0561 -I .\Basic\bkp -I .\Basic\adc -I .\Basic\nvic-I.\RTE\_Target_1-I"D:\project software\keil5\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include"-I"D:\project software\keil5\ARM\CMSIS\Include"-D__UVISION_VERSION="529" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\objects\stm32f10x_flash.o --omf_browse .\objects\stm32f10x_flash.crf --depend .\objects\stm32f10x_flash.d)
 I (.\Lib\inc\stm32f10x_flash.h)(0x4D783BB4)
 I (.\CMSIS\stm32f10x.h)(0x4D783CB4)
 I (.\CMSIS\core_cm3.h)(0x4D523B58)
@@ -632,7 +696,7 @@ I (.\Lib\inc\stm32f10x_tim.h)(0x4D783BB4)
 I (.\Lib\inc\stm32f10x_usart.h)(0x4D783BB4)
 I (.\Lib\inc\stm32f10x_wwdg.h)(0x4D783BB4)
 I (.\Lib\inc\misc.h)(0x4D783BB4)
-F (.\Lib\src\stm32f10x_gpio.c)(0x4D79EEC6)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Basic\delay -I .\Basic\flash -I .\Basic\i2c -I .\Basic\rtc -I .\Basic\sys -I .\Basic\usart -I .\CMSIS -I .\Hardware\BUZZER -I .\Hardware\ENCODER -I .\Hardware\KEY -I .\Hardware\LED -I .\Hardware\LM75A -I .\Hardware\TM1640 -I .\Hardware\TOUCH_KEY -I .\Lib\inc -I .\Lib\src -I .\Startup -I .\User -I .\Hardware\OLED0561 -I .\Basic\bkp-I.\RTE\_Target_1-I"D:\project software\keil5\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include"-I"D:\project software\keil5\ARM\CMSIS\Include"-D__UVISION_VERSION="529" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\objects\stm32f10x_gpio.o --omf_browse .\objects\stm32f10x_gpio.crf --depend .\objects\stm32f10x_gpio.d)
+F (.\Lib\src\stm32f10x_gpio.c)(0x4D79EEC6)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Basic\delay -I .\Basic\flash -I .\Basic\i2c -I .\Basic\rtc -I .\Basic\sys -I .\Basic\usart -I .\CMSIS -I .\Hardware\BUZZER -I .\Hardware\ENCODER -I .\Hardware\KEY -I .\Hardware\LED -I .\Hardware\LM75A -I .\Hardware\TM1640 -I .\Hardware\TOUCH_KEY -I .\Lib\inc -I .\Lib\src -I .\Startup -I .\User -I .\Hardware\OLED0561 -I .\Basic\bkp -I .\Basic\adc -I .\Basic\nvic-I.\RTE\_Target_1-I"D:\project software\keil5\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include"-I"D:\project software\keil5\ARM\CMSIS\Include"-D__UVISION_VERSION="529" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\objects\stm32f10x_gpio.o --omf_browse .\objects\stm32f10x_gpio.crf --depend .\objects\stm32f10x_gpio.d)
 I (.\Lib\inc\stm32f10x_gpio.h)(0x4D783BB4)
 I (.\CMSIS\stm32f10x.h)(0x4D783CB4)
 I (.\CMSIS\core_cm3.h)(0x4D523B58)
@@ -661,7 +725,7 @@ I (.\Lib\inc\stm32f10x_tim.h)(0x4D783BB4)
 I (.\Lib\inc\stm32f10x_usart.h)(0x4D783BB4)
 I (.\Lib\inc\stm32f10x_wwdg.h)(0x4D783BB4)
 I (.\Lib\inc\misc.h)(0x4D783BB4)
-F (.\Lib\src\stm32f10x_i2c.c)(0x4D783BB4)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Basic\delay -I .\Basic\flash -I .\Basic\i2c -I .\Basic\rtc -I .\Basic\sys -I .\Basic\usart -I .\CMSIS -I .\Hardware\BUZZER -I .\Hardware\ENCODER -I .\Hardware\KEY -I .\Hardware\LED -I .\Hardware\LM75A -I .\Hardware\TM1640 -I .\Hardware\TOUCH_KEY -I .\Lib\inc -I .\Lib\src -I .\Startup -I .\User -I .\Hardware\OLED0561 -I .\Basic\bkp-I.\RTE\_Target_1-I"D:\project software\keil5\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include"-I"D:\project software\keil5\ARM\CMSIS\Include"-D__UVISION_VERSION="529" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\objects\stm32f10x_i2c.o --omf_browse .\objects\stm32f10x_i2c.crf --depend .\objects\stm32f10x_i2c.d)
+F (.\Lib\src\stm32f10x_i2c.c)(0x4D783BB4)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Basic\delay -I .\Basic\flash -I .\Basic\i2c -I .\Basic\rtc -I .\Basic\sys -I .\Basic\usart -I .\CMSIS -I .\Hardware\BUZZER -I .\Hardware\ENCODER -I .\Hardware\KEY -I .\Hardware\LED -I .\Hardware\LM75A -I .\Hardware\TM1640 -I .\Hardware\TOUCH_KEY -I .\Lib\inc -I .\Lib\src -I .\Startup -I .\User -I .\Hardware\OLED0561 -I .\Basic\bkp -I .\Basic\adc -I .\Basic\nvic-I.\RTE\_Target_1-I"D:\project software\keil5\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include"-I"D:\project software\keil5\ARM\CMSIS\Include"-D__UVISION_VERSION="529" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\objects\stm32f10x_i2c.o --omf_browse .\objects\stm32f10x_i2c.crf --depend .\objects\stm32f10x_i2c.d)
 I (.\Lib\inc\stm32f10x_i2c.h)(0x4D783BB4)
 I (.\CMSIS\stm32f10x.h)(0x4D783CB4)
 I (.\CMSIS\core_cm3.h)(0x4D523B58)
@@ -690,7 +754,7 @@ I (.\Lib\inc\stm32f10x_tim.h)(0x4D783BB4)
 I (.\Lib\inc\stm32f10x_usart.h)(0x4D783BB4)
 I (.\Lib\inc\stm32f10x_wwdg.h)(0x4D783BB4)
 I (.\Lib\inc\misc.h)(0x4D783BB4)
-F (.\Lib\src\stm32f10x_pwr.c)(0x4D783BB4)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Basic\delay -I .\Basic\flash -I .\Basic\i2c -I .\Basic\rtc -I .\Basic\sys -I .\Basic\usart -I .\CMSIS -I .\Hardware\BUZZER -I .\Hardware\ENCODER -I .\Hardware\KEY -I .\Hardware\LED -I .\Hardware\LM75A -I .\Hardware\TM1640 -I .\Hardware\TOUCH_KEY -I .\Lib\inc -I .\Lib\src -I .\Startup -I .\User -I .\Hardware\OLED0561 -I .\Basic\bkp-I.\RTE\_Target_1-I"D:\project software\keil5\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include"-I"D:\project software\keil5\ARM\CMSIS\Include"-D__UVISION_VERSION="529" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\objects\stm32f10x_pwr.o --omf_browse .\objects\stm32f10x_pwr.crf --depend .\objects\stm32f10x_pwr.d)
+F (.\Lib\src\stm32f10x_pwr.c)(0x4D783BB4)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Basic\delay -I .\Basic\flash -I .\Basic\i2c -I .\Basic\rtc -I .\Basic\sys -I .\Basic\usart -I .\CMSIS -I .\Hardware\BUZZER -I .\Hardware\ENCODER -I .\Hardware\KEY -I .\Hardware\LED -I .\Hardware\LM75A -I .\Hardware\TM1640 -I .\Hardware\TOUCH_KEY -I .\Lib\inc -I .\Lib\src -I .\Startup -I .\User -I .\Hardware\OLED0561 -I .\Basic\bkp -I .\Basic\adc -I .\Basic\nvic-I.\RTE\_Target_1-I"D:\project software\keil5\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include"-I"D:\project software\keil5\ARM\CMSIS\Include"-D__UVISION_VERSION="529" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\objects\stm32f10x_pwr.o --omf_browse .\objects\stm32f10x_pwr.crf --depend .\objects\stm32f10x_pwr.d)
 I (.\Lib\inc\stm32f10x_pwr.h)(0x4D783BB4)
 I (.\CMSIS\stm32f10x.h)(0x4D783CB4)
 I (.\CMSIS\core_cm3.h)(0x4D523B58)
@@ -719,7 +783,7 @@ I (.\Lib\inc\stm32f10x_tim.h)(0x4D783BB4)
 I (.\Lib\inc\stm32f10x_usart.h)(0x4D783BB4)
 I (.\Lib\inc\stm32f10x_wwdg.h)(0x4D783BB4)
 I (.\Lib\inc\misc.h)(0x4D783BB4)
-F (.\Lib\src\stm32f10x_rcc.c)(0x4D783BB4)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Basic\delay -I .\Basic\flash -I .\Basic\i2c -I .\Basic\rtc -I .\Basic\sys -I .\Basic\usart -I .\CMSIS -I .\Hardware\BUZZER -I .\Hardware\ENCODER -I .\Hardware\KEY -I .\Hardware\LED -I .\Hardware\LM75A -I .\Hardware\TM1640 -I .\Hardware\TOUCH_KEY -I .\Lib\inc -I .\Lib\src -I .\Startup -I .\User -I .\Hardware\OLED0561 -I .\Basic\bkp-I.\RTE\_Target_1-I"D:\project software\keil5\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include"-I"D:\project software\keil5\ARM\CMSIS\Include"-D__UVISION_VERSION="529" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\objects\stm32f10x_rcc.o --omf_browse .\objects\stm32f10x_rcc.crf --depend .\objects\stm32f10x_rcc.d)
+F (.\Lib\src\stm32f10x_rcc.c)(0x4D783BB4)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Basic\delay -I .\Basic\flash -I .\Basic\i2c -I .\Basic\rtc -I .\Basic\sys -I .\Basic\usart -I .\CMSIS -I .\Hardware\BUZZER -I .\Hardware\ENCODER -I .\Hardware\KEY -I .\Hardware\LED -I .\Hardware\LM75A -I .\Hardware\TM1640 -I .\Hardware\TOUCH_KEY -I .\Lib\inc -I .\Lib\src -I .\Startup -I .\User -I .\Hardware\OLED0561 -I .\Basic\bkp -I .\Basic\adc -I .\Basic\nvic-I.\RTE\_Target_1-I"D:\project software\keil5\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include"-I"D:\project software\keil5\ARM\CMSIS\Include"-D__UVISION_VERSION="529" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\objects\stm32f10x_rcc.o --omf_browse .\objects\stm32f10x_rcc.crf --depend .\objects\stm32f10x_rcc.d)
 I (.\Lib\inc\stm32f10x_rcc.h)(0x4D783BB4)
 I (.\CMSIS\stm32f10x.h)(0x4D783CB4)
 I (.\CMSIS\core_cm3.h)(0x4D523B58)
@@ -748,7 +812,7 @@ I (.\Lib\inc\stm32f10x_tim.h)(0x4D783BB4)
 I (.\Lib\inc\stm32f10x_usart.h)(0x4D783BB4)
 I (.\Lib\inc\stm32f10x_wwdg.h)(0x4D783BB4)
 I (.\Lib\inc\misc.h)(0x4D783BB4)
-F (.\Lib\src\stm32f10x_rtc.c)(0x4D783BB4)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Basic\delay -I .\Basic\flash -I .\Basic\i2c -I .\Basic\rtc -I .\Basic\sys -I .\Basic\usart -I .\CMSIS -I .\Hardware\BUZZER -I .\Hardware\ENCODER -I .\Hardware\KEY -I .\Hardware\LED -I .\Hardware\LM75A -I .\Hardware\TM1640 -I .\Hardware\TOUCH_KEY -I .\Lib\inc -I .\Lib\src -I .\Startup -I .\User -I .\Hardware\OLED0561 -I .\Basic\bkp-I.\RTE\_Target_1-I"D:\project software\keil5\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include"-I"D:\project software\keil5\ARM\CMSIS\Include"-D__UVISION_VERSION="529" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\objects\stm32f10x_rtc.o --omf_browse .\objects\stm32f10x_rtc.crf --depend .\objects\stm32f10x_rtc.d)
+F (.\Lib\src\stm32f10x_rtc.c)(0x4D783BB4)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Basic\delay -I .\Basic\flash -I .\Basic\i2c -I .\Basic\rtc -I .\Basic\sys -I .\Basic\usart -I .\CMSIS -I .\Hardware\BUZZER -I .\Hardware\ENCODER -I .\Hardware\KEY -I .\Hardware\LED -I .\Hardware\LM75A -I .\Hardware\TM1640 -I .\Hardware\TOUCH_KEY -I .\Lib\inc -I .\Lib\src -I .\Startup -I .\User -I .\Hardware\OLED0561 -I .\Basic\bkp -I .\Basic\adc -I .\Basic\nvic-I.\RTE\_Target_1-I"D:\project software\keil5\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include"-I"D:\project software\keil5\ARM\CMSIS\Include"-D__UVISION_VERSION="529" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\objects\stm32f10x_rtc.o --omf_browse .\objects\stm32f10x_rtc.crf --depend .\objects\stm32f10x_rtc.d)
 I (.\Lib\inc\stm32f10x_rtc.h)(0x4D783BB4)
 I (.\CMSIS\stm32f10x.h)(0x4D783CB4)
 I (.\CMSIS\core_cm3.h)(0x4D523B58)
@@ -777,7 +841,7 @@ I (.\Lib\inc\stm32f10x_tim.h)(0x4D783BB4)
 I (.\Lib\inc\stm32f10x_usart.h)(0x4D783BB4)
 I (.\Lib\inc\stm32f10x_wwdg.h)(0x4D783BB4)
 I (.\Lib\inc\misc.h)(0x4D783BB4)
-F (.\Lib\src\stm32f10x_usart.c)(0x4D783BB4)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Basic\delay -I .\Basic\flash -I .\Basic\i2c -I .\Basic\rtc -I .\Basic\sys -I .\Basic\usart -I .\CMSIS -I .\Hardware\BUZZER -I .\Hardware\ENCODER -I .\Hardware\KEY -I .\Hardware\LED -I .\Hardware\LM75A -I .\Hardware\TM1640 -I .\Hardware\TOUCH_KEY -I .\Lib\inc -I .\Lib\src -I .\Startup -I .\User -I .\Hardware\OLED0561 -I .\Basic\bkp-I.\RTE\_Target_1-I"D:\project software\keil5\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include"-I"D:\project software\keil5\ARM\CMSIS\Include"-D__UVISION_VERSION="529" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\objects\stm32f10x_usart.o --omf_browse .\objects\stm32f10x_usart.crf --depend .\objects\stm32f10x_usart.d)
+F (.\Lib\src\stm32f10x_usart.c)(0x4D783BB4)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Basic\delay -I .\Basic\flash -I .\Basic\i2c -I .\Basic\rtc -I .\Basic\sys -I .\Basic\usart -I .\CMSIS -I .\Hardware\BUZZER -I .\Hardware\ENCODER -I .\Hardware\KEY -I .\Hardware\LED -I .\Hardware\LM75A -I .\Hardware\TM1640 -I .\Hardware\TOUCH_KEY -I .\Lib\inc -I .\Lib\src -I .\Startup -I .\User -I .\Hardware\OLED0561 -I .\Basic\bkp -I .\Basic\adc -I .\Basic\nvic-I.\RTE\_Target_1-I"D:\project software\keil5\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include"-I"D:\project software\keil5\ARM\CMSIS\Include"-D__UVISION_VERSION="529" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\objects\stm32f10x_usart.o --omf_browse .\objects\stm32f10x_usart.crf --depend .\objects\stm32f10x_usart.d)
 I (.\Lib\inc\stm32f10x_usart.h)(0x4D783BB4)
 I (.\CMSIS\stm32f10x.h)(0x4D783CB4)
 I (.\CMSIS\core_cm3.h)(0x4D523B58)
@@ -806,7 +870,7 @@ I (.\Lib\inc\stm32f10x_spi.h)(0x4D783BB4)
 I (.\Lib\inc\stm32f10x_tim.h)(0x4D783BB4)
 I (.\Lib\inc\stm32f10x_wwdg.h)(0x4D783BB4)
 I (.\Lib\inc\misc.h)(0x4D783BB4)
-F (.\Lib\src\stm32f10x_adc.c)(0x4D783BB4)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Basic\delay -I .\Basic\flash -I .\Basic\i2c -I .\Basic\rtc -I .\Basic\sys -I .\Basic\usart -I .\CMSIS -I .\Hardware\BUZZER -I .\Hardware\ENCODER -I .\Hardware\KEY -I .\Hardware\LED -I .\Hardware\LM75A -I .\Hardware\TM1640 -I .\Hardware\TOUCH_KEY -I .\Lib\inc -I .\Lib\src -I .\Startup -I .\User -I .\Hardware\OLED0561 -I .\Basic\bkp-I.\RTE\_Target_1-I"D:\project software\keil5\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include"-I"D:\project software\keil5\ARM\CMSIS\Include"-D__UVISION_VERSION="529" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\objects\stm32f10x_adc.o --omf_browse .\objects\stm32f10x_adc.crf --depend .\objects\stm32f10x_adc.d)
+F (.\Lib\src\stm32f10x_adc.c)(0x4D783BB4)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Basic\delay -I .\Basic\flash -I .\Basic\i2c -I .\Basic\rtc -I .\Basic\sys -I .\Basic\usart -I .\CMSIS -I .\Hardware\BUZZER -I .\Hardware\ENCODER -I .\Hardware\KEY -I .\Hardware\LED -I .\Hardware\LM75A -I .\Hardware\TM1640 -I .\Hardware\TOUCH_KEY -I .\Lib\inc -I .\Lib\src -I .\Startup -I .\User -I .\Hardware\OLED0561 -I .\Basic\bkp -I .\Basic\adc -I .\Basic\nvic-I.\RTE\_Target_1-I"D:\project software\keil5\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include"-I"D:\project software\keil5\ARM\CMSIS\Include"-D__UVISION_VERSION="529" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\objects\stm32f10x_adc.o --omf_browse .\objects\stm32f10x_adc.crf --depend .\objects\stm32f10x_adc.d)
 I (.\Lib\inc\stm32f10x_adc.h)(0x4D783BB4)
 I (.\CMSIS\stm32f10x.h)(0x4D783CB4)
 I (.\CMSIS\core_cm3.h)(0x4D523B58)
@@ -820,6 +884,35 @@ I (.\Lib\inc\stm32f10x_crc.h)(0x4D783BB4)
 I (.\Lib\inc\stm32f10x_dac.h)(0x4D783BB4)
 I (.\Lib\inc\stm32f10x_dbgmcu.h)(0x4D783BB4)
 I (.\Lib\inc\stm32f10x_dma.h)(0x4D783BB4)
+I (.\Lib\inc\stm32f10x_exti.h)(0x4D783BB4)
+I (.\Lib\inc\stm32f10x_flash.h)(0x4D783BB4)
+I (.\Lib\inc\stm32f10x_fsmc.h)(0x4D783BB4)
+I (.\Lib\inc\stm32f10x_gpio.h)(0x4D783BB4)
+I (.\Lib\inc\stm32f10x_i2c.h)(0x4D783BB4)
+I (.\Lib\inc\stm32f10x_iwdg.h)(0x4D783BB4)
+I (.\Lib\inc\stm32f10x_pwr.h)(0x4D783BB4)
+I (.\Lib\inc\stm32f10x_rcc.h)(0x4D783BB4)
+I (.\Lib\inc\stm32f10x_rtc.h)(0x4D783BB4)
+I (.\Lib\inc\stm32f10x_sdio.h)(0x4D783BB4)
+I (.\Lib\inc\stm32f10x_spi.h)(0x4D783BB4)
+I (.\Lib\inc\stm32f10x_tim.h)(0x4D783BB4)
+I (.\Lib\inc\stm32f10x_usart.h)(0x4D783BB4)
+I (.\Lib\inc\stm32f10x_wwdg.h)(0x4D783BB4)
+I (.\Lib\inc\misc.h)(0x4D783BB4)
+F (.\Lib\src\stm32f10x_dma.c)(0x4D783BB4)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Basic\delay -I .\Basic\flash -I .\Basic\i2c -I .\Basic\rtc -I .\Basic\sys -I .\Basic\usart -I .\CMSIS -I .\Hardware\BUZZER -I .\Hardware\ENCODER -I .\Hardware\KEY -I .\Hardware\LED -I .\Hardware\LM75A -I .\Hardware\TM1640 -I .\Hardware\TOUCH_KEY -I .\Lib\inc -I .\Lib\src -I .\Startup -I .\User -I .\Hardware\OLED0561 -I .\Basic\bkp -I .\Basic\adc -I .\Basic\nvic-I.\RTE\_Target_1-I"D:\project software\keil5\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include"-I"D:\project software\keil5\ARM\CMSIS\Include"-D__UVISION_VERSION="529" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\objects\stm32f10x_dma.o --omf_browse .\objects\stm32f10x_dma.crf --depend .\objects\stm32f10x_dma.d)
+I (.\Lib\inc\stm32f10x_dma.h)(0x4D783BB4)
+I (.\CMSIS\stm32f10x.h)(0x4D783CB4)
+I (.\CMSIS\core_cm3.h)(0x4D523B58)
+I (D:\project software\keil5\ARM\ARMCC\include\stdint.h)(0x5D9AD218)
+I (.\CMSIS\system_stm32f10x.h)(0x4D783CAA)
+I (.\User\stm32f10x_conf.h)(0x4D99A59E)
+I (.\Lib\inc\stm32f10x_adc.h)(0x4D783BB4)
+I (.\Lib\inc\stm32f10x_bkp.h)(0x4D783BB4)
+I (.\Lib\inc\stm32f10x_can.h)(0x4D783BB4)
+I (.\Lib\inc\stm32f10x_cec.h)(0x4D783BB4)
+I (.\Lib\inc\stm32f10x_crc.h)(0x4D783BB4)
+I (.\Lib\inc\stm32f10x_dac.h)(0x4D783BB4)
+I (.\Lib\inc\stm32f10x_dbgmcu.h)(0x4D783BB4)
 I (.\Lib\inc\stm32f10x_exti.h)(0x4D783BB4)
 I (.\Lib\inc\stm32f10x_flash.h)(0x4D783BB4)
 I (.\Lib\inc\stm32f10x_fsmc.h)(0x4D783BB4)
@@ -836,7 +929,7 @@ I (.\Lib\inc\stm32f10x_usart.h)(0x4D783BB4)
 I (.\Lib\inc\stm32f10x_wwdg.h)(0x4D783BB4)
 I (.\Lib\inc\misc.h)(0x4D783BB4)
 F (.\Startup\startup_stm32f10x_md.s)(0x4D783CD2)(--cpu Cortex-M3 -g --apcs=interwork -I.\RTE\_Target_1-I"D:\project software\keil5\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include"-I"D:\project software\keil5\ARM\CMSIS\Include"--pd "__UVISION_VERSION SETA 529" --pd "STM32F10X_MD SETA 1"--list .\listings\startup_stm32f10x_md.lst --xref -o .\objects\startup_stm32f10x_md.o --depend .\objects\startup_stm32f10x_md.d)
-F (.\User\main.c)(0x674ADC91)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Basic\delay -I .\Basic\flash -I .\Basic\i2c -I .\Basic\rtc -I .\Basic\sys -I .\Basic\usart -I .\CMSIS -I .\Hardware\BUZZER -I .\Hardware\ENCODER -I .\Hardware\KEY -I .\Hardware\LED -I .\Hardware\LM75A -I .\Hardware\TM1640 -I .\Hardware\TOUCH_KEY -I .\Lib\inc -I .\Lib\src -I .\Startup -I .\User -I .\Hardware\OLED0561 -I .\Basic\bkp-I.\RTE\_Target_1-I"D:\project software\keil5\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include"-I"D:\project software\keil5\ARM\CMSIS\Include"-D__UVISION_VERSION="529" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
+F (.\User\main.c)(0x6756FF6B)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Basic\delay -I .\Basic\flash -I .\Basic\i2c -I .\Basic\rtc -I .\Basic\sys -I .\Basic\usart -I .\CMSIS -I .\Hardware\BUZZER -I .\Hardware\ENCODER -I .\Hardware\KEY -I .\Hardware\LED -I .\Hardware\LM75A -I .\Hardware\TM1640 -I .\Hardware\TOUCH_KEY -I .\Lib\inc -I .\Lib\src -I .\Startup -I .\User -I .\Hardware\OLED0561 -I .\Basic\bkp -I .\Basic\adc -I .\Basic\nvic-I.\RTE\_Target_1-I"D:\project software\keil5\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include"-I"D:\project software\keil5\ARM\CMSIS\Include"-D__UVISION_VERSION="529" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
 I (.\CMSIS\stm32f10x.h)(0x4D783CB4)
 I (.\CMSIS\core_cm3.h)(0x4D523B58)
 I (D:\project software\keil5\ARM\ARMCC\include\stdint.h)(0x5D9AD218)
@@ -873,7 +966,10 @@ I (.\Hardware\OLED0561\oled0561.h)(0x6748152C)
 I (.\Hardware\ENCODER\encoder.h)(0x66D424EA)
 I (.\Basic\rtc\rtc.h)(0x66CE02F3)
 I (.\Basic\bkp\bkp.h)(0x674AD973)
-F (.\User\stm32f10x_it.c)(0x4D99A59E)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Basic\delay -I .\Basic\flash -I .\Basic\i2c -I .\Basic\rtc -I .\Basic\sys -I .\Basic\usart -I .\CMSIS -I .\Hardware\BUZZER -I .\Hardware\ENCODER -I .\Hardware\KEY -I .\Hardware\LED -I .\Hardware\LM75A -I .\Hardware\TM1640 -I .\Hardware\TOUCH_KEY -I .\Lib\inc -I .\Lib\src -I .\Startup -I .\User -I .\Hardware\OLED0561 -I .\Basic\bkp-I.\RTE\_Target_1-I"D:\project software\keil5\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include"-I"D:\project software\keil5\ARM\CMSIS\Include"-D__UVISION_VERSION="529" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\objects\stm32f10x_it.o --omf_browse .\objects\stm32f10x_it.crf --depend .\objects\stm32f10x_it.d)
+I (.\Basic\adc\adc.h)(0x674FC6E4)
+I (.\Basic\nvic\nvic.h)(0x675411AF)
+I (.\Hardware\BUZZER\buzzer.h)(0x66C606EA)
+F (.\User\stm32f10x_it.c)(0x4D99A59E)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Basic\delay -I .\Basic\flash -I .\Basic\i2c -I .\Basic\rtc -I .\Basic\sys -I .\Basic\usart -I .\CMSIS -I .\Hardware\BUZZER -I .\Hardware\ENCODER -I .\Hardware\KEY -I .\Hardware\LED -I .\Hardware\LM75A -I .\Hardware\TM1640 -I .\Hardware\TOUCH_KEY -I .\Lib\inc -I .\Lib\src -I .\Startup -I .\User -I .\Hardware\OLED0561 -I .\Basic\bkp -I .\Basic\adc -I .\Basic\nvic-I.\RTE\_Target_1-I"D:\project software\keil5\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include"-I"D:\project software\keil5\ARM\CMSIS\Include"-D__UVISION_VERSION="529" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\objects\stm32f10x_it.o --omf_browse .\objects\stm32f10x_it.crf --depend .\objects\stm32f10x_it.d)
 I (User\stm32f10x_it.h)(0x4D99A59E)
 I (.\CMSIS\stm32f10x.h)(0x4D783CB4)
 I (.\CMSIS\core_cm3.h)(0x4D523B58)

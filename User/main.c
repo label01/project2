@@ -14,14 +14,28 @@
 #include "encoder.h"
 #include "rtc.h"
 #include "bkp.h"
+#include "adc.h"
+#include "nvic.h"
+#include "buzzer.h"
 
+extern vu16 ADC_DMA_IN[3]; //声明外部变量
+
+vu16 arr1[10];//放入10个ADC值，求平均值
+vu16 arr2[10];
+vu16 arr3[10];
 
 
 int main(void) {//主程序
 	
 	u8 buffer[3];//保存温度传感器数据
 	u8 MENU=1; //主菜单编号
+	u8 a;//for循环参数
 	u8 b;//获取编码器的值
+	u16 Average_ADC1;//第1个ADC平均值
+	u16 Average_ADC2;//第2个ADC平均值
+	u16 Average_ADC3;//第3个ADC平均值
+	u16 max;//ADC 最大值
+	u16 min;//ADC 最小值
 	
 	
 	delay_ms(100);//上电时等待其他器件就绪
@@ -29,14 +43,16 @@ int main(void) {//主程序
 	I2C_Configuration();//I2C初始化
 	LM75A_GetTemp(buffer);//读取lm75a的温度数据
 	ENCODER_Init();//旋转编码器初始化
-	RTC_Config();//初始化时钟
-	BKP_Configuration();//初始化bkp
-	
 	OLED0561_Init();//OLED屏幕初始化
+	RTC_Config();//初始化时钟
+	ENCODER_INT_INIT();//编码器中断初始化
+	//BKP_Configuration();//初始化bkp
+	ADC_Configuration(); //初始化ADC
+	BUZZER_Init();
 	OLED_DISPLAY_LIT(155);//调整屏幕亮度
-	
-	MENU=BKP_ReadBackupRegister(BKP_DR1);
-	if(MENU<1||MENU>3)MENU=1; //如果menu的备份值不在1~3的菜单列表里，默认重新赋值menu为1
+	delay_ms(1000);
+//	MENU=BKP_ReadBackupRegister(BKP_DR1);
+//	if(MENU<1||MENU>3)MENU=1; //如果menu的备份值不在1~3的菜单列表里，默认重新赋值menu为1
 	
 	while (1) {
 		//无限循环程序
@@ -75,17 +91,16 @@ int main(void) {//主程序
 			OLED_DISPLAY_16x16(6,3*16,20);
 			
 			//备份菜单值,掉电保存在备份寄存器
-			BKP_WriteBackupRegister(BKP_DR1, MENU);
+			//BKP_WriteBackupRegister(BKP_DR1, MENU);
 			
 			MENU=11;//自动跳转到菜单11
-			
 		}
 		
 		//菜单2
 		if(MENU==2){
 			OLED_DISPLAY_CLEAR();//清屏
 			INVERSE_OLED_DISPLAY_8x16(0,0*8,2+0x30); //数字反显示1
-			INVERSE_OLED_DISPLAY_8x16(0,1*8,80+0x30); //显示白面
+			INVERSE_OLED_DISPLAY_8x16(0,1*8,0x20); //显示白面
 			INVERSE_OLED_DISPLAY_16x16(0,1*16,13);
 			INVERSE_OLED_DISPLAY_16x16(0,2*16,13);
 
@@ -101,7 +116,7 @@ int main(void) {//主程序
 			OLED_DISPLAY_8x16_BUFFER(6,"ADC3: "); //显示字符串
 			
 			//备份菜单值,掉电保存在备份寄存器
-			BKP_WriteBackupRegister(BKP_DR1, MENU);
+			//BKP_WriteBackupRegister(BKP_DR1, MENU);
 			
 			MENU=21;//自动跳转到菜单21，用来设置菜单显示的数值
 		}
@@ -110,7 +125,7 @@ int main(void) {//主程序
 		if(MENU==3){
 			OLED_DISPLAY_CLEAR();//清屏
 			INVERSE_OLED_DISPLAY_8x16(0,0*8,3+0x30); //数字反显示1
-			INVERSE_OLED_DISPLAY_8x16(0,1*8,80+0x30); //显示白面
+			INVERSE_OLED_DISPLAY_8x16(0,1*8,0x20); //显示白面
 			INVERSE_OLED_DISPLAY_16x16(0,1*16,13);
 			INVERSE_OLED_DISPLAY_16x16(0,2*16,6);//汉字显示	 设置菜单
 			INVERSE_OLED_DISPLAY_16x16(0,3*16,7);
@@ -130,7 +145,7 @@ int main(void) {//主程序
 			OLED_DISPLAY_8x16(6,4*8,10+0x30);//冒号
 			
 			//备份菜单值,掉电保存在备份寄存器
-			BKP_WriteBackupRegister(BKP_DR1, MENU);
+			//BKP_WriteBackupRegister(BKP_DR1, MENU);
 			
 			MENU=31;//自动跳转到 菜单31 显示高低温 光照
 		}
@@ -144,7 +159,7 @@ int main(void) {//主程序
 			
 			OLED_DISPLAY_8x16(6, 8*8, rhour/10+0x30);//显示小时值
 			OLED_DISPLAY_8x16(6, 9*8, rhour%10+0x30);
-			OLED_DISPLAY_8x16(6, 10*8, ":");//显示冒号
+			OLED_DISPLAY_8x16(6, 10*8, 0x3a);//显示冒号
 			OLED_DISPLAY_8x16(6, 11*8, rmin/10+0x30);//显示分钟值
 			OLED_DISPLAY_8x16(6, 12*8, rmin%10+0x30);
 			OLED_DISPLAY_8x16(6, 13*8, 0x3a);//显示冒号
@@ -158,26 +173,91 @@ int main(void) {//主程序
 			OLED_DISPLAY_8x16(2, 11*8, buffer[1]%10+0x30);
 			OLED_DISPLAY_8x16(2, 12*8, 0x2e);//小数点
 			OLED_DISPLAY_8x16(2, 13*8, buffer[2]/10+0x30);
-			
-			b=ENCODER_READ();//读出旋转编码器左右旋转的值
-			if(b==1) MENU=2;
-			if(b==2) MENU=3;
 		}
 		
 		
 		//菜单21 显示模拟量的数值
 		if(MENU==21){
-			b=ENCODER_READ();//读出旋转编码器左右旋转的值
-			if(b==1) MENU=3;
-			if(b==2) MENU=1;
-		
+			Average_ADC1=0;//复位变量值
+			Average_ADC2=0;
+			Average_ADC3=0;
+			
+			for(a=0;a<10;a++){
+				arr1[a]=ADC_DMA_IN[0]; //读取第1路ADC值
+				arr2[a]=ADC_DMA_IN[1]; //读取第2路ADC值
+				arr3[a]=ADC_DMA_IN[2]; //读取第3路ADC值
+				while(!ADC_GetFlagStatus(ADC1, ADC_FLAG_EOC ));//判断ADC转换结束标识位
+				delay_us(1);//延时1ms等待ADC把数据写入ADC1_DR， 不延时1ms会出现死机
+				ADC_ClearFlag(ADC1, ADC_FLAG_EOC);//清除标志位
+			}
+			
+			/*求第一路平均值*/
+			max=arr1[0];
+			min=arr1[0];
+			for(a=0; a<10; a++){
+				if(max<arr1[a]) max=arr1[a];//检索最大值
+				if(min>arr1[a])	min=arr1[a];//检索最小值
+			}
+			for(a=0; a<10; a++){
+				Average_ADC1=Average_ADC1+arr1[a];//求和
+			}
+			Average_ADC1=(Average_ADC1-max-min)/8;//求平均值
+			
+			/*求第二路平均值*/
+			max=arr2[0];
+			min=arr2[0];
+			for(a=0; a<10; a++){
+				if(max<arr2[a]) max=arr2[a];//检索最大值
+				if(min>arr2[a])	min=arr2[a];//检索最小值
+			}
+			for(a=0; a<10; a++){
+				Average_ADC2=Average_ADC2+arr2[a];//求和
+			}
+			Average_ADC2=(Average_ADC2-max-min)/8;//求平均值
+			
+			/*求第三路平均值*/
+			max=arr3[0];
+			min=arr3[0];
+			for(a=0; a<10; a++){
+				if(max<arr3[a]) max=arr3[a];//检索最大值
+				if(min>arr3[a])	min=arr3[a];//检索最小值
+			}
+			for(a=0; a<10; a++){
+				Average_ADC3=Average_ADC3+arr3[a];//求和
+			}
+			Average_ADC3=(Average_ADC3-max-min)/8;//求平均值
+			/*显示第一路平均值*/
+			OLED_DISPLAY_8x16(2,5*8,Average_ADC1/1000+0x30);
+			OLED_DISPLAY_8x16(2,6*8,Average_ADC1%1000/100+0x30);                         
+			OLED_DISPLAY_8x16(2,7*8,Average_ADC1%100/10+0x30);
+			OLED_DISPLAY_8x16(2,8*8,Average_ADC1%10+0x30);
+			/*显示第二路平均值*/
+			OLED_DISPLAY_8x16(4,5*8,Average_ADC2/1000+0x30);
+			OLED_DISPLAY_8x16(4,6*8,Average_ADC2%1000/100+0x30);                         
+			OLED_DISPLAY_8x16(4,7*8,Average_ADC2%100/10+0x30);
+			OLED_DISPLAY_8x16(4,8*8,Average_ADC2%10+0x30);
+			/*显示第三路平均值*/
+			OLED_DISPLAY_8x16(6,5*8,Average_ADC3/1000+0x30);
+			OLED_DISPLAY_8x16(6,6*8,Average_ADC3%1000/100+0x30);                         
+			OLED_DISPLAY_8x16(6,7*8,Average_ADC3%100/10+0x30);
+			OLED_DISPLAY_8x16(6,8*8,Average_ADC3%10+0x30);
 		}
 		
 		//菜单31 显示高低温 光照
 		if(MENU==31){
-			b=ENCODER_READ();//读出旋转编码器左右旋转的值
-			if(b==1) MENU=1;
-			if(b==2) MENU=2;
+			delay_ms(1000);//延时1s
+		}
+		
+		//中断判断切换菜单
+		if(INT_MARK>0){
+			BUZZER_BEEP1();
+			if(MENU==11 && INT_MARK==1) MENU=2;
+			if(MENU==11 && INT_MARK==2) MENU=3; 
+			if(MENU==21 && INT_MARK==1) MENU=3;
+			if(MENU==21 && INT_MARK==2) MENU=1;
+			if(MENU==31 && INT_MARK==1) MENU=1;
+			if(MENU==31 && INT_MARK==2) MENU=2;
+			INT_MARK=0;//标志位清零
 		}
 		
 		

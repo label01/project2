@@ -36,3 +36,6 @@
 .\objects\main.o: .\Hardware\ENCODER\encoder.h
 .\objects\main.o: .\Basic\rtc\rtc.h
 .\objects\main.o: .\Basic\bkp\bkp.h
+.\objects\main.o: .\Basic\adc\adc.h
+.\objects\main.o: .\Basic\nvic\nvic.h
+.\objects\main.o: .\Hardware\BUZZER\buzzer.h
