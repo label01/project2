@@ -38,6 +38,8 @@ int main(void) {//主程序
 	u16 min;//ADC 最小值
 	u8 high_temp=0;//高温数值
 	u8 low_temp=0;//低温数值
+	u16 light_value=0;//光照值
+	u8 humidity_value=0;//湿度值
 	
 	
 	delay_ms(100);//上电时等待其他器件就绪
@@ -84,8 +86,6 @@ int main(void) {//主程序
 			OLED_DISPLAY_16x16(4,2*16,5);//汉字显示	 湿度
 			OLED_DISPLAY_16x16(4,3*16,4);
 			OLED_DISPLAY_8x16(4,8*8,10+0x30);//冒号
-			OLED_DISPLAY_8x16(4,9*8,2+0x30);
-			OLED_DISPLAY_8x16(4,10*8,5+0x30);
 			OLED_DISPLAY_8x16(4,11*8,0x25);//显示百分号
 			OLED_DISPLAY_16x16(6,0*16,17);//汉字显示 北京时间	 
 			OLED_DISPLAY_16x16(6,1*16,18);
@@ -279,6 +279,14 @@ int main(void) {//主程序
 			OLED_DISPLAY_8x16(2, 11*8, buffer[1]%10+0x30);
 			OLED_DISPLAY_8x16(2, 12*8, 0x2e);//小数点
 			OLED_DISPLAY_8x16(2, 13*8, buffer[2]/10+0x30);
+			
+			/*读取湿度值*/
+			OLED_DISPLAY_8x16(4,9*8,2+0x30);
+			OLED_DISPLAY_8x16(4,10*8,5+0x30);
+			
+			/*刷新湿度*/
+			
+			
 		}
 		
 		
