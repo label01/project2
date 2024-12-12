@@ -338,7 +338,7 @@
               <MiscControls></MiscControls>
               <Define>USE_STDPERIPH_DRIVER,STM32F10X_MD</Define>
               <Undefine></Undefine>
-              <IncludePath>.\Basic\delay;.\Basic\flash;.\Basic\i2c;.\Basic\rtc;.\Basic\sys;.\Basic\usart;.\CMSIS;.\Hardware\BUZZER;.\Hardware\ENCODER;.\Hardware\KEY;.\Hardware\LED;.\Hardware\LM75A;.\Hardware\TM1640;.\Hardware\TOUCH_KEY;.\Lib\inc;.\Lib\src;.\Startup;.\User;.\Hardware\OLED0561;.\Basic\bkp;.\Basic\adc;.\Basic\nvic</IncludePath>
+              <IncludePath>.\Basic\delay;.\Basic\flash;.\Basic\i2c;.\Basic\rtc;.\Basic\sys;.\Basic\usart;.\CMSIS;.\Hardware\BUZZER;.\Hardware\ENCODER;.\Hardware\KEY;.\Hardware\LED;.\Hardware\LM75A;.\Hardware\TM1640;.\Hardware\TOUCH_KEY;.\Lib\inc;.\Lib\src;.\Startup;.\User;.\Hardware\OLED0561;.\Basic\bkp;.\Basic\adc;.\Basic\nvic;.\Hardware\DHT11</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -486,6 +486,11 @@
               <FileName>oled0561.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Hardware\OLED0561\oled0561.c</FilePath>
+            </File>
+            <File>
+              <FileName>dht11.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Hardware\DHT11\dht11.c</FilePath>
             </File>
           </Files>
         </Group>
