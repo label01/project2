@@ -27,8 +27,60 @@ void BUZZER_BEEP1(void){
 		GPIO_WriteBit(BUZZERPORT, BUZZER, (BitAction)(1));
 		delay_us(500);
 	}
-
 }
+
+void BUZZER_BEEP2(void){ //蜂鸣器响一声（开机音）
+	u16 i;
+	for(i=0;i<400;i++){
+		GPIO_WriteBit(BUZZERPORT,BUZZER,(BitAction)(0)); //蜂鸣器接口输出0
+		delay_us(800); //延时		
+		GPIO_WriteBit(BUZZERPORT,BUZZER,(BitAction)(1)); //蜂鸣器接口输出高电平1
+		delay_us(800); //延时		
+	}
+}
+void BUZZER_BEEP3(void){ //蜂鸣器响一声（进入调时音）
+	u16 i;
+	for(i=0;i<150;i++){
+		GPIO_WriteBit(BUZZERPORT,BUZZER,(BitAction)(0)); //蜂鸣器接口输出0
+		delay_us(200); //延时		
+		GPIO_WriteBit(BUZZERPORT,BUZZER,(BitAction)(1)); //蜂鸣器接口输出高电平1
+		delay_us(200); //延时		
+	}
+	for(i=0;i<100;i++){
+		GPIO_WriteBit(BUZZERPORT,BUZZER,(BitAction)(0)); //蜂鸣器接口输出0
+		delay_us(300); //延时		
+		GPIO_WriteBit(BUZZERPORT,BUZZER,(BitAction)(1)); //蜂鸣器接口输出高电平1
+		delay_us(300); //延时		
+	}
+	for(i=0;i<250;i++){
+		GPIO_WriteBit(BUZZERPORT,BUZZER,(BitAction)(0)); //蜂鸣器接口输出0
+		delay_us(100); //延时		
+		GPIO_WriteBit(BUZZERPORT,BUZZER,(BitAction)(1)); //蜂鸣器接口输出高电平1
+		delay_us(100); //延时		
+	}
+}
+void BUZZER_BEEP4(void){ //蜂鸣器响一声（退出调时音）
+	u16 i;
+	for(i=0;i<450;i++){
+		GPIO_WriteBit(BUZZERPORT,BUZZER,(BitAction)(0)); //蜂鸣器接口输出0
+		delay_us(200); //延时		
+		GPIO_WriteBit(BUZZERPORT,BUZZER,(BitAction)(1)); //蜂鸣器接口输出高电平1
+		delay_us(200); //延时		
+	}
+	for(i=0;i<250;i++){
+		GPIO_WriteBit(BUZZERPORT,BUZZER,(BitAction)(0)); //蜂鸣器接口输出0
+		delay_us(400); //延时		
+		GPIO_WriteBit(BUZZERPORT,BUZZER,(BitAction)(1)); //蜂鸣器接口输出高电平1
+		delay_us(400); //延时		
+	}
+	for(i=0;i<450;i++){
+		GPIO_WriteBit(BUZZERPORT,BUZZER,(BitAction)(0)); //蜂鸣器接口输出0
+		delay_us(100); //延时		
+		GPIO_WriteBit(BUZZERPORT,BUZZER,(BitAction)(1)); //蜂鸣器接口输出高电平1
+		delay_us(100); //延时		
+	}
+}
+
 
 uc16 music1[78]={ //音乐1的数据表（奇数是音调，偶数是长度） uc16 无符号的只读变量，只读变量存储在flash里
 330,750,

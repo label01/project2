@@ -272,7 +272,6 @@ int main(void) {//主程序
 		}
 		
 		
-		
 		//菜单11 获取温度， 时间，显示到菜单1
 		if(MENU==11){//菜单切换
 			RTC_Get();//获取RTC时钟
@@ -410,22 +409,17 @@ int main(void) {//主程序
 			if(MENU==21 && INT_MARK==2) MENU=1;//左转
 			if(MENU==31 && INT_MARK==1) MENU=1;//右转
 			if(MENU==31 && INT_MARK==2) MENU=2;//左转
-			if(MENU==31 && INT_MARK==3) MENU=32;//确定，进入菜单3子菜单队列 高温设置
+			if(MENU==31 && INT_MARK==3) //确定，进入菜单3子菜单队列 高温设置
+			{
+				MENU=32;//反显高温设置
+				BUZZER_BEEP3();//确认提示音
+			}	
+			
 			INT_MARK=0;//标志位清零
 		}
 		
 		//菜单32 菜单3子菜单， 高温设置反显
 		if(MENU==32){
-			INVERSE_OLED_DISPLAY_8x16(0,0*8,3+0x30); //数字反显示3
-			INVERSE_OLED_DISPLAY_8x16(0,1*8,0x20); //显示白面
-			INVERSE_OLED_DISPLAY_16x16(0,1*16,13);
-			INVERSE_OLED_DISPLAY_16x16(0,2*16,6);//汉字显示	 设置菜单
-			INVERSE_OLED_DISPLAY_16x16(0,3*16,7);
-			INVERSE_OLED_DISPLAY_16x16(0,4*16,1);
-			INVERSE_OLED_DISPLAY_16x16(0,5*16,2);
-			INVERSE_OLED_DISPLAY_16x16(0,6*16,13); //显示白面
-			INVERSE_OLED_DISPLAY_16x16(0,7*16,13);
-			
 			INVERSE_OLED_DISPLAY_16x16(2,0*16,21); //反显高温设置
 			INVERSE_OLED_DISPLAY_16x16(2,1*16,3);
 			INVERSE_OLED_DISPLAY_16x16(2,2*16,6); 
@@ -453,22 +447,9 @@ int main(void) {//主程序
 			OLED_DISPLAY_16x16(6,6*16,13); 
 			OLED_DISPLAY_16x16(6,7*16,13);
 		}
-		
-		
-		
 	
 		//菜单33 菜单3子菜单， 低温设置反显
-		if(MENU==33){
-			INVERSE_OLED_DISPLAY_8x16(0,0*8,3+0x30); //数字反显示3
-			INVERSE_OLED_DISPLAY_8x16(0,1*8,0x20); //显示白面
-			INVERSE_OLED_DISPLAY_16x16(0,1*16,13);
-			INVERSE_OLED_DISPLAY_16x16(0,2*16,6);//汉字显示	 设置菜单
-			INVERSE_OLED_DISPLAY_16x16(0,3*16,7);
-			INVERSE_OLED_DISPLAY_16x16(0,4*16,1);
-			INVERSE_OLED_DISPLAY_16x16(0,5*16,2);
-			INVERSE_OLED_DISPLAY_16x16(0,6*16,13); //显示白面
-			INVERSE_OLED_DISPLAY_16x16(0,7*16,13);
-			
+		if(MENU==33){		
 			OLED_DISPLAY_16x16(2,0*16,21);//汉字显示	 高温设置
 			OLED_DISPLAY_16x16(2,1*16,3);
 			OLED_DISPLAY_16x16(2,2*16,6);
@@ -499,16 +480,6 @@ int main(void) {//主程序
 		
 		//菜单34 菜单3子菜单， 光照设置反显
 		if(MENU==34){
-			INVERSE_OLED_DISPLAY_8x16(0,0*8,3+0x30); //数字反显示3
-			INVERSE_OLED_DISPLAY_8x16(0,1*8,0x20); //显示白面
-			INVERSE_OLED_DISPLAY_16x16(0,1*16,13);
-			INVERSE_OLED_DISPLAY_16x16(0,2*16,6);//汉字显示	 设置菜单
-			INVERSE_OLED_DISPLAY_16x16(0,3*16,7);
-			INVERSE_OLED_DISPLAY_16x16(0,4*16,1);
-			INVERSE_OLED_DISPLAY_16x16(0,5*16,2);
-			INVERSE_OLED_DISPLAY_16x16(0,6*16,13); //显示白面
-			INVERSE_OLED_DISPLAY_16x16(0,7*16,13);
-			
 			OLED_DISPLAY_16x16(2,0*16,21);//汉字显示	 高温设置
 			OLED_DISPLAY_16x16(2,1*16,3);
 			OLED_DISPLAY_16x16(2,2*16,6);
@@ -540,16 +511,6 @@ int main(void) {//主程序
 		
 		//菜单35 菜单3子菜单， 湿度设置反显
 		if(MENU==35){
-			INVERSE_OLED_DISPLAY_8x16(0,0*8,3+0x30); //数字反显示3
-			INVERSE_OLED_DISPLAY_8x16(0,1*8,0x20); //显示白面
-			INVERSE_OLED_DISPLAY_16x16(0,1*16,13);
-			INVERSE_OLED_DISPLAY_16x16(0,2*16,6);//汉字显示	 设置菜单
-			INVERSE_OLED_DISPLAY_16x16(0,3*16,7);
-			INVERSE_OLED_DISPLAY_16x16(0,4*16,1);
-			INVERSE_OLED_DISPLAY_16x16(0,5*16,2);
-			INVERSE_OLED_DISPLAY_16x16(0,6*16,13); //显示白面
-			INVERSE_OLED_DISPLAY_16x16(0,7*16,13);
-
 			OLED_DISPLAY_16x16(2,0*16,22);//汉字显示	 低温设置
 			OLED_DISPLAY_16x16(2,1*16,3);
 			OLED_DISPLAY_16x16(2,2*16,6);
@@ -579,7 +540,7 @@ int main(void) {//主程序
 		}
 		
 		//菜单3子菜单中断切换
-		if(INT_MARK!=0){
+		if(INT_MARK!=0 && MENU<36 && MENU>31){
 			/*高温设置*/
 			if(MENU==32 && INT_MARK==1) 
 			{
@@ -623,7 +584,15 @@ int main(void) {//主程序
 			{
 				MENU=34;//左转，光照设置
 				INT_MARK=0;//标志位清零
-			}	
+			}
+			BUZZER_BEEP1();//旋钮提示音
+			/*旋钮按下，进入菜单3子菜单设置*/
+			if(INT_MARK==3)
+			{
+				MENU=MENU%10+2;
+				INT_MARK=0;
+				BUZZER_BEEP3();//确认提示音
+			}
 		}
 	}
 }
