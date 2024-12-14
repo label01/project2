@@ -52,6 +52,7 @@ int main(void) {//主程序
 	ENCODER_INT_INIT();//编码器中断初始化
 	BKP_Configuration();//初始化bkp
 	ADC_Configuration(); //初始化ADC
+	NVIC_Configuration();//设置中断优先级
 	BUZZER_Init();
 	OLED_DISPLAY_LIT(155);//调整屏幕亮度
 	delay_ms(1000);
@@ -241,8 +242,11 @@ int main(void) {//主程序
 			OLED_DISPLAY_16x16(4,1*16,9);
 			OLED_DISPLAY_8x16(4,4*8,10+0x30);//冒号
 			OLED_DISPLAY_8x16(4,5*8,0x20);//空格
-			INVERSE_OLED_DISPLAY_16x16(4, 3*16,13);//反显白面
-			INVERSE_OLED_DISPLAY_16x16(4, 4*16,13);
+			INVERSE_OLED_DISPLAY_8x16(4, 6*8, light_value/1000+0x30);
+			INVERSE_OLED_DISPLAY_8x16(4, 7*8, light_value/100%10+0x30);
+			INVERSE_OLED_DISPLAY_8x16(4, 8*8, light_value/10%10+0x30);
+			INVERSE_OLED_DISPLAY_8x16(4, 9*8, light_value%10+0x30);
+			
 			MENU=61; //进入光照调整菜单
 		}
 		
@@ -595,5 +599,12 @@ int main(void) {//主程序
 				BUZZER_BEEP3();//确认提示音
 			}
 		}
+		
+		
+		
+		
+		
+		
+		
 	}
 }
