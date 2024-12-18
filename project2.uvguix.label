@@ -3606,9 +3606,9 @@
       <ActiveTab>0</ActiveTab>
       <Doc>
         <Name>.\User\main.c</Name>
-        <ColumnNumber>18</ColumnNumber>
-        <TopLine>704</TopLine>
-        <CurrentLine>713</CurrentLine>
+        <ColumnNumber>13</ColumnNumber>
+        <TopLine>67</TopLine>
+        <CurrentLine>78</CurrentLine>
         <Folding>1</Folding>
         <ContractedFolders></ContractedFolders>
         <PaneID>0</PaneID>
@@ -3626,8 +3626,7 @@
   </MDIGroups>
 
   <Bookmarks>
-    <ListItem>.\User\main.c 738</ListItem>
-    <ListItem>.\User\main.c 761</ListItem>
+    <ListItem>.\User\main.c 602</ListItem>
   </Bookmarks>
 
 </ProjectGui>

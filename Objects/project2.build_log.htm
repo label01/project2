@@ -30,11 +30,19 @@ Build target 'Target 1'
 compiling main.c...
 User\main.c(34): warning:  #177-D: variable "dht11_data"  was declared but never referenced
   	u8 dht11_data[2];
-User\main.c: 1 warning, 0 errors
+User\main.c(40): warning:  #177-D: variable "high_temp"  was declared but never referenced
+  	u8 high_temp=0;//高温数值
+User\main.c(41): warning:  #177-D: variable "low_temp"  was declared but never referenced
+  	u8 low_temp=0;//低温数值
+User\main.c(42): warning:  #177-D: variable "light_value"  was declared but never referenced
+  	u16 light_value=0;//光照值
+User\main.c(43): warning:  #177-D: variable "humidity_value"  was declared but never referenced
+  	u8 humidity_value=0;//湿度值
+User\main.c: 5 warnings, 0 errors
 linking...
-Program Size: Code=13040 RO-data=3652 RW-data=48 ZI-data=1896  
+Program Size: Code=11924 RO-data=3652 RW-data=48 ZI-data=1896  
 FromELF: creating hex file...
-".\Objects\project2.axf" - 0 Error(s), 1 Warning(s).
+".\Objects\project2.axf" - 0 Error(s), 5 Warning(s).
 
 <h2>Software Packages used:</h2>
 
