@@ -2,7 +2,7 @@
 #include "nvic.h"
 #include "encoder.h"
 
-u8 INT_MARK=0;//中断标志位
+u8 INT_MARK;//中断标志位
 u8 encoder_key;//存储编码器键值
 
 //系统延时，这个并不精确只是一个大概的值
@@ -140,10 +140,16 @@ void  EXTI9_5_IRQHandler(void){
 	if(EXTI_GetITStatus(EXTI_Line6)!=RESET){//判断某个线上的中断是否发生 
 		NVIC_Delay_Us(100);//延时100微秒
 		encoder_key=GPIO_ReadInputDataBit(ENCODER_PORT_B, ENCODER_R);//读取编码器右键值
-		NVIC_Delay_Ms(3);//延时3毫秒
+		NVIC_Delay_Ms(3);//延时4毫秒
 		if(!GPIO_ReadInputDataBit(ENCODER_PORT_A, ENCODER_L)){
-			if(encoder_key==0) INT_MARK=1;//左转
-			if(encoder_key==1) INT_MARK=2;//右转
+			if(encoder_key==0)
+			{
+				INT_MARK=1;//右转
+			}
+			if(encoder_key==1)
+			{
+				INT_MARK=2;//左转
+			}
 			u16 a=0;//判断锁死计时
 			while(!GPIO_ReadInputDataBit(ENCODER_PORT_A, ENCODER_L) && a<60000){//等待旋钮放开，同时判断是否锁死
 				a++;

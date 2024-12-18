@@ -19,7 +19,7 @@
 #include "buzzer.h"
 
 extern vu16 ADC_DMA_IN[3]; //声明外部变量
-
+extern u8 INT_MARK; //中断标志位
 vu16 arr1[10];//放入10个ADC值，求平均值
 vu16 arr2[10];
 vu16 arr3[10];
@@ -29,6 +29,7 @@ int main(void) {//主程序
 	
 	u8 buffer[3];//保存温度传感器数据
 	u8 MENU=1; //主菜单编号
+	u8 MENU2=0;//菜单3
 	u8 a;//for循环参数
 	u8 dht11_data[2];
 	u16 Average_ADC1;//第1个ADC平均值
@@ -59,11 +60,25 @@ int main(void) {//主程序
 	MENU=BKP_ReadBackupRegister(BKP_DR1);
 	if(MENU<1||MENU>3)MENU=1; //如果menu的备份值不在1~3的菜单列表里，默认重新赋值menu为1
 	
+	
+//	high_temp=BKP_ReadBackupRegister(BKP_DR2);//从备用寄存器中读取高温的设置值
+//	low_temp=BKP_ReadBackupRegister(BKP_DR3);//从备用寄存器中读取低温的设置值
+//	light_value=BKP_ReadBackupRegister(BKP_DR4);//从备用寄存器中读取光照强度的设置值
+//	humidity_value=BKP_ReadBackupRegister(BKP_DR5);//从备用寄存器中读取湿度的设置值
+//	
+//	//首次读取，如果数值异常，重新赋值
+//	if(high_temp<0 || high_temp>99) high_temp=0;
+//	if(low_temp<0 || low_temp>99) low_temp=0;
+//	if(light_value<0 || light_value>4096) light_value=0;
+//	if(humidity_value<0 || humidity_value>99) humidity_value=0;
+	
+	
 	while (1) {
-		//无限循环程序
+		/*无限循环程序*/
 		
-		//菜单1  显示温湿度， 背景时间
+		/*菜单1  显示温湿度， 背景时间*/
 		if(MENU==1){
+			
 			OLED_DISPLAY_CLEAR(); //清屏
 			INVERSE_OLED_DISPLAY_8x16(0, 0*8, 1+0x30);//0x30 是ASII码表里 0的16进制数
 			INVERSE_OLED_DISPLAY_8x16(0, 1*8, 0x20);//英文空格显示白面
@@ -93,14 +108,15 @@ int main(void) {//主程序
 			OLED_DISPLAY_16x16(6,2*16,19);	
 			OLED_DISPLAY_16x16(6,3*16,20);
 			
-			//备份菜单值,掉电保存在备份寄存器
-			BKP_WriteBackupRegister(BKP_DR1, MENU);
+			
+			BKP_WriteBackupRegister(BKP_DR1, MENU);//备份菜单值,掉电保存在备份寄存器
 			
 			MENU=11;//自动跳转到菜单11
 		}
 		
-		//菜单2
+		/*菜单2 模拟量菜单*/
 		if(MENU==2){
+			
 			OLED_DISPLAY_CLEAR();//清屏
 			INVERSE_OLED_DISPLAY_8x16(0,0*8,2+0x30); //数字反显示2
 			INVERSE_OLED_DISPLAY_8x16(0,1*8,0x20); //显示白面
@@ -118,14 +134,15 @@ int main(void) {//主程序
 			OLED_DISPLAY_8x16_BUFFER(4,"ADC2:"); //显示字符串
 			OLED_DISPLAY_8x16_BUFFER(6,"ADC3: "); //显示字符串
 			
-			//备份菜单值,掉电保存在备份寄存器
-			BKP_WriteBackupRegister(BKP_DR1, MENU);
+			
+			BKP_WriteBackupRegister(BKP_DR1, MENU);//备份菜单值,掉电保存在备份寄存器
 			
 			MENU=21;//自动跳转到菜单21，用来设置菜单显示的数值
 		}
 		
-		//菜单3
+		/*菜单3  设置菜单*/
 		if(MENU==3){
+			
 			OLED_DISPLAY_CLEAR();//清屏
 			INVERSE_OLED_DISPLAY_8x16(0,0*8,3+0x30); //数字反显示3
 			INVERSE_OLED_DISPLAY_8x16(0,1*8,0x20); //显示白面
@@ -152,136 +169,139 @@ int main(void) {//主程序
 			OLED_DISPLAY_16x16(6,2*16,6);
 			OLED_DISPLAY_16x16(6,3*16,7);
 			
-			
-			//备份菜单值,掉电保存在备份寄存器
-			BKP_WriteBackupRegister(BKP_DR1, MENU);
+			BKP_WriteBackupRegister(BKP_DR1, MENU);//备份菜单值,掉电保存在备份寄存器
 			
 			MENU=31;//自动跳转到 菜单31 显示高低温 光照
 		}
 		
-		//菜单4 高温设置菜单
-		if(MENU==4){
-			OLED_DISPLAY_CLEAR();//清屏
-			INVERSE_OLED_DISPLAY_8x16(0,0*8,3+0x30); //数字反显示3
-			INVERSE_OLED_DISPLAY_8x16(0,1*8,0x2d); //反显字符 -
-			INVERSE_OLED_DISPLAY_8x16(0,2*8,1+0x30); //数字反显示1
-			INVERSE_OLED_DISPLAY_8x16(0,3*8,0x20); //显示白面
-			INVERSE_OLED_DISPLAY_16x16(0,2*16,13);
-			INVERSE_OLED_DISPLAY_16x16(0,3*16,21);//汉字显示	 高温设置
-			INVERSE_OLED_DISPLAY_16x16(0,4*16,3);
-			INVERSE_OLED_DISPLAY_16x16(0,5*16,6);
-			INVERSE_OLED_DISPLAY_16x16(0,6*16,7);
-			INVERSE_OLED_DISPLAY_16x16(0,7*16,13); //显示白面
-			
+//		/*菜单4 高温设置菜单*/
+//		if(MENU==4){
+//			
+//			OLED_DISPLAY_CLEAR();//清屏
+//			INVERSE_OLED_DISPLAY_8x16(0,0*8,3+0x30); //数字反显示3
+//			INVERSE_OLED_DISPLAY_8x16(0,1*8,0x2d); //反显字符 -
+//			INVERSE_OLED_DISPLAY_8x16(0,2*8,1+0x30); //数字反显示1
+//			INVERSE_OLED_DISPLAY_8x16(0,3*8,0x20); //显示白面
+//			INVERSE_OLED_DISPLAY_16x16(0,2*16,13);
+//			INVERSE_OLED_DISPLAY_16x16(0,3*16,21);//汉字显示	 高温设置
+//			INVERSE_OLED_DISPLAY_16x16(0,4*16,3);
+//			INVERSE_OLED_DISPLAY_16x16(0,5*16,6);
+//			INVERSE_OLED_DISPLAY_16x16(0,6*16,7);
+//			INVERSE_OLED_DISPLAY_16x16(0,7*16,13); //显示白面
+//			
 
-			OLED_DISPLAY_16x16(2,0*16,21);//汉字显示	 高温
-			OLED_DISPLAY_16x16(2,1*16,3);
-			OLED_DISPLAY_8x16(2,4*8,10+0x30);//冒号
-			INVERSE_OLED_DISPLAY_8x16(2,5*8,0x20);//空格
-			INVERSE_OLED_DISPLAY_8x16(2, 6*8, high_temp/10+0x30);//高温十位
-			INVERSE_OLED_DISPLAY_8x16(2, 7*8, high_temp%10+0x30);//高温个位
-			INVERSE_OLED_DISPLAY_16x16(2, 4*16, 16);//摄氏度
-			
-			OLED_DISPLAY_16x16(4,0*16,22);//汉字显示	 低温
-			OLED_DISPLAY_16x16(4,1*16,3);
-			OLED_DISPLAY_8x16(4,4*8,10+0x30);//冒号
-			OLED_DISPLAY_8x16(4, 6*8, low_temp/10+0x30);//高温十位
-			OLED_DISPLAY_8x16(4, 7*8, low_temp%10+0x30);//高温个位
-			OLED_DISPLAY_16x16(4, 4*16, 16);//摄氏度
-			
-			MENU=41;//跳转到调整菜单
-		}
-		
-		//菜单5 低温设置菜单
-		if(MENU==5){
-			OLED_DISPLAY_CLEAR();//清屏
-			INVERSE_OLED_DISPLAY_8x16(0,0*8,3+0x30); //数字反显示3
-			INVERSE_OLED_DISPLAY_8x16(0,1*8,0x2d); //反显字符 -
-			INVERSE_OLED_DISPLAY_8x16(0,2*8,2+0x30); //数字反显示2
-			INVERSE_OLED_DISPLAY_8x16(0,3*8,0x20); //显示白面
-			INVERSE_OLED_DISPLAY_16x16(0,2*16,13);
-			INVERSE_OLED_DISPLAY_16x16(0,3*16,22);//汉字显示	 低温设置
-			INVERSE_OLED_DISPLAY_16x16(0,4*16,3);
-			INVERSE_OLED_DISPLAY_16x16(0,5*16,6);
-			INVERSE_OLED_DISPLAY_16x16(0,6*16,7);
-			INVERSE_OLED_DISPLAY_16x16(0,7*16,13); //显示白面
+//			OLED_DISPLAY_16x16(2,0*16,21);//汉字显示	 高温
+//			OLED_DISPLAY_16x16(2,1*16,3);
+//			OLED_DISPLAY_8x16(2,4*8,10+0x30);//冒号
+//			INVERSE_OLED_DISPLAY_8x16(2,5*8,0x20);//空格
+//			INVERSE_OLED_DISPLAY_8x16(2, 6*8, high_temp/10+0x30);//高温十位
+//			INVERSE_OLED_DISPLAY_8x16(2, 7*8, high_temp%10+0x30);//高温个位
+//			INVERSE_OLED_DISPLAY_16x16(2, 4*16, 16);//摄氏度
+//			
+//			OLED_DISPLAY_16x16(4,0*16,22);//汉字显示	 低温
+//			OLED_DISPLAY_16x16(4,1*16,3);
+//			OLED_DISPLAY_8x16(4,4*8,10+0x30);//冒号
+//			OLED_DISPLAY_8x16(4,5*8,0x20);//空格
+//			OLED_DISPLAY_8x16(4, 6*8, low_temp/10+0x30);//低温十位
+//			OLED_DISPLAY_8x16(4, 7*8, low_temp%10+0x30);//低温个位
+//			OLED_DISPLAY_16x16(4, 4*16, 16);//摄氏度
+//			
+//			MENU=41;//跳转到调整菜单
+//		}
+//		
+//		/*菜单5 低温设置菜单*/
+//		if(MENU==5){
+//			
+//			OLED_DISPLAY_CLEAR();//清屏
+//			INVERSE_OLED_DISPLAY_8x16(0,0*8,3+0x30); //数字反显示3
+//			INVERSE_OLED_DISPLAY_8x16(0,1*8,0x2d); //反显字符 -
+//			INVERSE_OLED_DISPLAY_8x16(0,2*8,2+0x30); //数字反显示2
+//			INVERSE_OLED_DISPLAY_8x16(0,3*8,0x20); //显示白面
+//			INVERSE_OLED_DISPLAY_16x16(0,2*16,13);
+//			INVERSE_OLED_DISPLAY_16x16(0,3*16,22);//汉字显示	 低温设置
+//			INVERSE_OLED_DISPLAY_16x16(0,4*16,3);
+//			INVERSE_OLED_DISPLAY_16x16(0,5*16,6);
+//			INVERSE_OLED_DISPLAY_16x16(0,6*16,7);
+//			INVERSE_OLED_DISPLAY_16x16(0,7*16,13); //显示白面
 
-			OLED_DISPLAY_16x16(2,0*16,21);//汉字显示	 高温
-			OLED_DISPLAY_16x16(2,1*16,3);
-			OLED_DISPLAY_8x16(2,4*8,10+0x30);//冒号
-			OLED_DISPLAY_8x16(2, 6*8, high_temp/10+0x30);//高温十位
-			OLED_DISPLAY_8x16(2, 7*8, high_temp%10+0x30);//高温个位
-			OLED_DISPLAY_16x16(2, 4*16, 16);//摄氏度
-			OLED_DISPLAY_16x16(4,0*16,22);//汉字显示	 低温
-			OLED_DISPLAY_16x16(4,1*16,3);
-			OLED_DISPLAY_8x16(4,4*8,10+0x30);//冒号
-			OLED_DISPLAY_8x16(4,5*8,0x20);//空格
-			INVERSE_OLED_DISPLAY_8x16(4, 6*8, low_temp/10+0x30);//高温十位
-			INVERSE_OLED_DISPLAY_8x16(4, 7*8, low_temp%10+0x30);//高温个位
-			INVERSE_OLED_DISPLAY_16x16(4, 4*16, 16);//摄氏度
-			
-			MENU=51;//进入低温调整菜单
-			
-		}
-		
-		//菜单6 光照设置菜单
-		if(MENU==6){
-			OLED_DISPLAY_CLEAR();//清屏
-			INVERSE_OLED_DISPLAY_8x16(0,0*8,3+0x30); //数字反显示3
-			INVERSE_OLED_DISPLAY_8x16(0,1*8,0x2d); //反显字符 -
-			INVERSE_OLED_DISPLAY_8x16(0,2*8,3+0x30); //数字反显示3
-			INVERSE_OLED_DISPLAY_8x16(0,3*8,0x20); //显示白面
-			INVERSE_OLED_DISPLAY_16x16(0,2*16,13);
-			INVERSE_OLED_DISPLAY_16x16(0,3*16,8);//汉字显示	 光照设置
-			INVERSE_OLED_DISPLAY_16x16(0,4*16,9);
-			INVERSE_OLED_DISPLAY_16x16(0,5*16,6);
-			INVERSE_OLED_DISPLAY_16x16(0,6*16,7);
-			INVERSE_OLED_DISPLAY_16x16(0,7*16,13); //显示白面
+//			OLED_DISPLAY_16x16(2,0*16,21);//汉字显示	 高温
+//			OLED_DISPLAY_16x16(2,1*16,3);
+//			OLED_DISPLAY_8x16(2,4*8,10+0x30);//冒号
+//			OLED_DISPLAY_8x16(2,5*8,0x20);//空格
+//			OLED_DISPLAY_8x16(2, 6*8, high_temp/10+0x30);//高温十位
+//			OLED_DISPLAY_8x16(2, 7*8, high_temp%10+0x30);//高温个位
+//			OLED_DISPLAY_16x16(2, 4*16, 16);//摄氏度
+//			OLED_DISPLAY_16x16(4,0*16,22);//汉字显示	 低温
+//			OLED_DISPLAY_16x16(4,1*16,3);
+//			OLED_DISPLAY_8x16(4,4*8,10+0x30);//冒号
+//			INVERSE_OLED_DISPLAY_8x16(4,5*8,0x20);//空格
+//			INVERSE_OLED_DISPLAY_8x16(4, 6*8, low_temp/10+0x30);//低温十位
+//			INVERSE_OLED_DISPLAY_8x16(4, 7*8, low_temp%10+0x30);//低温个位
+//			INVERSE_OLED_DISPLAY_16x16(4, 4*16, 16);//摄氏度
+//			
+//			MENU=51;//进入低温调整菜单
+//			
+//		}
+//		
+//		/*菜单6 光照设置菜单*/
+//		if(MENU==6){
+//			
+//			OLED_DISPLAY_CLEAR();//清屏
+//			INVERSE_OLED_DISPLAY_8x16(0,0*8,3+0x30); //数字反显示3
+//			INVERSE_OLED_DISPLAY_8x16(0,1*8,0x2d); //反显字符 -
+//			INVERSE_OLED_DISPLAY_8x16(0,2*8,3+0x30); //数字反显示3
+//			INVERSE_OLED_DISPLAY_8x16(0,3*8,0x20); //显示白面
+//			INVERSE_OLED_DISPLAY_16x16(0,2*16,13);
+//			INVERSE_OLED_DISPLAY_16x16(0,3*16,8);//汉字显示	 光照设置
+//			INVERSE_OLED_DISPLAY_16x16(0,4*16,9);
+//			INVERSE_OLED_DISPLAY_16x16(0,5*16,6);
+//			INVERSE_OLED_DISPLAY_16x16(0,6*16,7);
+//			INVERSE_OLED_DISPLAY_16x16(0,7*16,13); //显示白面
 
-			OLED_DISPLAY_16x16(4,0*16,8);//汉字显示	 光照
-			OLED_DISPLAY_16x16(4,1*16,9);
-			OLED_DISPLAY_8x16(4,4*8,10+0x30);//冒号
-			OLED_DISPLAY_8x16(4,5*8,0x20);//空格
-			INVERSE_OLED_DISPLAY_8x16(4, 6*8, light_value/1000+0x30);
-			INVERSE_OLED_DISPLAY_8x16(4, 7*8, light_value/100%10+0x30);
-			INVERSE_OLED_DISPLAY_8x16(4, 8*8, light_value/10%10+0x30);
-			INVERSE_OLED_DISPLAY_8x16(4, 9*8, light_value%10+0x30);
-			
-			MENU=61; //进入光照调整菜单
-		}
+//			OLED_DISPLAY_16x16(4,0*16,8);//汉字显示	 光照
+//			OLED_DISPLAY_16x16(4,1*16,9);
+//			OLED_DISPLAY_8x16(4,4*8,10+0x30);//冒号
+//			OLED_DISPLAY_8x16(4,5*8,0x20);//空格
+//			INVERSE_OLED_DISPLAY_8x16(4, 6*8, light_value/1000+0x30);//反色显示光照强度设置值
+//			INVERSE_OLED_DISPLAY_8x16(4, 7*8, light_value/100%10+0x30);
+//			INVERSE_OLED_DISPLAY_8x16(4, 8*8, light_value/10%10+0x30);
+//			INVERSE_OLED_DISPLAY_8x16(4, 9*8, light_value%10+0x30);
+//			
+//			MENU=61; //进入光照调整菜单
+//		}
+//		
+//		/*菜单7 湿度设置菜单*/
+//		if(MENU==7){
+//			
+//			OLED_DISPLAY_CLEAR();//清屏
+//			INVERSE_OLED_DISPLAY_8x16(0,0*8,3+0x30); //数字反显示3
+//			INVERSE_OLED_DISPLAY_8x16(0,1*8,0x2d); //反显字符 -
+//			INVERSE_OLED_DISPLAY_8x16(0,2*8,4+0x30); //数字反显示4
+//			INVERSE_OLED_DISPLAY_8x16(0,3*8,0x20); //显示白面
+//			INVERSE_OLED_DISPLAY_16x16(0,2*16,13);
+//			INVERSE_OLED_DISPLAY_16x16(0,3*16,5);//汉字显示	 湿度设置
+//			INVERSE_OLED_DISPLAY_16x16(0,4*16,4);
+//			INVERSE_OLED_DISPLAY_16x16(0,5*16,6);
+//			INVERSE_OLED_DISPLAY_16x16(0,6*16,7);
+//			INVERSE_OLED_DISPLAY_16x16(0,7*16,13); //显示白面
+//			
+//			OLED_DISPLAY_16x16(4,0*16,5);//汉字显示	 湿度
+//			OLED_DISPLAY_16x16(4,1*16,4);
+//			OLED_DISPLAY_8x16(4,4*8,10+0x30);//冒号
+//			OLED_DISPLAY_8x16(4,5*8,0x20);//空格
+//			INVERSE_OLED_DISPLAY_8x16(4, 6*8, humidity_value/10+0x30);//反色显示湿度设置值
+//			INVERSE_OLED_DISPLAY_8x16(4, 7*8, humidity_value%10+0x30);
+//			INVERSE_OLED_DISPLAY_8x16(4, 8*8, 0x25);
+//			
+//			MENU=71;//进入湿度调整菜单
+//			
+//		}
 		
-		//菜单7 湿度设置菜单
-		if(MENU==7){
-			OLED_DISPLAY_CLEAR();//清屏
-			INVERSE_OLED_DISPLAY_8x16(0,0*8,3+0x30); //数字反显示3
-			INVERSE_OLED_DISPLAY_8x16(0,1*8,0x2d); //反显字符 -
-			INVERSE_OLED_DISPLAY_8x16(0,2*8,4+0x30); //数字反显示4
-			INVERSE_OLED_DISPLAY_8x16(0,3*8,0x20); //显示白面
-			INVERSE_OLED_DISPLAY_16x16(0,2*16,13);
-			INVERSE_OLED_DISPLAY_16x16(0,3*16,5);//汉字显示	 湿度设置
-			INVERSE_OLED_DISPLAY_16x16(0,4*16,4);
-			INVERSE_OLED_DISPLAY_16x16(0,5*16,6);
-			INVERSE_OLED_DISPLAY_16x16(0,6*16,7);
-			INVERSE_OLED_DISPLAY_16x16(0,7*16,13); //显示白面
-			
-			OLED_DISPLAY_16x16(4,0*16,5);//汉字显示	 湿度
-			OLED_DISPLAY_16x16(4,1*16,4);
-			OLED_DISPLAY_8x16(4,4*8,10+0x30);//冒号
-			OLED_DISPLAY_8x16(4,5*8,0x20);//空格
-			INVERSE_OLED_DISPLAY_8x16(4, 6*8, humidity_value/10+0x30);
-			INVERSE_OLED_DISPLAY_8x16(4, 7*8, humidity_value%10+0x30);
-			INVERSE_OLED_DISPLAY_8x16(4, 8*8, 0x25);
-			
-			MENU=71;
-			
-		}
 		
-		
-		//菜单11 获取温度， 时间，显示到菜单1
+		/*菜单11 获取温度， 时间，显示到菜单1*/
 		if(MENU==11){//菜单切换
 			RTC_Get();//获取RTC时钟
 			LM75A_GetTemp(buffer);//获取温度值
-			
 			OLED_DISPLAY_8x16(6, 8*8, rhour/10+0x30);//显示小时值
 			OLED_DISPLAY_8x16(6, 9*8, rhour%10+0x30);
 			OLED_DISPLAY_8x16(6, 10*8, 0x3a);//显示冒号
@@ -305,11 +325,10 @@ int main(void) {//主程序
 			
 			/*刷新湿度*/
 			
-			
 		}
 		
 		
-		//菜单21 显示模拟量的数值
+		/*菜单21 显示模拟量的数值*/
 		if(MENU==21){
 			Average_ADC1=0;//复位变量值
 			Average_ADC2=0;
@@ -376,8 +395,124 @@ int main(void) {//主程序
 			OLED_DISPLAY_8x16(6,8*8,Average_ADC3%10+0x30);
 		}
 		
-		//菜单31 设置菜单
+		/*菜单31 设置菜单*/
 		if(MENU==31){
+			delay_ms(50);
+		}
+		
+		/*主菜单旋钮切换*/
+		if(INT_MARK!=0 && MENU>=11 && MENU<=31){
+			/*主菜单队列循环切换*/
+			switch(MENU){
+				case 11:
+					if(INT_MARK==1){//右转
+						MENU=2;
+					}else if(INT_MARK==2){//左转
+						MENU=3;
+					}
+					break;
+				case 21:
+					if(INT_MARK==1){//右转
+						MENU=3;
+					}else if(INT_MARK==2){//左转
+						MENU=1;
+					}
+					break;
+				case 31:
+					if(INT_MARK==1){//右转
+						MENU=1;
+					}else if(INT_MARK==2){//左转
+						MENU=2;
+					}else if(INT_MARK==3){
+						INT_MARK=0;//标志位清零
+						BUZZER_BEEP3();//确认提示音
+					}
+					break;
+				default:
+					MENU=1;
+					break;
+			}
+			
+			INT_MARK=0;//标志位清零
+		}
+		
+		
+		
+		/*菜单3子菜单中断切换*/
+		if(INT_MARK!=0 && MENU>=32 && MENU<=35){
+			/*高温设置*/
+			if(MENU==32 && INT_MARK==1) 
+			{
+				MENU=33;//右转，进入低温设置
+				INT_MARK=0;//标志位清零
+				OLED_DISPLAY_CLEAR();//清屏
+				//BUZZER_BEEP1();//提示音
+			}
+			if(MENU==32 && INT_MARK==2) 
+			{
+				MENU=35;//左转，湿度设置
+				INT_MARK=0;//标志位清零
+				OLED_DISPLAY_CLEAR();//清屏
+				//BUZZER_BEEP1();//提示音
+			}
+			/*低温设置*/
+			if(MENU==33 && INT_MARK==1) 
+			{
+				MENU=34;//右转，光照设置
+				INT_MARK=0;//标志位清零
+				OLED_DISPLAY_CLEAR();//清屏
+				//BUZZER_BEEP1();//提示音
+			}
+			if(MENU==33 && INT_MARK==2)
+			{
+				MENU=32;//左转，高温设置
+				INT_MARK=0;//标志位清零
+				OLED_DISPLAY_CLEAR();//清屏
+				//BUZZER_BEEP1();//提示音
+			}
+			/*光照设置*/
+			if(MENU==34 && INT_MARK==1)
+			{
+				MENU=35;//右转，湿度设置
+				INT_MARK=0;//标志位清零
+				OLED_DISPLAY_CLEAR();//清屏
+				//BUZZER_BEEP1();//提示音
+			}
+			if(MENU==34 && INT_MARK==2) 
+			{
+				MENU=33;//左转，低温设置
+				INT_MARK=0;//标志位清零
+				OLED_DISPLAY_CLEAR();//清屏
+				//BUZZER_BEEP1();//提示音
+			}	
+			/*湿度设置*/
+			if(MENU==35 && INT_MARK==1) 
+			{
+				MENU=32;//右转，高温设置
+				INT_MARK=0;//标志位清零
+				OLED_DISPLAY_CLEAR();//清屏
+				//BUZZER_BEEP1();//提示音
+			}	
+			if(MENU==35 && INT_MARK==2) 
+			{
+				MENU=34;//左转，光照设置
+				INT_MARK=0;//标志位清零
+				OLED_DISPLAY_CLEAR();//清屏
+				//BUZZER_BEEP1();//提示音
+			}
+			/*旋钮按下，进入菜单3子菜单设置*/
+			if(INT_MARK==3)
+			{
+				MENU=MENU%10+2;
+				INT_MARK=0;
+				BUZZER_BEEP3();//确认提示音
+			}
+		}
+		
+		
+		/*菜单32 菜单3子菜单， 高温设置反显*/
+		if(MENU==100){
+			delay_ms(100);
 			INVERSE_OLED_DISPLAY_8x16(0,0*8,3+0x30); //数字反显示3
 			INVERSE_OLED_DISPLAY_8x16(0,1*8,0x20); //显示白面
 			INVERSE_OLED_DISPLAY_16x16(0,1*16,13);
@@ -387,44 +522,7 @@ int main(void) {//主程序
 			INVERSE_OLED_DISPLAY_16x16(0,5*16,2);
 			INVERSE_OLED_DISPLAY_16x16(0,6*16,13); //显示白面
 			INVERSE_OLED_DISPLAY_16x16(0,7*16,13);
-
-			OLED_DISPLAY_16x16(2,0*16,21);//汉字显示	 高温设置
-			OLED_DISPLAY_16x16(2,1*16,3);
-			OLED_DISPLAY_16x16(2,2*16,6);
-			OLED_DISPLAY_16x16(2,3*16,7);
 			
-			OLED_DISPLAY_16x16(4,0*16,22);//汉字显示	 低温设置
-			OLED_DISPLAY_16x16(4,1*16,3);
-			OLED_DISPLAY_16x16(4,2*16,6);
-			OLED_DISPLAY_16x16(4,3*16,7);
-			
-			OLED_DISPLAY_16x16(6,0*16,8);//汉字显示	 光照设置
-			OLED_DISPLAY_16x16(6,1*16,9);
-			OLED_DISPLAY_16x16(6,2*16,6);
-			OLED_DISPLAY_16x16(6,3*16,7);
-		}
-		
-		//主菜单旋钮切换
-		if(INT_MARK!=0 && MENU<32){
-			BUZZER_BEEP1();
-			//主菜单队列循环切换
-			if(MENU==11 && INT_MARK==1) MENU=2;//右转
-			if(MENU==11 && INT_MARK==2) MENU=3;//左转
-			if(MENU==21 && INT_MARK==1) MENU=3;//右转
-			if(MENU==21 && INT_MARK==2) MENU=1;//左转
-			if(MENU==31 && INT_MARK==1) MENU=1;//右转
-			if(MENU==31 && INT_MARK==2) MENU=2;//左转
-			if(MENU==31 && INT_MARK==3) //确定，进入菜单3子菜单队列 高温设置
-			{
-				MENU=32;//反显高温设置
-				BUZZER_BEEP3();//确认提示音
-			}	
-			
-			INT_MARK=0;//标志位清零
-		}
-		
-		//菜单32 菜单3子菜单， 高温设置反显
-		if(MENU==32){
 			INVERSE_OLED_DISPLAY_16x16(2,0*16,21); //反显高温设置
 			INVERSE_OLED_DISPLAY_16x16(2,1*16,3);
 			INVERSE_OLED_DISPLAY_16x16(2,2*16,6); 
@@ -438,7 +536,7 @@ int main(void) {//主程序
 			OLED_DISPLAY_16x16(4,1*16,3);
 			OLED_DISPLAY_16x16(4,2*16,6);
 			OLED_DISPLAY_16x16(4,3*16,7);
-			OLED_DISPLAY_16x16(4,4*16,13);
+			OLED_DISPLAY_16x16(4,4*16,13);//显示空格
 			OLED_DISPLAY_16x16(4,5*16,13);
 			OLED_DISPLAY_16x16(4,6*16,13); 
 			OLED_DISPLAY_16x16(4,7*16,13);
@@ -447,19 +545,30 @@ int main(void) {//主程序
 			OLED_DISPLAY_16x16(6,1*16,9);
 			OLED_DISPLAY_16x16(6,2*16,6);
 			OLED_DISPLAY_16x16(6,3*16,7);
-			OLED_DISPLAY_16x16(6,4*16,13);
+			OLED_DISPLAY_16x16(6,4*16,13);//显示空格
 			OLED_DISPLAY_16x16(6,5*16,13);
 			OLED_DISPLAY_16x16(6,6*16,13); 
 			OLED_DISPLAY_16x16(6,7*16,13);
 		}
 	
-		//菜单33 菜单3子菜单， 低温设置反显
-		if(MENU==33){		
+		/*菜单33 菜单3子菜单， 低温设置反显*/
+		if(MENU==200){
+			delay_ms(100);
+			INVERSE_OLED_DISPLAY_8x16(0,0*8,3+0x30); //数字反显示3
+			INVERSE_OLED_DISPLAY_8x16(0,1*8,0x20); //显示白面
+			INVERSE_OLED_DISPLAY_16x16(0,1*16,13);
+			INVERSE_OLED_DISPLAY_16x16(0,2*16,6);//汉字显示	 设置菜单
+			INVERSE_OLED_DISPLAY_16x16(0,3*16,7);
+			INVERSE_OLED_DISPLAY_16x16(0,4*16,1);
+			INVERSE_OLED_DISPLAY_16x16(0,5*16,2);
+			INVERSE_OLED_DISPLAY_16x16(0,6*16,13); //显示白面
+			INVERSE_OLED_DISPLAY_16x16(0,7*16,13);
+			
 			OLED_DISPLAY_16x16(2,0*16,21);//汉字显示	 高温设置
 			OLED_DISPLAY_16x16(2,1*16,3);
 			OLED_DISPLAY_16x16(2,2*16,6);
 			OLED_DISPLAY_16x16(2,3*16,7);
-			OLED_DISPLAY_16x16(2,4*16,13);
+			OLED_DISPLAY_16x16(2,4*16,13);//显示空格
 			OLED_DISPLAY_16x16(2,5*16,13);
 			OLED_DISPLAY_16x16(2,6*16,13); 
 			OLED_DISPLAY_16x16(2,7*16,13);
@@ -483,24 +592,35 @@ int main(void) {//主程序
 			OLED_DISPLAY_16x16(6,7*16,13);
 		}
 		
-		//菜单34 菜单3子菜单， 光照设置反显
-		if(MENU==34){
+		/*菜单34 菜单3子菜单， 光照设置反显*/
+		if(MENU==250){
+			delay_ms(100);
+			INVERSE_OLED_DISPLAY_8x16(0,0*8,3+0x30); //数字反显示3
+			INVERSE_OLED_DISPLAY_8x16(0,1*8,0x20); //显示白面
+			INVERSE_OLED_DISPLAY_16x16(0,1*16,13);
+			INVERSE_OLED_DISPLAY_16x16(0,2*16,6);//汉字显示	 设置菜单
+			INVERSE_OLED_DISPLAY_16x16(0,3*16,7);
+			INVERSE_OLED_DISPLAY_16x16(0,4*16,1);
+			INVERSE_OLED_DISPLAY_16x16(0,5*16,2);
+			INVERSE_OLED_DISPLAY_16x16(0,6*16,13); //显示白面
+			INVERSE_OLED_DISPLAY_16x16(0,7*16,13);
+			
 			OLED_DISPLAY_16x16(2,0*16,21);//汉字显示	 高温设置
 			OLED_DISPLAY_16x16(2,1*16,3);
 			OLED_DISPLAY_16x16(2,2*16,6);
 			OLED_DISPLAY_16x16(2,3*16,7);
-			OLED_DISPLAY_16x16(2,4*16,13);
+			OLED_DISPLAY_16x16(2,4*16,13);//显示空格
 			OLED_DISPLAY_16x16(2,5*16,13);
-			OLED_DISPLAY_16x16(2,6*16,13); 
+			OLED_DISPLAY_16x16(2,6*16,13);//显示空格
 			OLED_DISPLAY_16x16(2,7*16,13);
 			
 			OLED_DISPLAY_16x16(4,0*16,22);//汉字显示	 低温设置
 			OLED_DISPLAY_16x16(4,1*16,3);
 			OLED_DISPLAY_16x16(4,2*16,6);
 			OLED_DISPLAY_16x16(4,3*16,7);
-			OLED_DISPLAY_16x16(4,4*16,13);
+			OLED_DISPLAY_16x16(4,4*16,13);//显示空格
 			OLED_DISPLAY_16x16(4,5*16,13);
-			OLED_DISPLAY_16x16(4,6*16,13); 
+			OLED_DISPLAY_16x16(4,6*16,13); //显示空格
 			OLED_DISPLAY_16x16(4,7*16,13);
 			
 			INVERSE_OLED_DISPLAY_16x16(6,0*16,8); //反显光照设置
@@ -514,8 +634,8 @@ int main(void) {//主程序
 		}
 		
 		
-		//菜单35 菜单3子菜单， 湿度设置反显
-		if(MENU==35){
+		/*菜单35 菜单3子菜单， 湿度设置反显*/
+		if(MENU==230){
 			OLED_DISPLAY_16x16(2,0*16,22);//汉字显示	 低温设置
 			OLED_DISPLAY_16x16(2,1*16,3);
 			OLED_DISPLAY_16x16(2,2*16,6);
@@ -529,7 +649,7 @@ int main(void) {//主程序
 			OLED_DISPLAY_16x16(4,1*16,9);
 			OLED_DISPLAY_16x16(4,2*16,6);
 			OLED_DISPLAY_16x16(4,3*16,7);
-			OLED_DISPLAY_16x16(4,4*16,13);
+			OLED_DISPLAY_16x16(4,4*16,13);//显示空格
 			OLED_DISPLAY_16x16(4,5*16,13);
 			OLED_DISPLAY_16x16(4,6*16,13); 
 			OLED_DISPLAY_16x16(4,7*16,13);
@@ -543,64 +663,116 @@ int main(void) {//主程序
 			INVERSE_OLED_DISPLAY_16x16(6,6*16,13); //显示白面
 			INVERSE_OLED_DISPLAY_16x16(6,7*16,13);
 		}
-		
-		//菜单3子菜单中断切换
-		if(INT_MARK!=0 && MENU<36 && MENU>31){
-			/*高温设置*/
-			if(MENU==32 && INT_MARK==1) 
-			{
-				MENU=33;//右转，进入低温设置
-				INT_MARK=0;//标志位清零
-			}
-			if(MENU==32 && INT_MARK==2) 
-			{
-				MENU=35;//左转，湿度设置
-				INT_MARK=0;//标志位清零
-			}
-			/*低温设置*/
-			if(MENU==33 && INT_MARK==1) 
-			{
-				MENU=34;//右转，光照设置
-				INT_MARK=0;//标志位清零
-			}
-			if(MENU==33 && INT_MARK==2)
-			{
-				MENU=32;//左转，高温设置
-				INT_MARK=0;//标志位清零
-			}
-			/*光照设置*/
-			if(MENU==34 && INT_MARK==1)
-			{
-				MENU=35;//右转，湿度设置
-				INT_MARK=0;//标志位清零
-			}
-			if(MENU==34 && INT_MARK==2) 
-			{
-				MENU=33;//左转，低温设置
-				INT_MARK=0;//标志位清零
-			}	
-			/*湿度设置*/
-			if(MENU==35 && INT_MARK==1) 
-			{
-				MENU=32;//右转，高温设置
-				INT_MARK=0;//标志位清零
-			}	
-			if(MENU==35 && INT_MARK==2) 
-			{
-				MENU=34;//左转，光照设置
-				INT_MARK=0;//标志位清零
-			}
-			BUZZER_BEEP1();//旋钮提示音
-			/*旋钮按下，进入菜单3子菜单设置*/
-			if(INT_MARK==3)
-			{
-				MENU=MENU%10+2;
-				INT_MARK=0;
-				BUZZER_BEEP3();//确认提示音
-			}
-		}
-		
-		
+
+
+//		
+//		/*菜单41 高温设置数值调整*/
+//		if(MENU==41 && INT_MARK!=0){
+//			if(INT_MARK==1){
+//				//BUZZER_BEEP1();//提示音
+//				INT_MARK=0;//复位中断值
+//				high_temp++;
+//				if(high_temp>99) high_temp=low_temp;
+//			}
+//			if(INT_MARK==2){
+//				//BUZZER_BEEP1();//提示音
+//				INT_MARK=0;//复位中断值
+//				if(high_temp==low_temp) high_temp=100;
+//				high_temp--;
+//			}
+//			if(INT_MARK==3){//按下旋钮，确认保存设置值并返回菜单3
+//				INT_MARK=0;//复位中断值
+//				MENU=3;//返回菜单3
+//				BUZZER_BEEP4();//退出音效
+//			}
+//			
+//			/*显示高温调整数值*/
+//			INVERSE_OLED_DISPLAY_8x16(2,5*8,0x20);//空格
+//			INVERSE_OLED_DISPLAY_8x16(2, 6*8, high_temp/10+0x30);//高温十位
+//			INVERSE_OLED_DISPLAY_8x16(2, 7*8, high_temp%10+0x30);//高温个位
+//			INVERSE_OLED_DISPLAY_16x16(2, 4*16, 16);//摄氏度
+//		}
+//		
+//		/*菜单51 低温设置数值调整*/
+//		if(MENU==51 && INT_MARK!=0){
+//			if(INT_MARK==1){
+//				//BUZZER_BEEP1();//提示音
+//				INT_MARK=0;//复位中断值
+//				low_temp++;
+//				if(low_temp>high_temp) low_temp=0;//温度高于高温，低温设置为0度
+//			}
+//			if(INT_MARK==2){
+//				//BUZZER_BEEP1();//提示音
+//				INT_MARK=0;//复位中断值
+//				if(low_temp==0) low_temp=high_temp;
+//				low_temp--;
+//			}
+//			if(INT_MARK==3){//按下旋钮，确认保存设置值并返回菜单3
+//				INT_MARK=0;//复位中断值
+//				MENU=3;//返回菜单3
+//				BUZZER_BEEP4();//退出音效
+//			}
+//			
+//			/*显示低温调整数值*/
+//			INVERSE_OLED_DISPLAY_8x16(4,5*8,0x20);//空格
+//			INVERSE_OLED_DISPLAY_8x16(4, 6*8, low_temp/10+0x30);//低温十位
+//			INVERSE_OLED_DISPLAY_8x16(4, 7*8, low_temp%10+0x30);//低温个位
+//			INVERSE_OLED_DISPLAY_16x16(4, 4*16, 16);//摄氏度
+//		}
+//		
+//		/*光照强度设置数值调整*/
+//		if(MENU==61 && INT_MARK!=0){
+//			if(INT_MARK==1){
+//				//BUZZER_BEEP1();//提示音
+//				INT_MARK=0;//复位中断值
+//				light_value++;
+//				if(light_value>4095) light_value=0;
+//				
+//			}
+//			if(INT_MARK==2){
+//				//BUZZER_BEEP1();//提示音
+//				INT_MARK=0;//复位中断值
+//				if(light_value==0) light_value=4096;
+//				light_value--;
+//			}
+//			if(INT_MARK==3){//按下旋钮，确认保存设置值并返回菜单3
+//				INT_MARK=0;//复位中断值
+//				MENU=3;//返回菜单3
+//				BUZZER_BEEP4();//退出音效
+//			}
+//			
+//			/*显示光照强度调整数值*/
+//			INVERSE_OLED_DISPLAY_8x16(4, 6*8, light_value/1000+0x30);//反色显示光照强度设置值
+//			INVERSE_OLED_DISPLAY_8x16(4, 7*8, light_value/100%10+0x30);
+//			INVERSE_OLED_DISPLAY_8x16(4, 8*8, light_value/10%10+0x30);
+//			INVERSE_OLED_DISPLAY_8x16(4, 9*8, light_value%10+0x30);
+//		}
+//		
+//		/*湿度设置数值调整*/
+//		if(MENU==71 && INT_MARK!=0){
+//			if(INT_MARK==1){
+//				//BUZZER_BEEP1();//提示音
+//				INT_MARK=0;//复位中断值
+//				humidity_value++;
+//				if(humidity_value>90) humidity_value=0;
+//				
+//			}
+//			if(INT_MARK==2){
+//				//BUZZER_BEEP1();//提示音
+//				INT_MARK=0;//复位中断值
+//				if(humidity_value==0) humidity_value=90;
+//				humidity_value--;
+//			}
+//			if(INT_MARK==3){//按下旋钮，确认保存设置值并返回菜单3
+//				INT_MARK=0;//复位中断值
+//				MENU=3;//返回菜单3
+//				BUZZER_BEEP4();//退出音效
+//			}
+//			/*显示湿度调整数值*/
+//			INVERSE_OLED_DISPLAY_8x16(4, 6*8, humidity_value/10+0x30);//反色显示湿度设置值
+//			INVERSE_OLED_DISPLAY_8x16(4, 7*8, humidity_value%10+0x30);
+//			INVERSE_OLED_DISPLAY_8x16(4, 8*8, 0x25);
+//		}
 		
 		
 		
