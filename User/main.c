@@ -17,6 +17,8 @@
 #include "adc.h"
 #include "nvic.h"
 #include "buzzer.h"
+#include "dht11.h"
+#include "led.h"
 
 extern vu16 ADC_DMA_IN[3]; //声明外部变量
 extern u8 INT_MARK; //中断标志位
@@ -54,7 +56,8 @@ int main(void) {//主程序
 	BKP_Configuration();//初始化bkp
 	ADC_Configuration(); //初始化ADC
 	NVIC_Configuration();//设置中断优先级
-	BUZZER_Init();
+	BUZZER_Init();//蜂鸣器初始化
+	LED_Init();
 	OLED_DISPLAY_LIT(155);//调整屏幕亮度
 	delay_ms(1000);
 	MENU=BKP_ReadBackupRegister(BKP_DR2);
@@ -71,6 +74,47 @@ int main(void) {//主程序
 	if(low_temp<0 || low_temp>99) low_temp=0;
 	if(light_value>4096) light_value=0;
 	if(humidity_value>99) humidity_value=15;
+	
+	
+	/*开机检查*/
+	OLED_DISPLAY_CLEAR(); //清屏
+	INVERSE_OLED_DISPLAY_16x16(0, 0*16, 13);//汉字空格显示白面
+	INVERSE_OLED_DISPLAY_16x16(0, 1*16, 13);//汉字空格显示白面
+	INVERSE_OLED_DISPLAY_16x16(0, 2*16, 13);
+	INVERSE_OLED_DISPLAY_16x16(0, 3*16, 25);//开
+	INVERSE_OLED_DISPLAY_16x16(0, 4*16, 26);//机
+	INVERSE_OLED_DISPLAY_16x16(0, 5*16, 13);//
+	INVERSE_OLED_DISPLAY_16x16(0, 6*16, 13);//汉字空格显示白面
+	INVERSE_OLED_DISPLAY_16x16(0, 7*16, 13);//汉字空格显示白面
+	/*检查dht11传感器*/
+	if(!DHT11_Init()){//判断DHT11通信是否正常
+		OLED_DISPLAY_8x16(2, 0*8, 'D');
+		OLED_DISPLAY_8x16(2, 1*8, 'H');
+		OLED_DISPLAY_8x16(2, 2*8, 'T');
+		OLED_DISPLAY_8x16(2, 3*8, '1');
+		OLED_DISPLAY_8x16(2, 4*8, '1');
+		OLED_DISPLAY_8x16(2, 5*8, ':'); 
+		OLED_DISPLAY_16x16(2, 3*16, 27);//正
+		OLED_DISPLAY_16x16(2, 4*16, 28);//常
+		OLED_DISPLAY_16x16(2, 5*16, 29);//√
+		DHT11_ReadData(dht11_data);//读取数据
+		delay_ms(2000);//延时2S
+	}else{//传感器DHT11通信异常
+		OLED_DISPLAY_8x16(2, 0*8, 'D');
+		OLED_DISPLAY_8x16(2, 1*8, 'H');
+		OLED_DISPLAY_8x16(2, 2*8, 'T');
+		OLED_DISPLAY_8x16(2, 3*8, '1');
+		OLED_DISPLAY_8x16(2, 4*8, '1');
+		OLED_DISPLAY_8x16(2, 5*8, ':'); 
+		OLED_DISPLAY_16x16(2, 3*16, 31);//异
+		OLED_DISPLAY_16x16(2, 4*16, 28);//常
+		OLED_DISPLAY_16x16(2, 5*16, 30);//×
+		while(DHT11_Check()){
+			BUZZER_BEEP1();//蜂鸣器鸣响
+			delay_ms(500);//延时
+		}
+	}
+	
 	
 	
 	while (1) {
@@ -128,11 +172,24 @@ int main(void) {//主程序
 					INVERSE_OLED_DISPLAY_16x16(0,6*16,2);
 					INVERSE_OLED_DISPLAY_16x16(0,7*16,13);//显示白面
 
-					OLED_DISPLAY_8x16_BUFFER(2,"ADC1:"); //显示字符串
-					OLED_DISPLAY_8x16_BUFFER(4,"ADC2:"); //显示字符串
-					OLED_DISPLAY_8x16_BUFFER(6,"ADC3: "); //显示字符串
-					
-					
+					/*显示字符串ADC1*/
+					OLED_DISPLAY_8x16(2, 0*8, 'A');
+					OLED_DISPLAY_8x16(2, 1*8, 'D');
+					OLED_DISPLAY_8x16(2, 2*8, 'C');
+					OLED_DISPLAY_8x16(2, 3*8, '1');
+					OLED_DISPLAY_8x16(2, 4*8, ':');
+					/*显示字符串ADC2*/
+					OLED_DISPLAY_8x16(4, 0*8, 'A');
+					OLED_DISPLAY_8x16(4, 1*8, 'D');
+					OLED_DISPLAY_8x16(4, 2*8, 'C');
+					OLED_DISPLAY_8x16(4, 3*8, '2');
+					OLED_DISPLAY_8x16(4, 4*8, ':');
+					/*显示字符串ADC3*/
+					OLED_DISPLAY_8x16(6, 0*8, 'A');
+					OLED_DISPLAY_8x16(6, 1*8, 'D');
+					OLED_DISPLAY_8x16(6, 2*8, 'C');
+					OLED_DISPLAY_8x16(6, 3*8, '3');
+					OLED_DISPLAY_8x16(6, 4*8, ':');
 					BKP_WriteBackupRegister(BKP_DR2, MENU);//备份菜单值,掉电保存在备份寄存器
 					
 					MENU=21;//自动跳转到菜单21，用来设置菜单显示的数值
@@ -304,11 +361,10 @@ int main(void) {//主程序
 					OLED_DISPLAY_8x16(2, 12*8, 0x2e);//小数点
 					OLED_DISPLAY_8x16(2, 13*8, buffer[2]/10+0x30);
 					
-					/*读取湿度值*/
-					OLED_DISPLAY_8x16(4,9*8,2+0x30);
-					OLED_DISPLAY_8x16(4,10*8,5+0x30);
-					
 					/*刷新湿度*/
+					OLED_DISPLAY_8x16(4,9*8,dht11_data[0]/10+0x30);
+					OLED_DISPLAY_8x16(4,10*8,dht11_data[0]%10+0x30);
+					
 					break;
 				/*菜单21 显示模拟量的数值*/
 				case 21:

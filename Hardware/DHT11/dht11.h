@@ -6,7 +6,7 @@
 
 
 #define DHT11PORT GPIOA    //定义端口
-#define DHT11_IO GPIO_Pin_5 //定义IO接口
+#define DHT11_IO GPIO_Pin_12 //定义IO接口
 
 
 

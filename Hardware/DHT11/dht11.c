@@ -31,7 +31,7 @@ void DHT11_RST(void)
 	GPIO_SetBits(DHT11PORT, DHT11_IO);
 	delay_us(40);
 }
-
+//1: 异常 0：正常
 u8 DHT11_Check(void){
 	u8 tim=0;
 	DHT11_IO_IN();//切换未输入
@@ -56,8 +56,6 @@ u8 DHT11_Check(void){
 	}else{
 		return 0;
 	}
-	
-	
 }
 
 

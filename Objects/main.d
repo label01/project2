@@ -39,3 +39,5 @@
 .\objects\main.o: .\Basic\adc\adc.h
 .\objects\main.o: .\Basic\nvic\nvic.h
 .\objects\main.o: .\Hardware\BUZZER\buzzer.h
+.\objects\main.o: .\Hardware\DHT11\dht11.h
+.\objects\main.o: .\Hardware\LED\led.h
