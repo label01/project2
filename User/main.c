@@ -44,6 +44,8 @@ int main(void) {//主程序
 	u16 light_value;//光照值
 	u8 humidity_value;//湿度值
 	
+	u8 humidity_temp_mark=1;//温湿度更新标志位
+	
 	
 	delay_ms(100);//上电时等待其他器件就绪
 	RCC_Configuration();//系统时钟初始化
@@ -97,8 +99,7 @@ int main(void) {//主程序
 		OLED_DISPLAY_16x16(2, 3*16, 27);//正
 		OLED_DISPLAY_16x16(2, 4*16, 28);//常
 		OLED_DISPLAY_16x16(2, 5*16, 29);//√
-		DHT11_ReadData(dht11_data);//读取数据
-		delay_ms(2000);//延时2S
+		delay_ms(1000);
 	}else{//传感器DHT11通信异常
 		OLED_DISPLAY_8x16(2, 0*8, 'D');
 		OLED_DISPLAY_8x16(2, 1*8, 'H');
@@ -114,12 +115,25 @@ int main(void) {//主程序
 			delay_ms(500);//延时
 		}
 	}
-	
+	DHT11_ReadData(dht11_data);//读取数据
+	delay_ms(2000);//延时2S
 	
 	
 	while (1) {
 		/*无限循环程序*/
 		if (MENU>0){//主菜单
+			
+			/*传感器数据获取*/
+			RTC_Get();//获取RTC时钟
+			//根据RTC时钟获取温度值
+			if(rsec%3==1 && humidity_temp_mark==1){
+				LM75A_GetTemp(buffer);//获取温度值
+				DHT11_ReadData(dht11_data);//读取数据
+				humidity_temp_mark=0;
+			}
+			if(rsec%3!=1 && humidity_temp_mark==0){
+				humidity_temp_mark=1;
+			}
 			switch(MENU){
 				/*菜单1  显示温湿度， 背景时间*/
 				case 1:
@@ -342,8 +356,6 @@ int main(void) {//主程序
 					break;
 				/*菜单11 获取温度， 时间，显示到菜单1*/
 				case 11:
-					RTC_Get();//获取RTC时钟
-					LM75A_GetTemp(buffer);//获取温度值
 					OLED_DISPLAY_8x16(6, 8*8, rhour/10+0x30);//显示小时值
 					OLED_DISPLAY_8x16(6, 9*8, rhour%10+0x30);
 					OLED_DISPLAY_8x16(6, 10*8, 0x3a);//显示冒号
@@ -362,7 +374,7 @@ int main(void) {//主程序
 					OLED_DISPLAY_8x16(2, 13*8, buffer[2]/10+0x30);
 					
 					/*刷新湿度*/
-					OLED_DISPLAY_8x16(4,9*8,dht11_data[0]/10+0x30);
+					OLED_DISPLAY_8x16(4,9*8, dht11_data[0]/10%10+0x30);
 					OLED_DISPLAY_8x16(4,10*8,dht11_data[0]%10+0x30);
 					
 					break;
