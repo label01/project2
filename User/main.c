@@ -34,9 +34,9 @@ int main(void) {//主程序
 	u8 SUBMENU3=0;//菜单3的子菜单
 	u8 a;//for循环参数
 	u8 dht11_data[2];
-	u16 Average_ADC1;//第1个ADC平均值
-	u16 Average_ADC2;//第2个ADC平均值
-	u16 Average_ADC3;//第3个ADC平均值
+	u16 Average_ADC1=0;//第1个ADC平均值
+	u16 Average_ADC2=0;//第2个ADC平均值
+	u16 Average_ADC3=0;//第3个ADC平均值
 	u16 max;//ADC 最大值
 	u16 min;//ADC 最小值
 	int high_temp;//高温数值
@@ -45,6 +45,7 @@ int main(void) {//主程序
 	u8 humidity_value;//湿度值
 	
 	u8 humidity_temp_mark=1;//温湿度更新标志位
+	u8 music_mark=0; //本地音乐是否存在标识位标识位
 	
 	
 	delay_ms(100);//上电时等待其他器件就绪
@@ -121,19 +122,62 @@ int main(void) {//主程序
 	
 	while (1) {
 		/*无限循环程序*/
+		/*传感器数据获取*/
+		RTC_Get();//获取RTC时钟
+		//根据RTC时钟获取温度值
+		if(rsec%3==1 && humidity_temp_mark==1){
+			LM75A_GetTemp(buffer);//获取温度值
+			DHT11_ReadData(dht11_data);//读取数据
+			humidity_temp_mark=0;
+		}
+		if(rsec%3!=1 && humidity_temp_mark==0){
+			humidity_temp_mark=1;
+		}
+		for(a=0;a<10;a++){
+			arr1[a]=ADC_DMA_IN[0]; //读取第1路ADC值
+			arr2[a]=ADC_DMA_IN[1]; //读取第2路ADC值
+			arr3[a]=ADC_DMA_IN[2]; //读取第3路ADC值
+			while(!ADC_GetFlagStatus(ADC1, ADC_FLAG_EOC ));//判断ADC转换结束标识位
+			delay_us(1);//延时1ms等待ADC把数据写入ADC1_DR， 不延时1ms会出现死机
+			ADC_ClearFlag(ADC1, ADC_FLAG_EOC);//清除标志位
+		}
+		
+		/*求第一路平均值*/
+		max=arr1[0];
+		min=arr1[0];
+		for(a=0; a<10; a++){
+			if(max<arr1[a]) max=arr1[a];//检索最大值
+			if(min>arr1[a])	min=arr1[a];//检索最小值
+		}
+		for(a=0; a<10; a++){
+			Average_ADC1=Average_ADC1+arr1[a];//求和
+		}
+		Average_ADC1=(Average_ADC1-max-min)/8;//求平均值
+		
+		/*求第二路平均值*/
+		max=arr2[0];
+		min=arr2[0];
+		for(a=0; a<10; a++){
+			if(max<arr2[a]) max=arr2[a];//检索最大值
+			if(min>arr2[a])	min=arr2[a];//检索最小值
+		}
+		for(a=0; a<10; a++){
+			Average_ADC2=Average_ADC2+arr2[a];//求和
+		}
+		Average_ADC2=(Average_ADC2-max-min)/8;//求平均值
+		
+		/*求第三路平均值*/
+		max=arr3[0];
+		min=arr3[0];
+		for(a=0; a<10; a++){
+			if(max<arr3[a]) max=arr3[a];//检索最大值
+			if(min>arr3[a])	min=arr3[a];//检索最小值
+		}
+		for(a=0; a<10; a++){
+			Average_ADC3=Average_ADC3+arr3[a];//求和
+		}
+		Average_ADC3=(Average_ADC3-max-min)/8;//求平均值
 		if (MENU>0){//主菜单
-			
-			/*传感器数据获取*/
-			RTC_Get();//获取RTC时钟
-			//根据RTC时钟获取温度值
-			if(rsec%3==1 && humidity_temp_mark==1){
-				LM75A_GetTemp(buffer);//获取温度值
-				DHT11_ReadData(dht11_data);//读取数据
-				humidity_temp_mark=0;
-			}
-			if(rsec%3!=1 && humidity_temp_mark==0){
-				humidity_temp_mark=1;
-			}
 			switch(MENU){
 				/*菜单1  显示温湿度， 背景时间*/
 				case 1:
@@ -141,10 +185,10 @@ int main(void) {//主程序
 					INVERSE_OLED_DISPLAY_8x16(0, 0*8, 1+0x30);//0x30 是ASII码表里 0的16进制数
 					INVERSE_OLED_DISPLAY_8x16(0, 1*8, 0x20);//英文空格显示白面
 					INVERSE_OLED_DISPLAY_16x16(0, 1*16, 13);//汉字空格显示白面
-					INVERSE_OLED_DISPLAY_16x16(0, 2*16, 13);
-					INVERSE_OLED_DISPLAY_16x16(0, 3*16, 0);//主
-					INVERSE_OLED_DISPLAY_16x16(0, 4*16, 1);//菜
-					INVERSE_OLED_DISPLAY_16x16(0, 5*16, 2);//单
+					INVERSE_OLED_DISPLAY_16x16(0, 2*16, 0);//主
+					INVERSE_OLED_DISPLAY_16x16(0, 3*16, 1);//菜
+					INVERSE_OLED_DISPLAY_16x16(0, 4*16, 2);//单
+					INVERSE_OLED_DISPLAY_16x16(0, 5*16, 13);
 					INVERSE_OLED_DISPLAY_16x16(0, 6*16, 13);//汉字空格显示白面
 					INVERSE_OLED_DISPLAY_16x16(0, 7*16, 13);//汉字空格显示白面
 					
@@ -354,6 +398,34 @@ int main(void) {//主程序
 					
 					MENU=71;//进入湿度调整菜单
 					break;
+				
+				/*菜单8 音乐菜单*/
+				case 8:
+					OLED_DISPLAY_CLEAR();//清屏
+					INVERSE_OLED_DISPLAY_8x16(0,0*8,4+0x30); //数字反显示3
+					INVERSE_OLED_DISPLAY_8x16(0,1*8,0x20); //白面
+					INVERSE_OLED_DISPLAY_16x16(0,1*16,13);
+					INVERSE_OLED_DISPLAY_16x16(0,2*16,32);
+					INVERSE_OLED_DISPLAY_16x16(0,3*16,33); //汉字显示	 音乐
+					INVERSE_OLED_DISPLAY_8x16(0,8*8,'M');
+					INVERSE_OLED_DISPLAY_8x16(0,9*8,'U');
+					INVERSE_OLED_DISPLAY_8x16(0,10*8,'S');
+					INVERSE_OLED_DISPLAY_8x16(0,11*8,'I');
+					INVERSE_OLED_DISPLAY_8x16(0,12*8,'C');
+					INVERSE_OLED_DISPLAY_8x16(0,13*8,0x20);
+					INVERSE_OLED_DISPLAY_16x16(0,7*16,13); //显示白面
+					
+					OLED_DISPLAY_16x16(4,0*16,34);//汉字显示	 本地歌曲
+					OLED_DISPLAY_16x16(4,1*16,35);
+					OLED_DISPLAY_16x16(4,2*16,36);
+					OLED_DISPLAY_16x16(4,3*16,37);
+					OLED_DISPLAY_8x16(4,8*8,10+0x30);//冒号
+					OLED_DISPLAY_8x16(4,9*8,0x20);//空格
+
+					MENU=81;//进入检查检查本地歌曲菜单
+					break;
+				
+				
 				/*菜单11 获取温度， 时间，显示到菜单1*/
 				case 11:
 					OLED_DISPLAY_8x16(6, 8*8, rhour/10+0x30);//显示小时值
@@ -380,53 +452,7 @@ int main(void) {//主程序
 					break;
 				/*菜单21 显示模拟量的数值*/
 				case 21:
-					Average_ADC1=0;//复位变量值
-					Average_ADC2=0;
-					Average_ADC3=0;
-					for(a=0;a<10;a++){
-						arr1[a]=ADC_DMA_IN[0]; //读取第1路ADC值
-						arr2[a]=ADC_DMA_IN[1]; //读取第2路ADC值
-						arr3[a]=ADC_DMA_IN[2]; //读取第3路ADC值
-						while(!ADC_GetFlagStatus(ADC1, ADC_FLAG_EOC ));//判断ADC转换结束标识位
-						delay_us(2);//延时1ms等待ADC把数据写入ADC1_DR， 不延时1ms会出现死机
-						ADC_ClearFlag(ADC1, ADC_FLAG_EOC);//清除标志位
-					}
 					
-					/*求第一路平均值*/
-					max=arr1[0];
-					min=arr1[0];
-					for(a=0; a<10; a++){
-						if(max<arr1[a]) max=arr1[a];//检索最大值
-						if(min>arr1[a])	min=arr1[a];//检索最小值
-					}
-					for(a=0; a<10; a++){
-						Average_ADC1=Average_ADC1+arr1[a];//求和
-					}
-					Average_ADC1=(Average_ADC1-max-min)/8;//求平均值
-					
-					/*求第二路平均值*/
-					max=arr2[0];
-					min=arr2[0];
-					for(a=0; a<10; a++){
-						if(max<arr2[a]) max=arr2[a];//检索最大值
-						if(min>arr2[a])	min=arr2[a];//检索最小值
-					}
-					for(a=0; a<10; a++){
-						Average_ADC2=Average_ADC2+arr2[a];//求和
-					}
-					Average_ADC2=(Average_ADC2-max-min)/8;//求平均值
-					
-					/*求第三路平均值*/
-					max=arr3[0];
-					min=arr3[0];
-					for(a=0; a<10; a++){
-						if(max<arr3[a]) max=arr3[a];//检索最大值
-						if(min>arr3[a])	min=arr3[a];//检索最小值
-					}
-					for(a=0; a<10; a++){
-						Average_ADC3=Average_ADC3+arr3[a];//求和
-					}
-					Average_ADC3=(Average_ADC3-max-min)/8;//求平均值
 					/*显示第一路平均值*/
 					OLED_DISPLAY_8x16(2,5*8,Average_ADC1/1000+0x30);
 					OLED_DISPLAY_8x16(2,6*8,Average_ADC1%1000/100+0x30);                         
@@ -459,9 +485,22 @@ int main(void) {//主程序
 				case 61:
 					delay_ms(10);
 					break;
-				/*菜单31 设置菜单*/
+				/*菜单71 设置菜单*/
 				case 71:
 					delay_ms(10);
+					break;
+				/*菜单81 设置菜单*/
+				case 81:
+					if(music_mark){//本地读取到歌曲
+						OLED_DISPLAY_16x16(4,5*16,38);//有
+						OLED_DISPLAY_16x16(4,6*16,29);//√
+					}else{
+						OLED_DISPLAY_16x16(4,5*16,39);//无
+						OLED_DISPLAY_16x16(4,6*16,30);//×
+					}
+					delay_ms(5);
+					
+					
 					break;
 				default:
 					MENU=1;//跳转到初始菜单
@@ -470,14 +509,14 @@ int main(void) {//主程序
 	
 			
 			/*主菜单旋钮切换*/
-			if(INT_MARK!=0 && MENU>=11 && MENU<=71){
+			if(INT_MARK!=0 && MENU>=11 && MENU<=81){
 				/*主菜单队列循环切换*/
 				switch(MENU){
 					case 11:
 						if(INT_MARK==1){//右转
 							MENU=2;
 						}else if(INT_MARK==2){//左转
-							MENU=3;
+							MENU=8;
 						}
 						break;
 					case 21:
@@ -489,13 +528,21 @@ int main(void) {//主程序
 						break;
 					case 31:
 						if(INT_MARK==1){//右转
-							MENU=1;
+							MENU=8;
 						}else if(INT_MARK==2){//左转
 							MENU=2;
 						}else if(INT_MARK==3){
 							SUBMENU3=1;//菜单3子菜单选项
 							MENU=0;//不进入主菜单页面
 							BUZZER_BEEP3();//确认提示音
+						}
+						break;
+					/*菜单81 音乐菜单*/
+					case 81:
+						if(INT_MARK==1){//右转
+							MENU=1;
+						}else if(INT_MARK==2){//左转
+							MENU=3;
 						}
 						break;
 					/*菜单41 高温设置数值调整*/

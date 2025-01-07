@@ -1,7 +1,7 @@
 
 #ifndef __ASCII_8x16_H
 #define __ASCII_8x16_H	 
-
+#include "sys.h"
 
 // ------------------  ASCII字模的数据表 ------------------------ //
 // 码表从0x20~0x7e                                                //
