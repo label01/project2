@@ -41,3 +41,9 @@
 .\objects\main.o: .\Hardware\BUZZER\buzzer.h
 .\objects\main.o: .\Hardware\DHT11\dht11.h
 .\objects\main.o: .\Hardware\LED\led.h
+.\objects\main.o: .\Hardware\MY1690\my1690.h
+.\objects\main.o: .\Basic\usart\usart.h
+.\objects\main.o: D:\project software\keil5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\main.o: D:\project software\keil5\ARM\ARMCC\Bin\..\include\stdarg.h
+.\objects\main.o: D:\project software\keil5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\objects\main.o: D:\project software\keil5\ARM\ARMCC\Bin\..\include\string.h

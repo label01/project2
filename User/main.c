@@ -19,9 +19,11 @@
 #include "buzzer.h"
 #include "dht11.h"
 #include "led.h"
+#include "my1690.h"
 
 extern vu16 ADC_DMA_IN[3]; //声明外部变量
 extern u8 INT_MARK; //中断标志位
+extern u16 USART3_RX_STA;//接收状态标识位
 vu16 arr1[10];//放入10个ADC值，求平均值
 vu16 arr2[10];
 vu16 arr3[10];
@@ -32,6 +34,7 @@ int main(void) {//主程序
 	u8 buffer[3];//保存温度传感器数据
 	u8 MENU=1; //主菜单编号
 	u8 SUBMENU3=0;//菜单3的子菜单
+	u8 SUBMENU4=0;//菜单4的子菜单
 	u8 a;//for循环参数
 	u8 dht11_data[2];
 	u16 Average_ADC1=0;//第1个ADC平均值
@@ -46,9 +49,9 @@ int main(void) {//主程序
 	
 	u8 humidity_temp_mark=1;//温湿度更新标志位
 	u8 music_mark=0; //本地音乐是否存在标识位标识位
+	u8 play_mark=0;//播放标识位
 	
-	
-	delay_ms(100);//上电时等待其他器件就绪
+	delay_ms(500);//上电时等待其他器件就绪
 	RCC_Configuration();//系统时钟初始化
 	I2C_Configuration();//I2C初始化
 	LM75A_GetTemp(buffer);//读取lm75a的温度数据
@@ -61,6 +64,7 @@ int main(void) {//主程序
 	NVIC_Configuration();//设置中断优先级
 	BUZZER_Init();//蜂鸣器初始化
 	LED_Init();
+	MY1690_Init();
 	OLED_DISPLAY_LIT(155);//调整屏幕亮度
 	delay_ms(1000);
 	MENU=BKP_ReadBackupRegister(BKP_DR2);
@@ -118,6 +122,7 @@ int main(void) {//主程序
 	}
 	DHT11_ReadData(dht11_data);//读取数据
 	delay_ms(2000);//延时2S
+	
 	
 	
 	while (1) {
@@ -423,8 +428,7 @@ int main(void) {//主程序
 					OLED_DISPLAY_8x16(4,9*8,0x20);//空格
 
 					MENU=81;//进入检查检查本地歌曲菜单
-					break;
-				
+					break;		
 				
 				/*菜单11 获取温度， 时间，显示到菜单1*/
 				case 11:
@@ -499,8 +503,9 @@ int main(void) {//主程序
 						OLED_DISPLAY_16x16(4,6*16,30);//×
 					}
 					delay_ms(5);
-					
-					
+					break;
+				case 91:
+					delay_ms(10);
 					break;
 				default:
 					MENU=1;//跳转到初始菜单
@@ -543,6 +548,9 @@ int main(void) {//主程序
 							MENU=1;
 						}else if(INT_MARK==2){//左转
 							MENU=3;
+						}else if(INT_MARK==3){
+							MENU=0;
+							SUBMENU4=1;
 						}
 						break;
 					/*菜单41 高温设置数值调整*/
@@ -632,7 +640,8 @@ int main(void) {//主程序
 				
 				INT_MARK=0;//标志位清零
 			}
-		}else{//进入菜单3子菜单选项
+		}
+		else if(SUBMENU3!=0){//进入菜单3子菜单选项
 			
 			switch(SUBMENU3){
 				/*菜单3子菜单， 高温设置*/
@@ -875,7 +884,7 @@ int main(void) {//主程序
 
 			
 			/*菜单3子菜单旋钮切换*/
-			if(INT_MARK!=0){
+			if(INT_MARK!=0 && SUBMENU3>=11){
 				/*主菜单队列循环切换*/
 				switch(SUBMENU3){
 					case 11:
@@ -936,6 +945,137 @@ int main(void) {//主程序
 				
 				INT_MARK=0;//标志位清零
 			}
+		}
+		else if(SUBMENU4!=0){
+			switch(SUBMENU4){
+				/*菜单1 音乐播放菜单*/
+				case 1:
+					OLED_DISPLAY_CLEAR();//清屏
+					INVERSE_OLED_DISPLAY_8x16(0,0*8,4+0x30); //数字反显示3
+					INVERSE_OLED_DISPLAY_8x16(0,1*8,0x20); //白面
+					INVERSE_OLED_DISPLAY_16x16(0,1*16,13);
+					INVERSE_OLED_DISPLAY_16x16(0,2*16,32);
+					INVERSE_OLED_DISPLAY_16x16(0,3*16,33); //汉字显示	 音乐
+					INVERSE_OLED_DISPLAY_8x16(0,8*8,'M');
+					INVERSE_OLED_DISPLAY_8x16(0,9*8,'U');
+					INVERSE_OLED_DISPLAY_8x16(0,10*8,'S');
+					INVERSE_OLED_DISPLAY_8x16(0,11*8,'I');
+					INVERSE_OLED_DISPLAY_8x16(0,12*8,'C');
+					INVERSE_OLED_DISPLAY_8x16(0,13*8,0x20);
+					INVERSE_OLED_DISPLAY_16x16(0,7*16,13); //显示白面
+					
+					OLED_DISPLAY_8x16(4, 2*8, '-');
+					OLED_DISPLAY_8x16(4, 4*8, '-');
+					OLED_DISPLAY_8x16(4, 11*8, '-');
+					OLED_DISPLAY_8x16(4, 13*8, '-');
+					
+					OLED_DISPLAY_16x16(6, 0*16, 32);
+					OLED_DISPLAY_16x16(6, 1*16, 12);
+					OLED_DISPLAY_8x16(6, 4*8, '-');
+					OLED_DISPLAY_16x16(6, 5*16, 32);
+					OLED_DISPLAY_16x16(6, 6*16, 12);
+					OLED_DISPLAY_8x16(6, 14*8, '+');
+					SUBMENU4=11;//进入检查检查本地歌曲菜单
+					break;
+				/*菜单1 音乐播放菜单*/
+				case 2:
+					OLED_DISPLAY_CLEAR();//清屏
+					INVERSE_OLED_DISPLAY_8x16(0,0*8,4+0x30); //数字反显示3
+					INVERSE_OLED_DISPLAY_8x16(0,1*8,0x20); //白面
+					INVERSE_OLED_DISPLAY_16x16(0,1*16,13);
+					INVERSE_OLED_DISPLAY_16x16(0,2*16,32);
+					INVERSE_OLED_DISPLAY_16x16(0,3*16,33); //汉字显示	 音乐
+					INVERSE_OLED_DISPLAY_8x16(0,8*8,'M');
+					INVERSE_OLED_DISPLAY_8x16(0,9*8,'U');
+					INVERSE_OLED_DISPLAY_8x16(0,10*8,'S');
+					INVERSE_OLED_DISPLAY_8x16(0,11*8,'I');
+					INVERSE_OLED_DISPLAY_8x16(0,12*8,'C');
+					INVERSE_OLED_DISPLAY_8x16(0,13*8,0x20);
+					INVERSE_OLED_DISPLAY_16x16(0,7*16,13); //显示白面
+					
+					OLED_DISPLAY_8x16(4, 2*8, '-');
+					OLED_DISPLAY_8x16(4, 4*8, '-');
+					OLED_DISPLAY_8x16(4, 11*8, '-');
+					OLED_DISPLAY_8x16(4, 13*8, '-');
+					
+					OLED_DISPLAY_16x16(6, 3*16, 23);//退
+					OLED_DISPLAY_16x16(6, 4*16, 24);//出
+					OLED_DISPLAY_16x16(6, 0*16, 46);//上一首图标
+					OLED_DISPLAY_16x16(6, 7*16, 47);//下一首图标
+					
+					SUBMENU4=21;//进入检查检查本地歌曲菜单
+					break;
+				case 11:
+					if(play_mark==0){
+						play_mark=1;
+						MY1690_PLAY();
+					}
+					OLED_DISPLAY_16x16(4, 3*16, 42);//播放标识
+					OLED_DISPLAY_16x16(4, 4*16, 43);
+					break;
+				
+				case 21:
+					//MY1690_STOP();
+					//MY1690_PAUSE();
+					OLED_DISPLAY_16x16(4, 3*16, 44);//播放暂停
+					OLED_DISPLAY_16x16(4, 4*16, 45);
+					break;
+				
+				default:
+					SUBMENU4=0;
+					MENU=4;
+					break;
+			}
+
+			
+			/*菜单4子菜单旋钮切换*/
+			if(INT_MARK!=0 && SUBMENU4>=11){
+				/*主菜单队列循环切换*/
+				switch(SUBMENU4){
+					case 11:
+						if(INT_MARK==1){//右转
+							MY1690_VUP();
+						}else if(INT_MARK==2){//左转
+							MY1690_VDOWN();
+						}else if(INT_MARK==3){
+							SUBMENU4=2;
+							MY1690_STOP();
+							play_mark=0;
+						}
+						break;
+					case 21:
+						if(INT_MARK==1){//右转
+							MY1690_NEXT();
+							SUBMENU4=1;
+						}else if(INT_MARK==2){//左转
+							MY1690_PREV();
+							SUBMENU4=1;
+						}else if(INT_MARK==3){
+							play_mark=0;//播放复位
+							SUBMENU4=0;
+							MENU=8;
+						}
+						break;
+					default:
+						MENU=8;
+						SUBMENU4=0;
+						break;
+				}
+				
+				INT_MARK=0;//标志位清零
+			}
+			
+//			if(play_mark==0){
+//				MY1690_STOP();
+//				//MY1690_PAUSE();
+//				play_mark=4;
+//			}
+//			else if(play_mark==1){
+//				MY1690_PLAY();
+//				play_mark=4;
+//			}
+//			else if(play_mark==2){MY1690_NEXT();play_mark=4;}
+//			else if(play_mark==3){MY1690_PREV();play_mark=4;}
 		}
 	}
 }

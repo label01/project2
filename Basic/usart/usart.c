@@ -25,7 +25,7 @@ struct __FILE{
 FILE __stdout;
 
 //空操作
-void _sys_exit(int x){
+int _sys_exit(int x){
 	x = x;
 }
 
@@ -260,8 +260,8 @@ void USART3_Init(u32 BaudRate){ //USART3初始化并启动
    //串口中断配置
    NVIC_PriorityGroupConfig(NVIC_PriorityGroup_0);
    NVIC_InitStructure.NVIC_IRQChannel = USART3_IRQn;//允许USART3中断
-	 NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority=1;
-   NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;//中断等级
+	 NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority=2;
+   NVIC_InitStructure.NVIC_IRQChannelSubPriority = 2;//中断等级
    NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
    NVIC_Init(&NVIC_InitStructure);
 }
