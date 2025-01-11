@@ -1,12 +1,20 @@
 
 
 #include "my1690.h"
-
+#include "delay.h"
 
 
 void MY1690_Init(void)//初始化
 {
 	USART3_Init(9600); //芯片手册要求波特率为9600
+	MY1690_CMD2(0x35, 1);//设备切换
+	delay_ms(25);
+	MY1690_CMD2(0x33, 0);//循环方式
+	delay_ms(25);
+	MY1690_CMD2(0x32, 1);//设置EQ
+	delay_ms(25);
+	MY1690_CMD2(0x31, 10);//设置音量
+	delay_ms(25);
 	MY1690_STOP();
 }
 
@@ -78,15 +86,37 @@ void MY1690_CMD3(u8 a,u16 b){ //有参数的指令发送 a操作码 b参数（16位）
 	USART_SendData(USART3 , 0xef);	while(USART_GetFlagStatus(USART3, USART_FLAG_TC)==RESET); //检查发送中断标志位
 }
 
+/*
+* MY1690设备切换
+*0-U盘 1-SD卡
+*/
+void MY1690_SetDevice(u8 Data){
+	MY1690_CMD2(0x35, Data);//设备切换
+}
 
+/*
+* MY1690设置循环方式
+*0-全盘 1-文件夹 2-单曲 3-随机 4-不循环
+*/
+void MY1690_SetLoop(u8 Data){
+	MY1690_CMD2(0x33, Data);//循环方式
+}
 
+/*
+*MY1690 设置EQ
+*0-NO 1-POP 2-ROCK 3-JAZZ 4-CLASSIC 5-BASS
+*/
+void MY1690_SetEQ(u8 Data){
+	MY1690_CMD2(0x32, Data);//设置EQ
+}
 
-
-
-
-
-
-
+/*
+*MY1690 设置EQ
+*0-NO 1-POP 2-ROCK 3-JAZZ 4-CLASSIC 5-BASS
+*/
+void MY1690_SetVOL(u8 Data){
+	MY1690_CMD2(0x31, Data);//设置音量
+}
 
 
 
