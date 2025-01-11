@@ -17,7 +17,7 @@
 
 
 //不使用某个串口时要禁止此串口，以减少编译量
-#define EN_USART1		1 //使能（1） /禁止（0）串口1
+#define EN_USART1		0 //使能（1） /禁止（0）串口1
 #define EN_USART2		0 //使能（1） /禁止（0）串口1
 #define EN_USART3		1 //使能（1） /禁止（0）串口1
 

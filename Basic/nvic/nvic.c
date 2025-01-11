@@ -107,7 +107,7 @@ void ENCODER_INT_INIT(void){
 	NVIC_InitStructure.NVIC_IRQChannel=EXTI9_5_IRQn;//设置中断线EXTI9_5_IRQn，这对应外部中断线9-5
 	NVIC_InitStructure.NVIC_IRQChannelCmd=ENABLE;//使能中断通道
 	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority=2;//设置抢占优先级，抢占优先级决定了能否打断其他正在执行的中断服务程序
-	NVIC_InitStructure.NVIC_IRQChannelSubPriority=2; //设置子优先级 2，子优先级决定了在相同抢占优先级的中断中，哪个中断会先被执行
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority=1; //设置子优先级 2，子优先级决定了在相同抢占优先级的中断中，哪个中断会先被执行
 	NVIC_Init(&NVIC_InitStructure);//调用NVIC_Init函数，根据NVIC_InitStructure的配置初始化中断控制器
 	
 		//第二个中断
@@ -121,7 +121,7 @@ void ENCODER_INT_INIT(void){
 	NVIC_InitStructure.NVIC_IRQChannel=EXTI9_5_IRQn;//设置中断线EXTI9_5_IRQn，这对应外部中断线9-5
 	NVIC_InitStructure.NVIC_IRQChannelCmd=ENABLE;//使能中断通道
 	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority=2;//设置抢占优先级，抢占优先级决定了能否打断其他正在执行的中断服务程序
-	NVIC_InitStructure.NVIC_IRQChannelSubPriority=2; //设置子优先级 2，子优先级决定了在相同抢占优先级的中断中，哪个中断会先被执行
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority=1; //设置子优先级 2，子优先级决定了在相同抢占优先级的中断中，哪个中断会先被执行
 	NVIC_Init(&NVIC_InitStructure);//调用NVIC_Init函数，根据NVIC_InitStructure的配置初始化中断控制器
 	
 }

@@ -54,6 +54,7 @@ int main(void) {//主程序
 	delay_ms(500);//上电时等待其他器件就绪
 	RCC_Configuration();//系统时钟初始化
 	I2C_Configuration();//I2C初始化
+	NVIC_Configuration();//设置中断优先级
 	LM75A_GetTemp(buffer);//读取lm75a的温度数据
 	ENCODER_Init();//旋转编码器初始化
 	OLED0561_Init();//OLED屏幕初始化
@@ -61,7 +62,6 @@ int main(void) {//主程序
 	ENCODER_INT_INIT();//编码器中断初始化
 	BKP_Configuration();//初始化bkp
 	ADC_Configuration(); //初始化ADC
-	NVIC_Configuration();//设置中断优先级
 	BUZZER_Init();//蜂鸣器初始化
 	LED_Init();
 	MY1690_Init();
@@ -122,8 +122,6 @@ int main(void) {//主程序
 	}
 	DHT11_ReadData(dht11_data);//读取数据
 	delay_ms(2000);//延时2S
-	
-	
 	
 	while (1) {
 		/*无限循环程序*/
@@ -1007,7 +1005,7 @@ int main(void) {//主程序
 					break;
 				case 11:
 					if(play_mark==0){
-						play_mark=1;
+						play_mark=4;
 						MY1690_PLAY();
 					}
 					OLED_DISPLAY_16x16(4, 3*16, 42);//播放标识
@@ -1015,8 +1013,6 @@ int main(void) {//主程序
 					break;
 				
 				case 21:
-					//MY1690_STOP();
-					//MY1690_PAUSE();
 					OLED_DISPLAY_16x16(4, 3*16, 44);//播放暂停
 					OLED_DISPLAY_16x16(4, 4*16, 45);
 					break;
@@ -1034,12 +1030,12 @@ int main(void) {//主程序
 				switch(SUBMENU4){
 					case 11:
 						if(INT_MARK==1){//右转
-							MY1690_VUP();
+							MY1690_VUP();//音量加
 						}else if(INT_MARK==2){//左转
-							MY1690_VDOWN();
+							MY1690_VDOWN();//音量减
 						}else if(INT_MARK==3){
 							SUBMENU4=2;
-							MY1690_STOP();
+							MY1690_STOP();//播放停止
 							play_mark=0;
 						}
 						break;
@@ -1065,17 +1061,6 @@ int main(void) {//主程序
 				INT_MARK=0;//标志位清零
 			}
 			
-//			if(play_mark==0){
-//				MY1690_STOP();
-//				//MY1690_PAUSE();
-//				play_mark=4;
-//			}
-//			else if(play_mark==1){
-//				MY1690_PLAY();
-//				play_mark=4;
-//			}
-//			else if(play_mark==2){MY1690_NEXT();play_mark=4;}
-//			else if(play_mark==3){MY1690_PREV();play_mark=4;}
 		}
 	}
 }

@@ -19,7 +19,9 @@ void MY1690_PLAY(void){ //²¥·Å
 }
 
 void MY1690_PAUSE(void){ //ÔÝÍ£
-	USART3_printf("\x7e\x03\x12\x11\xef");
+	//USART3_printf("\x7e\x03\x12\x11\xef");
+	//USART3_printf("\x7e\x03\x1E\x1D\xef");
+	USART3_printf("\x7e\x03\x1c\x1f\xef");
 }
 
 void MY1690_PREV(void){ //ÉÏÒ»Çú

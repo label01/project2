@@ -12,7 +12,7 @@
 
 
 #include "usart.h"
-
+#include "buzzer.h"
 
 //使USART串口可用printf函数发送
 //在usart.h文件里可更换printf函数的串口号
@@ -252,30 +252,30 @@ void USART3_Init(u32 BaudRate){ //USART3初始化并启动
    USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;//无硬件数据流控制
    USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;	//收发模式
 
+		//串口中断配置
+   NVIC_InitStructure.NVIC_IRQChannel = USART3_IRQn;//允许USART3中断
+	 NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority=1;
+   NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;//中断等级
+   NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+   NVIC_Init(&NVIC_InitStructure);
+
    USART_Init(USART3, &USART_InitStructure);//配置串口3
    USART_ITConfig(USART3, USART_IT_RXNE, ENABLE);//使能串口接收中断  
    //USART_ITConfig(USART3, USART_IT_TXE, ENABLE);//串口发送中断在发送数据时开启
    USART_Cmd(USART3, ENABLE);//使能串口3
-
-   //串口中断配置
-   NVIC_PriorityGroupConfig(NVIC_PriorityGroup_0);
-   NVIC_InitStructure.NVIC_IRQChannel = USART3_IRQn;//允许USART3中断
-	 NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority=2;
-   NVIC_InitStructure.NVIC_IRQChannelSubPriority = 2;//中断等级
-   NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-   NVIC_Init(&NVIC_InitStructure);
 }
 
 //串口3中断服务程序（固定的函数名不能修改）
 void USART3_IRQHandler(void){ 	
 	u8 Res;
     if(USART_GetITStatus(USART3, USART_IT_RXNE) != RESET){  //接收中断
+				
         Res =USART_ReceiveData(USART3);//读取接收到的数据
         if(Res=='S'){//判断数据是否是STOP（省略读取S）            
             USART3_RX_STA=1;//如果是STOP则标志位为1      
         }else if(Res=='K'){//判断数据是否是OK（省略读取K）            
             USART3_RX_STA=2;//如果是OK则标志位为2      
-        }            
+        }
     }
 }
 #endif	

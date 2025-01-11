@@ -35,3 +35,4 @@
 .\objects\usart.o: D:\project software\keil5\ARM\ARMCC\Bin\..\include\stdarg.h
 .\objects\usart.o: D:\project software\keil5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\objects\usart.o: D:\project software\keil5\ARM\ARMCC\Bin\..\include\string.h
+.\objects\usart.o: .\Hardware\BUZZER\buzzer.h
