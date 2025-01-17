@@ -47,3 +47,7 @@
 .\objects\main.o: D:\project software\keil5\ARM\ARMCC\Bin\..\include\stdarg.h
 .\objects\main.o: D:\project software\keil5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\objects\main.o: D:\project software\keil5\ARM\ARMCC\Bin\..\include\string.h
+.\objects\main.o: .\Basic\spi\spi.h
+.\objects\main.o: .\Hardware\CH376\ch376.h
+.\objects\main.o: .\Hardware\CH376\ch376inc.h
+.\objects\main.o: .\Hardware\CH376\filesys.h

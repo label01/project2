@@ -21,6 +21,11 @@
 #include "led.h"
 #include "my1690.h"
 
+#include "spi.h"
+#include "ch376.h"
+#include "filesys.h"
+
+
 extern vu16 ADC_DMA_IN[3]; //声明外部变量
 extern u8 INT_MARK; //中断标志位
 extern u16 USART3_RX_STA;//接收状态标识位
@@ -48,8 +53,12 @@ int main(void) {//主程序
 	u8 humidity_value;//湿度值
 	
 	u8 humidity_temp_mark=1;//温湿度更新标志位
-	u8 music_mark=0; //本地音乐是否存在标识位标识位
+	u8 music_mark=1; //本地音乐是否存在标识位标识位
 	u8 play_mark=0;//播放标识位
+	
+	char *uchar[3];
+	u8 udisk_status;
+	u8 udisk_buff[128];
 	
 	delay_ms(500);//上电时等待其他器件就绪
 	RCC_Configuration();//系统时钟初始化
@@ -65,6 +74,7 @@ int main(void) {//主程序
 	BUZZER_Init();//蜂鸣器初始化
 	LED_Init();
 	MY1690_Init();
+	SPI2_Init();//配置SPI2 初始化ch376
 	OLED_DISPLAY_LIT(155);//调整屏幕亮度
 	delay_ms(1000);
 	MENU=BKP_ReadBackupRegister(BKP_DR2);
@@ -93,6 +103,20 @@ int main(void) {//主程序
 	INVERSE_OLED_DISPLAY_16x16(0, 5*16, 13);//
 	INVERSE_OLED_DISPLAY_16x16(0, 6*16, 13);//汉字空格显示白面
 	INVERSE_OLED_DISPLAY_16x16(0, 7*16, 13);//汉字空格显示白面
+	
+	if(mInitCH376Host()==USB_INT_SUCCESS){
+		OLED_DISPLAY_8x16(4, 0*8, 'C');
+		OLED_DISPLAY_8x16(4, 1*8, 'H');
+		OLED_DISPLAY_8x16(4, 2*8, '3');
+		OLED_DISPLAY_8x16(4, 3*8, '7');
+		OLED_DISPLAY_8x16(4, 4*8, '6');
+		OLED_DISPLAY_8x16(4, 5*8, ':');
+		OLED_DISPLAY_8x16(4, 7*8, 'O'); 
+		OLED_DISPLAY_8x16(4, 8*8, 'K'); 
+		OLED_DISPLAY_8x16(4, 9*8, '!'); 
+		OLED_DISPLAY_16x16(4, 5*16, 29);//√
+	}
+	
 	/*检查dht11传感器*/
 	if(!DHT11_Init()){//判断DHT11通信是否正常
 		OLED_DISPLAY_8x16(2, 0*8, 'D');
@@ -120,8 +144,36 @@ int main(void) {//主程序
 			delay_ms(500);//延时
 		}
 	}
+	
 	DHT11_ReadData(dht11_data);//读取数据
 	delay_ms(2000);//延时2S
+	
+	
+	//U盘写入
+	uchar[0]="U盘日志记录测试";
+	uchar[1]="时间			温度		湿度		光照量";
+	uchar[2]="00:00:00 	18.7℃ 		32%			0482";
+	while(CH376DiskConnect()!=USB_INT_SUCCESS) delay_ms(100);
+	delay_ms(200);
+	for(u8 i=0;i<100;i++){
+		delay_ms(50);
+		udisk_status=CH376DiskMount();
+		if(udisk_status==USB_INT_SUCCESS) break;
+		else if(udisk_status==ERR_DISK_DISCON) break;
+		if(CH376GetDiskStatus()>=DEF_DISK_MOUNTED&&i>=5) break;
+	}
+	delay_ms(200);
+	udisk_status=CH376FileCreatePath("/AA.TXT");
+	delay_ms(200);
+	udisk_status=sprintf((char*)udisk_buff, "%s\n",uchar[0]);
+	udisk_status=CH376ByteWrite(udisk_buff,udisk_status, NULL);
+	udisk_status=sprintf((char*)udisk_buff, "%s\n",uchar[1]);
+	udisk_status=CH376ByteWrite(udisk_buff,udisk_status, NULL);
+	udisk_status=sprintf((char*)udisk_buff, "%s\n",uchar[2]);
+	udisk_status=CH376ByteWrite(udisk_buff,udisk_status, NULL);
+	delay_ms(200);
+	udisk_status=CH376FileClose(TRUE);
+	
 	
 	while (1) {
 		/*无限循环程序*/
@@ -136,6 +188,7 @@ int main(void) {//主程序
 		if(rsec%3!=1 && humidity_temp_mark==0){
 			humidity_temp_mark=1;
 		}
+		
 		for(a=0;a<10;a++){
 			arr1[a]=ADC_DMA_IN[0]; //读取第1路ADC值
 			arr2[a]=ADC_DMA_IN[1]; //读取第2路ADC值
@@ -1062,6 +1115,7 @@ int main(void) {//主程序
 			}
 			
 		}
+		
 	}
 }
 
