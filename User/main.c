@@ -46,10 +46,12 @@ int main(void) {//主程序
 	int low_temp;//低温数值
 	u16 light_value;//光照值
 	u8 humidity_value;//湿度值
+	int8_t voice_value=10;//音量值
 	
 	u8 humidity_temp_mark=1;//温湿度更新标志位
-	u8 music_mark=0; //本地音乐是否存在标识位标识位
+	u8 music_mark=1; //本地音乐是否存在标识位标识位
 	u8 play_mark=0;//播放标识位
+	
 	
 	delay_ms(500);//上电时等待其他器件就绪
 	RCC_Configuration();//系统时钟初始化
@@ -1004,12 +1006,18 @@ int main(void) {//主程序
 					SUBMENU4=21;//进入检查检查本地歌曲菜单
 					break;
 				case 11:
-					if(play_mark==0){
+					if(play_mark==0){//从菜单3进入播放页面
 						play_mark=4;
 						MY1690_PLAY();
 					}
+					if(voice_value<=0) voice_value=0;
+					if(voice_value>=40) voice_value=40;
 					OLED_DISPLAY_16x16(4, 3*16, 42);//播放标识
 					OLED_DISPLAY_16x16(4, 4*16, 43);
+					
+					OLED_DISPLAY_8x16(6, 7*8, voice_value/10%10+0x30);//反色显示湿度设置值
+					OLED_DISPLAY_8x16(6, 8*8, voice_value%10+0x30);
+					
 					break;
 				
 				case 21:
@@ -1031,8 +1039,10 @@ int main(void) {//主程序
 					case 11:
 						if(INT_MARK==1){//右转
 							MY1690_VUP();//音量加
+							voice_value+=1;
 						}else if(INT_MARK==2){//左转
 							MY1690_VDOWN();//音量减
+							voice_value-=1;
 						}else if(INT_MARK==3){
 							SUBMENU4=2;
 							MY1690_STOP();//播放停止
