@@ -59,6 +59,7 @@ int main(void) {//主程序
 	char *uchar[3];
 	u8 udisk_status;
 	u8 udisk_buff[128];
+	//u8 uwrite_flag=0;
 	
 	delay_ms(500);//上电时等待其他器件就绪
 	RCC_Configuration();//系统时钟初始化
@@ -151,10 +152,10 @@ int main(void) {//主程序
 	
 	//U盘写入
 	uchar[0]="U盘日志记录测试";
-	uchar[1]="时间			温度		湿度		光照量";
+	uchar[1]="时间1			温度		湿度		光照量";
 	uchar[2]="00:00:00 	18.7℃ 		32%			0482";
 	while(CH376DiskConnect()!=USB_INT_SUCCESS) delay_ms(100);
-	delay_ms(200);
+	delay_ms(50);
 	for(u8 i=0;i<100;i++){
 		delay_ms(50);
 		udisk_status=CH376DiskMount();
@@ -162,16 +163,13 @@ int main(void) {//主程序
 		else if(udisk_status==ERR_DISK_DISCON) break;
 		if(CH376GetDiskStatus()>=DEF_DISK_MOUNTED&&i>=5) break;
 	}
-	delay_ms(200);
-	udisk_status=CH376FileCreatePath("/AA.TXT");
-	delay_ms(200);
+	udisk_status=CH376FileCreatePath("/LOG.TXT");
+	delay_ms(100);
 	udisk_status=sprintf((char*)udisk_buff, "%s\n",uchar[0]);
 	udisk_status=CH376ByteWrite(udisk_buff,udisk_status, NULL);
 	udisk_status=sprintf((char*)udisk_buff, "%s\n",uchar[1]);
 	udisk_status=CH376ByteWrite(udisk_buff,udisk_status, NULL);
-	udisk_status=sprintf((char*)udisk_buff, "%s\n",uchar[2]);
-	udisk_status=CH376ByteWrite(udisk_buff,udisk_status, NULL);
-	delay_ms(200);
+	delay_ms(100);
 	udisk_status=CH376FileClose(TRUE);
 	
 	
@@ -233,6 +231,31 @@ int main(void) {//主程序
 			Average_ADC3=Average_ADC3+arr3[a];//求和
 		}
 		Average_ADC3=(Average_ADC3-max-min)/8;//求平均值
+		
+//		if(rsec%3==2&&uwrite_flag==0){
+//			uwrite_flag=1;
+//			//U盘数据记录
+//			CH376DiskConnect();
+//			delay_ms(50);
+//				for(u8 i=0;i<100;i++){
+//					delay_ms(50);
+//					udisk_status=CH376DiskMount();
+//					if(udisk_status==USB_INT_SUCCESS) break;
+//					else if(udisk_status==ERR_DISK_DISCON) break;
+//					if(CH376GetDiskStatus()>=DEF_DISK_MOUNTED&&i>=5) break;
+//				}
+//			udisk_status=CH376FileCreatePath("/AA.TXT");
+//			delay_ms(100);
+//			udisk_status=sprintf((char*)udisk_buff, "ADC3 :%d\n", Average_ADC3);
+//			udisk_status=CH376ByteWrite(udisk_buff,udisk_status, NULL);
+//			delay_ms(100);
+//			udisk_status=CH376FileClose(TRUE);
+//		}
+//		if(rsec%3!=2&& uwrite_flag==1){
+//			uwrite_flag=0;
+//		}
+		
+		
 		if (MENU>0){//主菜单
 			switch(MENU){
 				/*菜单1  显示温湿度， 背景时间*/
